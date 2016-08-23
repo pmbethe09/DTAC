@@ -1,0 +1,8 @@
+#ifndef _BRIDGE_HANDCACHECONFIGINCLUDED
+#define _BRIDGE_HANDCACHECONFIGINCLUDED
+
+#define CACHING_ON true
+#define FANCY_KEY true
+#define STATS_ON true
+
+#endif

@@ -1,0 +1,34 @@
+% EXPORT
+%
+[Event "2009 Spingold"]
+[Site "BridgeBase"]
+[Date "2009.01.02"]
+[Board "17"]
+[West "Meltzer"]
+[North "Passell"]
+[East "Larsen"]
+[South "Lynch"]
+[Dealer "N"]
+[Deal "S:T.AK764.AQ84.K87 KJ752.T5.9.QJ942 AQ964.QJ82.KJ.AT 83.93.T76532.653"]
+[Vulnerable "None"]
+[Scoring "IMP"]
+[Declarer "S"]
+[Contract "6H"]
+[Result "13"]
+[HomeTeam "Lynch"]
+[Room "Open"]
+[Score "+1010"]
+[Stage "SemiFinal(2)"]
+[VisitTeam "Meltzer"]
+[Auction "N"]
+1C Pass 2H Pass
+3H Pass 4D Pass
+4S Pass 4NT Pass
+5S Pass 6C Pass
+6H Pass Pass Pass
+[Play "W"]
+CQ CT C3 CK
+H5 HQ H3 H4
+HT H2 H9 HA
+*
+
