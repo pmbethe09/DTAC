@@ -1,6 +1,6 @@
 #include "dtac/BridgeTestBase.hpp"
 
-#include "external/gtest_repo/include/gtest/gtest.h"
+#include "external/com_github_google_googletest/include/gtest/gtest.h"
 
 #include "dtac/Claim.hpp"
 

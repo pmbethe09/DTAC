@@ -36,7 +36,7 @@ cc_library(
 )
 
 cc_library(
-    name = "lib",
+    name = "dtac",
     srcs = glob(
         ["*.cpp"],
         exclude = MAINS + TESTS + HAND_SRCS + TEST_LIB,
@@ -58,7 +58,7 @@ cc_library(
         name = m[:-4],
         srcs = [m],
         copts = ["-Wno-sign-compare"],  # TODO -- fix
-        deps = [":lib"],
+        deps = [":dtac"],
     )
     for m in MAINS
 ]
@@ -70,7 +70,7 @@ cc_library(
     hdrs = TEST_LIB_HDRS,
     deps = [
         "//external:gtest",
-        ":lib",
+        ":dtac",
     ],
 )
 
@@ -79,7 +79,7 @@ cc_test(
     srcs = TESTS,
     deps = [
         "//external:gtest",
-        ":lib",
+        ":dtac",
         ":testlib",
     ],
     copts = ["-Wno-sign-compare"],  # TODO -- fix

@@ -1,7 +1,7 @@
-workspace(name = "dtac")
+workspace(name = "com_github_pmbethe09_dtac")
 
 new_git_repository(
-    name = "gtest_repo",
+    name = "com_github_google_googletest",
     remote = "https://github.com/google/googletest",
     tag = "release-1.7.0",
     build_file = "third_party/BUILD.gtest",
@@ -9,5 +9,5 @@ new_git_repository(
 
 bind(
     name = "gtest",
-    actual = "@gtest_repo//:gtest",
+    actual = "@com_github_google_googletest//:gtest",
 )
