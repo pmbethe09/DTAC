@@ -204,6 +204,24 @@ cc_library(
 )
 """
 
+_nanopb_build_file = """
+cc_library(
+  name = "nanopb",
+  visibility = ["//visibility:public"],
+  hdrs = [
+    "pb.h",
+    "pb_common.h",
+    "pb_decode.h",
+    "pb_encode.h",
+  ],
+  srcs = [
+    "pb_common.c",
+    "pb_decode.c",
+    "pb_encode.c",
+  ],
+)
+"""
+
 def cc_proto_repositories():
   native.bind(
     name = "protobuf_clib",
@@ -221,9 +239,15 @@ def cc_proto_repositories():
     name = "grpc_lib",
     actual = "@com_github_grpc_grpc//:grpc++",
   )
+  native.new_git_repository(
+    name = "com_github_nanopb_nanopb",
+    remote = "https://github.com/nanopb/nanopb",
+    tag = "nanopb-0.3.6",
+    build_file_content = "_nanopb_build_file,
+  )
   native.bind(
     name="nanopb",
-    actual="@com_github_grpc_grpc//third_party/nanopb",
+    actual="@com_github_nanopb_nanopb//:nanopb",
   )
   native.git_repository(
     name = "boringssl",
