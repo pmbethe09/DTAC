@@ -153,12 +153,12 @@ def common_proto_repositories():
   native.git_repository(
       name = "com_github_google_protobuf",
       remote = "https://github.com/google/protobuf",
-      tag = "v3.1.0",
+      tag = "v3.0.0",
   )
   native.git_repository(
       name = "com_github_grpc_grpc",
       remote = "https://github.com/grpc/grpc",
-      tag = "v1.0.0",
+      tag = "v1.0.1",
   )
 
 grpc_build_file = """
@@ -204,6 +204,24 @@ cc_library(
 )
 """
 
+_nanopb_build_file = """
+cc_library(
+  name = "nanopb",
+  visibility = ["//visibility:public"],
+  hdrs = [
+    "third_party/nanopb/pb.h",
+    "third_party/nanopb/pb_common.h",
+    "third_party/nanopb/pb_decode.h",
+    "third_party/nanopb/pb_encode.h",
+  ],
+  srcs = [
+    "third_party/nanopb/pb_common.c",
+    "third_party/nanopb/pb_decode.c",
+    "third_party/nanopb/pb_encode.c",
+  ],
+)
+"""
+
 def cc_proto_repositories():
   native.bind(
     name = "protobuf_clib",
@@ -218,8 +236,19 @@ def cc_proto_repositories():
     actual = "@com_github_grpc_grpc//:grpc_cpp_plugin",
   )
   native.bind(
+    name = "grpc_lib",
+    actual = "@com_github_grpc_grpc//:grpc++_reflection",
+  )
+  native.new_git_repository(
+    name = "com_github_nanopb_nanopb",
+    # Hack until a grpc tag has the third_party/nanopb/BUILD file 
+    remote = "https://github.com/grpc/grpc",
+    tag = "v1.0.1",
+    build_file_content = _nanopb_build_file,
+  )
+  native.bind(
     name="nanopb",
-    actual="@com_github_grpc_grpc//third_party/nanopb",
+    actual="@com_github_nanopb_nanopb//:nanopb",
   )
   native.git_repository(
     name = "boringssl",
@@ -257,12 +286,12 @@ def java_proto_repositories(cc = 0, shared = 1):
   )
   native.maven_jar(
       name = "protobuf_java_maven",
-      artifact = "com.google.protobuf:protobuf-java:3.1.0",
-      sha1 = "e13484d9da178399d32d2d27ee21a77cfb4b7873",
+      artifact = "com.google.protobuf:protobuf-java:3.0.0",
+      sha1 = "6d325aa7c921661d84577c0a93d82da4df9fa4c8",
   )
   native.maven_jar(
       name = "protobuf_java_util_maven",
-      artifact = "com.google.protobuf:protobuf-java-util:jar:3.1.0",
+      artifact = "com.google.protobuf:protobuf-java-util:jar:3.0.0",
       sha1 = "5085a47f398f229ef2f07fb496099461e8f4c56c",
   )
   native.maven_jar(
