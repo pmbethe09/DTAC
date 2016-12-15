@@ -218,6 +218,10 @@ def cc_proto_repositories():
     actual = "@com_github_grpc_grpc//:grpc_cpp_plugin",
   )
   native.bind(
+    name = "grpc_lib",
+    actual = "@com_github_grpc_grpc//:grpc++",
+  )
+  native.bind(
     name="nanopb",
     actual="@com_github_grpc_grpc//third_party/nanopb",
   )
