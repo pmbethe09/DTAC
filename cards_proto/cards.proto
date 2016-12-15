@@ -1,0 +1,45 @@
+syntax = "proto2";
+
+package cards;
+
+// Common card representations, including Suits, Hands.
+
+option java_package = "edu.nyu.cards.gen";
+option java_outer_classname = "Cards";
+
+enum Suit {
+  CLUBS = 0;
+  DIAMONDS = 1;
+  HEARTS = 2;
+  SPADES = 3;
+  NOTRUMPS = 4;  // or use 'unset' as trump?
+}
+
+message Card {
+  enum Rank {
+    TWO = 2;
+    THREE = 3;
+    FOUR = 4;
+    FIVE = 5;
+    SIX = 6;
+    SEVEN = 7;
+    EIGHT = 8;
+    NINE = 9;
+    TEN = 10;
+    JACK = 11;
+    QUEEN = 12;
+    KING = 13;
+    ACE = 14;
+  }
+
+  optional Rank rank = 1;
+  optional Suit suit = 2;
+}
+
+// for convenience of passing between files, languages, etc.
+// Probably want to write a toProto and fromProto into a class with a more
+// efficient look up structure.  (see edu.nyu.bridge.bids.Hand)
+message Hand {
+  // unordered
+  repeated Card cards = 1;
+}
