@@ -16,6 +16,33 @@ import edu.nyu.cards.gen.Cards.Suit;
  * Helper function for stringifying and extracting constants for {@link Card}s
  */
 public class Cards {
+  /** Returns a prebuilt {@link Card} for the given string. */
+  public static Card string2Card(String cardString) {
+    if (cardString.equals("") || cardString.equals("-")) {
+      return Card.getDefaultInstance();
+    }
+    return checkNotNull(
+        STRING_2_CARD.get(cardString.toUpperCase()), "no card found for %s", cardString);
+  }
+
+  /** Returns the standard SuitRank e.g. DA */
+  public static String card2String(Card card) {
+    if (!card.hasRank() && !card.hasSuit()) {
+      return "-";
+    }
+    return card2String(card.getSuit(), card.getRank());
+  }
+
+  /** Returns the standard SuitRank e.g. DA */
+  public static String card2String(Suit suit, Rank rank) {
+    return CARD_2_STRING.get(suit).get(rank);
+  }
+
+  /** Returns a prebuilt {@link Card} for the given {@link Suit}, {@link Rank}. */
+  public static Card card(Suit suit, Rank rank) {
+    return PREBUILT_CARDS.get(suit).get(rank);
+  }
+
   private static final Map<Suit, Map<Rank, String>> CARD_2_STRING;
   private static final Map<Suit, Map<Rank, Card>> PREBUILT_CARDS;
   private static final Map<String, Card> STRING_2_CARD;
@@ -47,32 +74,5 @@ public class Cards {
         .append(Suits.suit2Char(suit))
         .append(Ranks.rank2Char(rank))
         .toString();
-  }
-
-  /** Returns a prebuilt {@link Card} for the given string. */
-  public static Card string2Card(String cardString) {
-    if (cardString.equals("") || cardString.equals("-")) {
-      return Card.getDefaultInstance();
-    }
-    return checkNotNull(
-        STRING_2_CARD.get(cardString.toUpperCase()), "no card found for %s", cardString);
-  }
-
-  /** Returns the standard SuitRank e.g. DA */
-  public static String card2String(Card card) {
-    if (!card.hasRank() && !card.hasSuit()) {
-      return "-";
-    }
-    return card2String(card.getSuit(), card.getRank());
-  }
-
-  /** Returns the standard SuitRank e.g. DA */
-  public static String card2String(Suit suit, Rank rank) {
-    return CARD_2_STRING.get(suit).get(rank);
-  }
-
-  /** Returns a prebuilt {@link Card} for the given {@link Suit}, {@link Rank}. */
-  public static Card card(Suit suit, Rank rank) {
-    return PREBUILT_CARDS.get(suit).get(rank);
   }
 }

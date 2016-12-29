@@ -6,7 +6,6 @@ java_library(
     deps = [
         "//cards_proto:cards_proto_java",
         "@guava_repo//jar",
-        #        "@guice_repo//jar",
         "@jsr305_repo//jar",
         "@jsr330_repo//jar",
     ],

@@ -6,17 +6,47 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import com.google.common.base.Converter;
 import com.google.common.collect.ImmutableBiMap;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import edu.nyu.cards.gen.Cards.Card;
+import edu.nyu.cards.gen.Cards.Card.Rank;
 
 /**
  * Static methods for converting back and forth from {@link Card.Rank} to {@code char}.
  */
 public class Ranks {
   public static final List<Card.Rank> HIGH_TO_LOW =
-      Lists.reverse(Arrays.asList(Card.Rank.values()));
+      ImmutableList.copyOf(Lists.reverse(Arrays.asList(Card.Rank.values())));
+
+  public static final Converter<Character, Card.Rank> CHAR_TO_RANK =
+      new Converter<Character, Card.Rank>() {
+        @Override
+        protected Character doBackward(Rank r) {
+          return rank2Char(r);
+        }
+
+        @Override
+        protected Rank doForward(Character c) {
+          return char2Rank(c);
+        }
+      };
+
+  @Nullable
+  public static Card.Rank char2Rank(char r) {
+    return biData.get(r);
+  }
+
+  public static char rank2Char(Card.Rank r) {
+    return biData.inverse().get(r);
+  }
+
+  // includes 9 - may be wrong
+  public static EnumSet<Card.Rank> lowCards() {
+    return LOW_CARDS;
+  }
 
   private static ImmutableBiMap<Character, Card.Rank> biData =
       ImmutableBiMap.<Character, Card.Rank>builder()
@@ -38,18 +68,4 @@ public class Ranks {
   private static final EnumSet<Card.Rank> LOW_CARDS =
       EnumSet.of(Card.Rank.TWO, Card.Rank.THREE, Card.Rank.FOUR, Card.Rank.FIVE, Card.Rank.SIX,
           Card.Rank.SEVEN, Card.Rank.EIGHT, Card.Rank.NINE);
-
-  @Nullable
-  public static Card.Rank char2Rank(char r) {
-    return biData.get(r);
-  }
-
-  public static char rank2Char(Card.Rank r) {
-    return biData.inverse().get(r);
-  }
-
-  // includes 9 - may be wrong
-  public static EnumSet<Card.Rank> lowCards() {
-    return LOW_CARDS;
-  }
 }

@@ -14,7 +14,7 @@ public interface Dealer {
 
   /**
    * Returns {@code true} if more deals are available, which is usually true except if say
-   * a tournament dealer, which uses random or prebuilt deals of a specific number.
+   * a tournament dealer, which uses random or prebuilt deals of a specific quantity.
    */
   boolean hasNext();
 }
