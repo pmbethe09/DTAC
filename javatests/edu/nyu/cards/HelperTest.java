@@ -8,8 +8,6 @@ import junit.framework.TestCase;
 
 /**
  * Test all the helper classes {@link Cards}, {@link Ranks}, {@link Suits}
- *
- * @author pbethe
  */
 public class HelperTest extends TestCase {
   @Test

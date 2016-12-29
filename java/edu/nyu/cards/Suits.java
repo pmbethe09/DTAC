@@ -31,7 +31,6 @@ public class Suits {
     return SUIT_2_CHAR_BI.inverse().get(Character.toUpperCase(suit));
   }
 
-  @Nullable
   public static char suit2Char(Suit suit) {
     return SUIT_2_CHAR_BI.get(suit);
   }
