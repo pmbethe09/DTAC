@@ -1,5 +1,7 @@
 package edu.nyu.cards.dealer;
 
+import static com.google.common.base.Preconditions.checkState;
+
 import java.util.List;
 
 import edu.nyu.cards.gen.Cards.Hand;
@@ -21,6 +23,7 @@ public class LimitedDealer implements Dealer {
 
   @Override
   public List<Hand> generateDeal(int hands, Hand... previous) {
+    checkState(nDeals > 0, "dealer exhausted, nDeals=0");
     --nDeals;
     return dealer.generateDeal(hands, previous);
   }
