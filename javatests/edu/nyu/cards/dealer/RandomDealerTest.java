@@ -1,5 +1,6 @@
 package edu.nyu.cards.dealer;
 
+import java.util.List;
 import java.util.Random;
 
 import org.junit.Test;
@@ -16,6 +17,14 @@ public class RandomDealerTest extends TestCase {
       hand.addAll(proto);
     }
     assertEquals("has all", 52, hand.size());
+  }
+
+  @Test
+  public void testDealHands() {
+    Dealer dealer = new RandomDealer(new Random());
+    List<Cards.Hand> deal = dealer.next();
+    assertEquals("has 4", 4, deal.size());
+    assertEquals("has 2", 2, dealer.generateDeal(2).size());
   }
 
   @Test

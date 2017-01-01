@@ -35,7 +35,7 @@ public class RandomDealer implements Dealer {
     }
     List<Cards.Card> result = Lists.newArrayList(deck.toProto().getCardsList());
     Collections.shuffle(result, random);
-    return FluentIterable.from(Lists.partition(result, hands))
+    return FluentIterable.from(Lists.partition(result, result.size() / hands))
         .transform(Hands.HAND_TO_LIST.reverse())
         .toList();
   }
