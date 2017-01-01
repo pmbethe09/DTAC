@@ -1,10 +1,14 @@
 package edu.nyu.cards;
 
+import java.util.List;
+
 import com.google.common.base.Converter;
 import edu.nyu.cards.gen.Cards;
 
 /** Utilities for {@link Hand} objects. */
 public class Hands {
+  private Hands() {}
+
   public static final Converter<Cards.Hand, String> HAND_TO_STRING =
       new Converter<Cards.Hand, String>() {
         @Override
@@ -28,6 +32,18 @@ public class Hands {
         @Override
         protected Cards.Hand doForward(Hand arg0) {
           return arg0.toProto();
+        }
+      };
+
+  public static final Converter<Cards.Hand, List<Cards.Card>> HAND_TO_LIST =
+      new Converter<Cards.Hand, List<Cards.Card>>() {
+        @Override
+        protected Cards.Hand doBackward(List<Cards.Card> hand) {
+          return Cards.Hand.newBuilder().addAllCards(hand).build();
+        }
+        @Override
+        protected List<Cards.Card> doForward(Cards.Hand hand) {
+          return hand.getCardsList();
         }
       };
 }

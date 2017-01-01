@@ -5,6 +5,7 @@ import static edu.nyu.cards.Suits.lowerSuit;
 
 import java.util.EnumMap;
 import java.util.EnumSet;
+import java.util.Map;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
@@ -20,8 +21,9 @@ import edu.nyu.cards.gen.Cards.Suit;
  * Where each x represents any low card, usually below 9 or T.
  */
 public class GenericHand {
+  /** Returns a GenericHand parsed from the normal string format but with 'x's. */
   public static GenericHand fromString(String hand) {
-    GenericHand result = new GenericHand();
+    GenericHand.Builder result = new Builder();
     // TODO(pbethe): support several formats...
     Suit currentSuit = Suit.NOTRUMPS;
     Rank lastRank = Rank.TWO;
@@ -51,25 +53,15 @@ public class GenericHand {
 
       // lowerSuit
     }
-    return result;
+    return result.build();
   }
 
-  private final EnumMap<Suit, Integer> lowCards;
-  private final Hand knownCards = new Hand();
+  private final Map<Suit, Integer> lowCards;
+  private final Hand knownCards;
 
-  private GenericHand() {
-    lowCards = Maps.newEnumMap(Suit.class);
-    for (Suit suit : Suits.iterateSuitsHighLow()) {
-      lowCards.put(suit, 0);
-    }
-  }
-
-  private void addCard(Suit suit, Rank rank) {
-    knownCards.addCard(suit, rank);
-  }
-
-  private void addLowCard(Suit suit) {
-    lowCards.put(suit, 1 + lowCards.get(suit));
+  private GenericHand(EnumMap<Suit, Integer> lowCards, Hand knownCards) {
+    this.lowCards = Maps.immutableEnumMap(lowCards);
+    this.knownCards = knownCards;
   }
 
   /** Returns a {@link Hand} with all cards not explicitly in this hand. */
@@ -138,5 +130,29 @@ public class GenericHand {
     }
     GenericHand otherHand = (GenericHand) other;
     return knownCards.equals(otherHand.knownCards) && lowCards.equals(otherHand.lowCards);
+  }
+
+  public static class Builder {
+    private final EnumMap<Suit, Integer> lowCards;
+    private final Hand knownCards = new Hand();
+
+    public Builder() {
+      lowCards = Maps.newEnumMap(Suit.class);
+      for (Suit suit : Suits.iterateSuitsHighLow()) {
+        lowCards.put(suit, 0);
+      }
+    }
+
+    public void addCard(Suit suit, Rank rank) {
+      knownCards.addCard(suit, rank);
+    }
+
+    public void addLowCard(Suit suit) {
+      lowCards.put(suit, 1 + lowCards.get(suit));
+    }
+
+    public GenericHand build() {
+      return new GenericHand(lowCards, knownCards);
+    }
   }
 }

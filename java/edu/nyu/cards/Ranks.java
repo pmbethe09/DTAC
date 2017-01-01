@@ -18,6 +18,8 @@ import edu.nyu.cards.gen.Cards.Card.Rank;
  * Static methods for converting back and forth from {@link Card.Rank} to {@code char}.
  */
 public class Ranks {
+  private Ranks() {}
+
   public static final List<Card.Rank> HIGH_TO_LOW =
       ImmutableList.copyOf(Lists.reverse(Arrays.asList(Card.Rank.values())));
 

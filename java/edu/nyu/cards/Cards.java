@@ -13,9 +13,11 @@ import edu.nyu.cards.gen.Cards.Card.Rank;
 import edu.nyu.cards.gen.Cards.Suit;
 
 /**
- * Helper function for stringifying and extracting constants for {@link Card}s
+ * Helper functions for stringifying and extracting constants for {@link Card}s
  */
 public class Cards {
+  private Cards() {}
+
   /** Returns a prebuilt {@link Card} for the given string. */
   public static Card string2Card(String cardString) {
     if (cardString.equals("") || cardString.equals("-")) {
@@ -40,7 +42,8 @@ public class Cards {
 
   /** Returns a prebuilt {@link Card} for the given {@link Suit}, {@link Rank}. */
   public static Card card(Suit suit, Rank rank) {
-    return PREBUILT_CARDS.get(suit).get(rank);
+    return checkNotNull(
+        PREBUILT_CARDS.get(suit).get(rank), "No card found for suit=%s rank=%s", suit, rank);
   }
 
   private static final Map<Suit, Map<Rank, String>> CARD_2_STRING;

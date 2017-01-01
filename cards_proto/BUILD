@@ -6,8 +6,8 @@ load("//proto:java_proto_library.bzl", "java_proto_library")
 cc_proto_library(
     name = "cards_proto_cc",
     srcs = ["cards.proto"],
+    default_runtime = "@com_github_google_protobuf//:protobuf",
     protoc = "@com_github_google_protobuf//:protoc",
-    default_runtime="@com_github_google_protobuf//:protobuf",
 )
 
 java_proto_library(

@@ -14,6 +14,8 @@ import edu.nyu.cards.gen.Cards.Suit;
  * Methods for converting back and forth from {@link Suit} to char.
  */
 public class Suits {
+  private Suits() {}
+
   public static final Converter<Character, Suit> CHAR_TO_RANK = new Converter<Character, Suit>() {
     @Override
     protected Character doBackward(Suit s) {

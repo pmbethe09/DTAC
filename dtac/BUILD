@@ -46,11 +46,11 @@ cc_library(
         exclude = HDRS + HAND_HDRS + TEST_LIB_HDRS,
     ),
     copts = ["-Wno-sign-compare"],  # TODO -- fix
+    linkopts = ["-lm"],
     deps = [
         ":hand",
         ":hdrs",
     ],
-    linkopts = ["-lm"],
 )
 
 [
@@ -69,21 +69,21 @@ cc_library(
     srcs = TEST_LIB,
     hdrs = TEST_LIB_HDRS,
     deps = [
-        "//external:gtest",
         ":dtac",
+        "//external:gtest",
     ],
 )
 
 cc_test(
     name = "unit_tests",
+    size = "small",
     srcs = TESTS,
+    copts = ["-Wno-sign-compare"],  # TODO -- fix
     deps = [
-        "//external:gtest",
         ":dtac",
         ":testlib",
+        "//external:gtest",
     ],
-    copts = ["-Wno-sign-compare"],  # TODO -- fix
-    size = "small",
 )
 
 genrule(

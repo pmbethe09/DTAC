@@ -37,9 +37,14 @@ message Card {
 }
 
 // for convenience of passing between files, languages, etc.
-// Probably want to write a toProto and fromProto into a class with a more
-// efficient look up structure.  (see edu.nyu.bridge.bids.Hand)
+// For an efficient look up structure see edu.nyu.cards.Hand
 message Hand {
   // unordered
   repeated Card cards = 1;
+}
+
+// convenience proto for wrapping a preset deal
+message Deal {
+  // Ordered from the dealer, if it matters.
+  repeated Hand hands = 1;
 }

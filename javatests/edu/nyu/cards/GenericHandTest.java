@@ -1,10 +1,10 @@
 package edu.nyu.cards;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import junit.framework.TestCase;
-
-public class GenericHandTest extends TestCase {
+public class GenericHandTest {
   @Test
   public void testBasic() {
     GenericHand genericHand = GenericHand.fromString("AKxxx.KQx.J9.QTx");

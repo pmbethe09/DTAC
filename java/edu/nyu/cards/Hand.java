@@ -11,6 +11,8 @@ import java.util.EnumSet;
 
 import javax.annotation.Nullable;
 
+import com.google.common.annotations.VisibleForTesting;
+
 import edu.nyu.cards.gen.Cards;
 import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Card.Rank;
@@ -19,10 +21,11 @@ import edu.nyu.cards.gen.Cards.Suit;
 /**
  * Represent a hand as the set of cards in each suit. optimized to use EnumSets,
  * but can map to/from {@link Cards.Hand} for transport.
+ * Explicitly mutable, use a Cards.Hand for an Immutable representation.
  */
 public class Hand {
   // for each suit, a Set with the cards held.
-  private EnumMap<Suit, EnumSet<Card.Rank>> cards;
+  @VisibleForTesting EnumMap<Suit, EnumSet<Card.Rank>> cards;
 
   public Hand() {
     // default - init the map
@@ -30,6 +33,11 @@ public class Hand {
     for (Suit suit : iterateSuitsLowHigh()) {
       cards.put(suit, EnumSet.noneOf(Card.Rank.class));
     }
+  }
+
+  /** Returns a hand with all cards in a standard deck. */
+  public static Hand deck() {
+    return new Hand().complement();
   }
 
   public static Hand fromProto(Cards.Hand hand) {
@@ -44,7 +52,7 @@ public class Hand {
     Cards.Hand.Builder result = Cards.Hand.newBuilder();
     for (Suit suit : iterateSuitsLowHigh()) {
       for (Card.Rank rank : cards.get(suit)) {
-        result.addCards(Cards.Card.newBuilder().setRank(rank).setSuit(suit));
+        result.addCards(card(suit, rank));
       }
     }
     return result.build();
@@ -118,7 +126,7 @@ public class Hand {
     return cards.equals(((Hand) other).cards);
   }
 
-  // lin format string, SxxHxxDxxCxx
+  // BBO lin format string, SxxHxxDxxCxx
   public String linString() {
     StringBuffer result = new StringBuffer();
     for (Suit suit : iterateSuitsHighLow()) {
@@ -171,6 +179,13 @@ public class Hand {
   public Hand addAll(Hand hand) {
     for (Suit suit : iterateSuitsHighLow()) {
       cards.get(suit).addAll(hand.suit(suit));
+    }
+    return this;
+  }
+
+  public Hand addAll(Cards.Hand hand) {
+    for (Cards.Card card : hand.getCardsList()) {
+      cards.get(card.getSuit()).add(card.getRank());
     }
     return this;
   }
