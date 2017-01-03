@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import java.util.EnumMap;
 import java.util.Map;
 
+import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
@@ -17,6 +18,13 @@ import edu.nyu.cards.gen.Cards.Suit;
  */
 public class Cards {
   private Cards() {}
+
+  public static final Function<String, Card> STRING_TO_CARD = new Function<String, Card>() {
+    @Override
+    public Card apply(String arg0) {
+      return Cards.string2Card(arg0);
+    }
+  };
 
   /** Returns a prebuilt {@link Card} for the given string. */
   public static Card string2Card(String cardString) {

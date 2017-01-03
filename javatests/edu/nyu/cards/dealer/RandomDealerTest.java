@@ -1,5 +1,8 @@
 package edu.nyu.cards.dealer;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
+
 import java.util.List;
 import java.util.Random;
 
@@ -7,9 +10,8 @@ import org.junit.Test;
 
 import edu.nyu.cards.Hand;
 import edu.nyu.cards.gen.Cards;
-import junit.framework.TestCase;
 
-public class RandomDealerTest extends TestCase {
+public class RandomDealerTest {
   @Test
   public void testDealing() {
     Hand hand = new Hand();

@@ -1,0 +1,111 @@
+syntax = "proto2";
+
+package bridge;
+
+// Common bridge representations, including Bids Auctions, Deals.
+
+option java_package = "edu.nyu.bridge.gen";
+option java_outer_classname = "Bridge";
+
+enum Direction {
+  NORTH = 0;
+  EAST = 1;
+  SOUTH = 2;
+  WEST = 3;
+}
+
+enum Vulnerability {
+  NONE = 0;
+  NS = 1;
+  EW = 2;
+  BOTH = 3;
+}
+
+enum Level {
+  ONE = 1;
+  TWO = 2;
+  THREE = 3;
+  FOUR = 4;
+  FIVE = 5;
+  SIX = 6;
+  SEVEN = 7;
+}
+
+// use edu.nyu.bridge.util.Bids to convert to/from Level/Suit.
+enum Bid {
+  ONE_CLUB = 1;
+  ONE_DIAMOND = 2;
+  ONE_HEART = 3;
+  ONE_SPADE = 4;
+  ONE_NOTRUMP = 5;
+  TWO_CLUBS = 6;
+  TWO_DIAMONDS = 7;
+  TWO_HEARTS = 8;
+  TWO_SPADES = 9;
+  TWO_NOTRUMPS = 10;
+  THREE_CLUBS = 11;
+  THREE_DIAMONDS = 12;
+  THREE_HEARTS = 13;
+  THREE_SPADES = 14;
+  THREE_NOTRUMPS = 15;
+  FOUR_CLUBS = 16;
+  FOUR_DIAMONDS = 17;
+  FOUR_HEARTS = 18;
+  FOUR_SPADES = 19;
+  FOUR_NOTRUMPS = 20;
+  FIVE_CLUBS = 21;
+  FIVE_DIAMONDS = 22;
+  FIVE_HEARTS = 23;
+  FIVE_SPADES = 24;
+  FIVE_NOTRUMPS = 25;
+  SIX_CLUBS = 26;
+  SIX_DIAMONDS = 27;
+  SIX_HEARTS = 28;
+  SIX_SPADES = 29;
+  SIX_NOTRUMPS = 30;
+  SEVEN_CLUBS = 31;
+  SEVEN_DIAMONDS = 32;
+  SEVEN_HEARTS = 33;
+  SEVEN_SPADES = 34;
+  SEVEN_NOTRUMPS = 35;
+}
+
+enum NonBid {
+  PASS = 1;
+  DOUBLE = 2;
+  REDOUBLE = 4;  // 4 Makes it easy to do score multiplier
+}
+
+message Call {
+  // only one of these should be set, except when reused to indicate a Contract
+  optional NonBid non_bid = 1;  //
+  optional Bid bid = 2;         // required if non_bid is empty
+}
+
+message Auction {
+  message CallWithDescription {
+    optional Call call = 1;
+    optional bool alerted = 2;
+    optional string description = 3;
+  }
+  repeated CallWithDescription auction = 1;
+
+  optional Direction dealer = 2;
+}
+
+// Interchange format for bridge deals
+// Should be compatible with lin & pbn
+message Deal {
+  // Either dealer/vulnerable, or board# are required
+  optional Direction dealer = 1;
+  optional Vulnerability vulnerable = 2;
+
+  // Board number.
+  optional int32 board = 3;
+
+  // indexed by Direction.getNumber(), so 0 -> NORTH
+  // can have empty entries (for partial deal passing)
+  // should always be size=4
+  // see edu.nyu.cards.Hand for valid formats.
+  repeated string hands = 4;
+}
