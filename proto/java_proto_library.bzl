@@ -153,7 +153,7 @@ def common_proto_repositories():
   native.git_repository(
       name = "com_github_google_protobuf",
       remote = "https://github.com/google/protobuf",
-      tag = "v3.0.0",
+      tag = "v3.2.0-rc.1",
   )
   native.git_repository(
       name = "com_github_grpc_grpc",
