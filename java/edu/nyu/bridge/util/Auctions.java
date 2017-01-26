@@ -8,7 +8,6 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 
 import edu.nyu.bridge.gen.Bridge.Auction;
-import edu.nyu.bridge.gen.Bridge.Auction.CallWithDescription;
 import edu.nyu.bridge.gen.Bridge.AuctionOrBuilder;
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
@@ -45,8 +44,8 @@ public class Auctions {
       return Role.RESPONDER;
     }
     Direction result = auction.getDealer();
-    for (CallWithDescription cwd : auction.getAuctionList()) {
-      if (cwd.getCall().hasBid() || cwd.getCall().getNonBid() != NonBid.PASS) {
+    for (Call cwd : auction.getAuctionList()) {
+      if (cwd.hasBid() || cwd.getNonBid() != NonBid.PASS) {
         if (result == me) {
           return Role.OVERCALLER;
         }
@@ -64,8 +63,8 @@ public class Auctions {
   @Nullable
   public static Direction opener(AuctionOrBuilder builder, Direction direction) {
     Direction result = direction;
-    for (CallWithDescription cwd : builder.getAuctionList()) {
-      if (cwd.getCall().hasBid()) {
+    for (Call cwd : builder.getAuctionList()) {
+      if (cwd.hasBid()) {
         return result;
       }
       result = Directions.lho(result);
@@ -95,8 +94,7 @@ public class Auctions {
     EnumMap<Suit, Direction> firstBidderNS = Maps.newEnumMap(Suit.class);
     EnumMap<Suit, Direction> firstBidderEW = Maps.newEnumMap(Suit.class);
     Direction bidder = auction.getDealer();
-    for (Auction.CallWithDescription callWith : auction.getAuctionList()) {
-      Call call = callWith.getCall();
+    for (Call call : auction.getAuctionList()) {
       if (call.hasBid()) {
         Suit suit = Bids.suit(call.getBid());
         if (Directions.isNS(bidder)) {
@@ -145,8 +143,8 @@ public class Auctions {
     return true;
   }
 
-  public static boolean isPass(CallWithDescription call) {
-    return !call.getCall().hasBid() && call.getCall().getNonBid() == NonBid.PASS;
+  public static boolean isPass(Call call) {
+    return !call.hasBid() && call.getNonBid() == NonBid.PASS;
   }
 
   public static boolean isPassout(AuctionOrBuilder auction) {
@@ -154,13 +152,12 @@ public class Auctions {
   }
 
   /** Returns {@code true} if the given call is a valid one at this point in the given auction. */
-  public static boolean isValid(AuctionOrBuilder auction, CallWithDescription callWithD) {
-    Call call = callWithD.getCall();
+  public static boolean isValid(AuctionOrBuilder auction, Call call) {
     if (call.hasBid()) {
       for (int i = auction.getAuctionCount() - 1; i >= 0; --i) {
-        CallWithDescription prev = auction.getAuction(i);
-        if (prev.getCall().hasBid()) {
-          return Calls.allowed(prev.getCall(), call);
+        Call prev = auction.getAuction(i);
+        if (prev.hasBid()) {
+          return Calls.allowed(prev, call);
         }
       }
       return true; // no prev calls, so sure.

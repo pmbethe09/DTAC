@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import edu.nyu.bridge.gen.Bridge.Auction;
 import edu.nyu.bridge.gen.Bridge.Direction;
-import edu.nyu.bridge.gen.Bridge.Auction.CallWithDescription;
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Call;
 
@@ -87,10 +86,10 @@ public class AuctionsTest {
 
   @Test
   public void testIsValid() {
-    CallWithDescription highBid = call("4S");
+    Call highBid = call("4S");
     Auction a = auction(call("1H"), PASS, call("2H"), highBid);
     for (Bid bid : Bid.values()) {
-      if (bid.getNumber() <= highBid.getCall().getBid().getNumber()) {
+      if (bid.getNumber() <= highBid.getBid().getNumber()) {
         assertFalse("Can not bid " + bid, Auctions.isValid(a, call(bid)));
       } else {
         assertTrue("Can bid " + bid, Auctions.isValid(a, call(bid)));
@@ -115,30 +114,30 @@ public class AuctionsTest {
   }
 
   private Contract contract(String cont, String dir) {
-    return new Contract(call(cont).getCall(), Directions.fromString(dir));
+    return new Contract(call(cont), Directions.fromString(dir));
   }
 
   private Contract contract(String cont, Direction dir, Call risk) {
-    Call c = call(cont).getCall().toBuilder().setNonBid(risk.getNonBid()).build();
+    Call c = call(cont).toBuilder().setNonBid(risk.getNonBid()).build();
     return new Contract(c, dir);
   }
 
-  private static CallWithDescription call(Bid bid) {
-    return CallWithDescription.newBuilder().setCall(Call.newBuilder().setBid(bid)).build();
+  private static Call call(Bid bid) {
+    return Call.newBuilder().setBid(bid).build();
   }
 
-  private static CallWithDescription call(String call) {
-    return CallWithDescription.newBuilder().setCall(Calls.string2Call(call)).build();
+  private static Call call(String call) {
+    return Calls.string2Call(call);
   }
 
-  private static final CallWithDescription PASS = call("P");
-  private static final CallWithDescription DOUBLE = call("X");
+  private static final Call PASS = call("P");
+  private static final Call DOUBLE = call("X");
 
-  private Auction auction(Direction dealer, CallWithDescription... calls) {
+  private Auction auction(Direction dealer, Call... calls) {
     return Auction.newBuilder().setDealer(dealer).addAllAuction(Arrays.asList(calls)).build();
   }
 
-  private Auction auction(CallWithDescription... calls) {
+  private Auction auction(Call... calls) {
     return auction(Direction.NORTH, calls);
   }
 }

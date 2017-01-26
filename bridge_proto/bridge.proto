@@ -80,15 +80,15 @@ message Call {
   // only one of these should be set, except when reused to indicate a Contract
   optional NonBid non_bid = 1;  //
   optional Bid bid = 2;         // required if non_bid is empty
+
+  // missing may just mean 'unknown'
+  optional bool alerted = 3;
+  // provided if available
+  optional string description = 4;
 }
 
 message Auction {
-  message CallWithDescription {
-    optional Call call = 1;
-    optional bool alerted = 2;
-    optional string description = 3;
-  }
-  repeated CallWithDescription auction = 1;
+  repeated Call auction = 1;
 
   optional Direction dealer = 2;
 }

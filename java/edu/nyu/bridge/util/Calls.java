@@ -14,7 +14,6 @@ import com.google.common.collect.Maps;
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.NonBid;
-import edu.nyu.bridge.gen.Bridge.Auction.CallWithDescription;
 import edu.nyu.cards.gen.Cards.Suit;
 
 /**
@@ -27,12 +26,12 @@ public class Calls {
   public static final Call DOUBLE = Call.newBuilder().setNonBid(NonBid.DOUBLE).build();
   public static final Call REDOUBLE = Call.newBuilder().setNonBid(NonBid.REDOUBLE).build();
 
-  public static CallWithDescription withDescription(Call call) {
+  public static Call withDescription(Call call) {
     return withDescription(call, null);
   }
 
-  public static CallWithDescription withDescription(Call call, @Nullable String description) {
-    CallWithDescription.Builder builder = CallWithDescription.newBuilder().setCall(call);
+  public static Call withDescription(Call call, @Nullable String description) {
+    Call.Builder builder = call.toBuilder();
     if (description != null) {
       builder.setDescription(description);
     }
