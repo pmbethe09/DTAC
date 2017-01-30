@@ -150,15 +150,17 @@ def java_proto_library(name, srcs, deps = None, visibility = None,
 
 def common_proto_repositories():
   """Common things to all langauge proto deps."""
-  native.git_repository(
+  native.http_archive(
       name = "com_github_google_protobuf",
-      remote = "https://github.com/google/protobuf",
-      tag = "v3.2.0-rc.1",
+      url = "https://github.com/google/protobuf/archive/v3.2.0-rc.1.tar.gz",
+      sha256 = "b9ae7afbf6e0bd613df72d29579304c12b574d9f3e3fcfd72823c431904f92c3",
+      strip_prefix = "protobuf-3.2.0-rc.1",
   )
-  native.git_repository(
+  native.http_archive(
       name = "com_github_grpc_grpc",
-      remote = "https://github.com/grpc/grpc",
-      tag = "v1.0.1",
+      url = "https://github.com/grpc/grpc/archive/v1.0.1.tar.gz",
+      strip_prefix = "grpc-1.0.1",
+      sha256 = "efad782944da13d362aab9b81f001b7b8b1458794751de818e9848c47acd4b32",
   )
 
 grpc_build_file = """
@@ -239,11 +241,12 @@ def cc_proto_repositories():
     name = "grpc_lib",
     actual = "@com_github_grpc_grpc//:grpc++_reflection",
   )
-  native.new_git_repository(
+  native.new_http_archive(
     name = "com_github_nanopb_nanopb",
     # Hack until a grpc tag has the third_party/nanopb/BUILD file 
-    remote = "https://github.com/grpc/grpc",
-    tag = "v1.0.1",
+    url = "https://github.com/grpc/grpc/archive/v1.0.1.tar.gz",
+    strip_prefix = "grpc-1.0.1",
+    sha256 = "efad782944da13d362aab9b81f001b7b8b1458794751de818e9848c47acd4b32",
     build_file_content = _nanopb_build_file,
   )
   native.bind(
@@ -259,10 +262,11 @@ def cc_proto_repositories():
     name="libssl",
     actual="@boringssl//:ssl",
   )
-  native.new_git_repository(
+  native.new_http_archive(
     name = "com_github_madler_zlib",
-    remote = "https://github.com/madler/zlib",
-    tag = "v1.2.8",
+    url = "https://github.com/madler/zlib/archive/v1.2.8.tar.gz",
+    strip_prefix = "zlib-1.2.8",
+    sha256 = "e380bd1bdb6447508beaa50efc653fe45f4edc1dafe11a251ae093e0ee97db9a",
     build_file_content = _zlib_build_file,
   )
   native.bind(
@@ -278,10 +282,11 @@ def java_proto_repositories(cc = 0, shared = 1):
   if cc:
      cc_proto_repositories()
 
-  native.new_git_repository(
+  native.new_http_archive(
       name = "com_github_grpc_java",
-      remote = "https://github.com/grpc/grpc-java",
-      tag = "v1.0.1",
+      url = "https://github.com/grpc/grpc-java/archive/v1.0.1.tar.gz",
+      strip_prefix = "grpc-java-1.0.1",
+      sha256 = "68f65590b00dac1d4afb7e894fc1b99a4ff300db74347880f3be6b295ee6f3ac",
       build_file_content = grpc_build_file,
   )
   native.maven_jar(
@@ -292,7 +297,7 @@ def java_proto_repositories(cc = 0, shared = 1):
   native.maven_jar(
       name = "protobuf_java_util_maven",
       artifact = "com.google.protobuf:protobuf-java-util:jar:3.0.0",
-      sha1 = "5085a47f398f229ef2f07fb496099461e8f4c56c",
+      sha1 = "b2828be88b6346489300069a052a1fe63f6a5dc5",
   )
   native.maven_jar(
       name = "guava_maven",
