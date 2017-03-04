@@ -4,7 +4,7 @@
 #include <memory>
 #include <vector>
 
-#include "dtac/Constants.hpp"
+#include "dtac/Constants.h"
 
 namespace dtac {
 
@@ -56,4 +56,4 @@ class LoseATrick {
 };
 }  // namespace dtac
 
-#endif  // hpp
+#endif  //.h

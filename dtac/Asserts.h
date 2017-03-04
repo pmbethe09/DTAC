@@ -5,7 +5,7 @@
 #include <sstream>
 #include <string>
 
-#include "dtac/Exceptions.hpp"
+#include "dtac/Exceptions.h"
 
 namespace dtac {
 
@@ -35,4 +35,4 @@ namespace dtac {
 
 }  // namespace dtac
 
-#endif  // hpp
+#endif  //.h

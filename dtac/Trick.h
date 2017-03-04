@@ -4,8 +4,8 @@
 #include <string>
 #include <vector>
 
-#include "dtac/Constants.hpp"
-#include "dtac/Hand.hpp"
+#include "dtac/Constants.h"
+#include "dtac/Hand.h"
 
 namespace dtac {
 

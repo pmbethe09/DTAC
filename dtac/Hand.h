@@ -10,8 +10,8 @@
 #include <ostream>
 #include <sstream>
 
-#include "dtac/Asserts.hpp"
-#include "dtac/Constants.hpp"
+#include "dtac/Asserts.h"
+#include "dtac/Constants.h"
 
 namespace dtac {
 

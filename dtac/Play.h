@@ -1,8 +1,8 @@
 #ifndef _BRIDGE_PLAY_INCLUDED_HPP
 #define _BRIDGE_PLAY_INCLUDED_HPP
 
-#include "dtac/Constants.hpp"
-#include "dtac/Hand.hpp"
+#include "dtac/Constants.h"
+#include "dtac/Hand.h"
 
 namespace dtac {
 
@@ -46,4 +46,4 @@ std::ostream& operator<<(std::ostream& os, const Play& p);
 
 }  // namespace dtac
 
-#endif  // hpp
+#endif  //.h

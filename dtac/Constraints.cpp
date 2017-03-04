@@ -1,6 +1,6 @@
-#include "dtac/Constraints.hpp"
+#include "dtac/Constraints.h"
 
-#include "dtac/Hand.hpp"
+#include "dtac/Hand.h"
 
 namespace dtac {
 

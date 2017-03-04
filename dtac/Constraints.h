@@ -37,4 +37,4 @@ class PointRange : public virtual IConstraint {
 
 }  // namespace dtac
 
-#endif /* hpp */
+#endif /*.h */

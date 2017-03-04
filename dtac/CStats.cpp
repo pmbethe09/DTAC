@@ -1,4 +1,4 @@
-#include "dtac/CStats.hpp"
+#include "dtac/CStats.h"
 
 using std::endl;
 using std::ostream;

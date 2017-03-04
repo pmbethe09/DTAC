@@ -1,8 +1,8 @@
 #ifndef _BRIDGE_CLAIM_TRICK_INCLUDED_HPP
 #define _BRIDGE_CLAIM_TRICK_INCLUDED_HPP
 
-#include "dtac/Constants.hpp"
-#include "dtac/Play.hpp"
+#include "dtac/Constants.h"
+#include "dtac/Play.h"
 
 namespace dtac {
 

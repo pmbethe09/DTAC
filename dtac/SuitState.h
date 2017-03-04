@@ -10,10 +10,10 @@
 
 #include <vector>
 
-#include "dtac/Claim.hpp"
-#include "dtac/Constants.hpp"
-#include "dtac/Hand.hpp"
-#include "dtac/WorstSearch.hpp"
+#include "dtac/Claim.h"
+#include "dtac/Constants.h"
+#include "dtac/Hand.h"
+#include "dtac/WorstSearch.h"
 
 namespace dtac {
 

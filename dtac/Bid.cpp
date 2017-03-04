@@ -1,9 +1,9 @@
-#include "dtac/Bid.hpp"
+#include "dtac/Bid.h"
 
 #include <fstream>
 #include <iostream>
 
-#include "dtac/Hand.hpp"
+#include "dtac/Hand.h"
 
 using std::string;
 using std::ostringstream;

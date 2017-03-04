@@ -1,4 +1,4 @@
-#include "dtac/SuitState.hpp"
+#include "dtac/SuitState.h"
 
 using std::vector;
 

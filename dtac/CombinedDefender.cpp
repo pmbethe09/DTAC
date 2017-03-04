@@ -9,7 +9,7 @@
  * SO: opponents hold J 6th... play the Jack for up to 6 rounds. *
  * Will discover to play A K Q in separate plays - only 3 winners.
  ***************************************************************************/
-#include "dtac/CombinedDefender.hpp"
+#include "dtac/CombinedDefender.h"
 
 using std::endl;
 using std::istringstream;

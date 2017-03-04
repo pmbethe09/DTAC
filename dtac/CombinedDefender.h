@@ -16,7 +16,7 @@
 #include <ostream>
 #include <string>
 
-#include "dtac/Hand.hpp"
+#include "dtac/Hand.h"
 
 namespace dtac {
 

@@ -1,6 +1,6 @@
 
-#include "dtac/Hand.hpp"
-#include "dtac/SampleHands.hpp"
+#include "dtac/Hand.h"
+#include "dtac/SampleHands.h"
 
 #include <stdlib.h>
 

@@ -3,8 +3,8 @@
 
 #include <vector>
 
-#include "dtac/Bid.hpp"
-#include "dtac/Constants.hpp"
+#include "dtac/Bid.h"
+#include "dtac/Constants.h"
 
 namespace dtac {
 
@@ -24,4 +24,4 @@ class Auction {
 
 }  // namespace dtac
 
-#endif  // hpp
+#endif  //.h

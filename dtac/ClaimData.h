@@ -3,8 +3,8 @@
 
 /** verify claim
  */
-#include "dtac/PBNDeal.hpp"
-#include "dtac/Trick.hpp"
+#include "dtac/PBNDeal.h"
+#include "dtac/Trick.h"
 
 #include <math.h>
 #include <ostream>
@@ -92,4 +92,4 @@ class ClaimData {
 
 }  // namespace dtac
 
-#endif /* hpp */
+#endif /*.h */

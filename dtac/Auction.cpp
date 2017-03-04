@@ -1,4 +1,4 @@
-#include "dtac/Auction.hpp"
+#include "dtac/Auction.h"
 
 namespace dtac {
 

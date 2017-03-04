@@ -1,8 +1,8 @@
-#include "dtac/BridgeTestBase.hpp"
+#include "dtac/BridgeTestBase.h"
 
 #include <gtest/gtest.h>
 
-#include "dtac/WorstSearch.hpp"
+#include "dtac/WorstSearch.h"
 
 #define ASSERT_SP(sp) ASSERT_TRUE(sp.get())
 

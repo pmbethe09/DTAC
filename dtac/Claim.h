@@ -7,10 +7,10 @@
 #include <string>
 #include <vector>
 
-#include "dtac/ClaimTrick.hpp"
-#include "dtac/CombinedDefender.hpp"
-#include "dtac/Hand.hpp"
-#include "dtac/LoseATrick.hpp"
+#include "dtac/ClaimTrick.h"
+#include "dtac/CombinedDefender.h"
+#include "dtac/Hand.h"
+#include "dtac/LoseATrick.h"
 
 namespace dtac {
 

@@ -6,7 +6,7 @@
  * class
  ***************************************************************************/
 
-#include "dtac/PBNFile.hpp"
+#include "dtac/PBNFile.h"
 
 #include <fstream>
 #include <iostream>
@@ -15,7 +15,7 @@
 #include <sstream>
 #include <stdexcept>
 
-#include "dtac/PBNTags.hpp"
+#include "dtac/PBNTags.h"
 
 using std::unique_ptr;
 using std::pair;

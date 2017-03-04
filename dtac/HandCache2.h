@@ -11,10 +11,10 @@
 #include <unordered_map>
 #include <vector>
 
-#include "dtac/CStats.hpp"
-#include "dtac/Claim.hpp"
-#include "dtac/Hand.hpp"
-#include "dtac/HandCacheConfig.hpp"
+#include "dtac/CStats.h"
+#include "dtac/Claim.h"
+#include "dtac/Hand.h"
+#include "dtac/HandCacheConfig.h"
 
 namespace dtac {
 

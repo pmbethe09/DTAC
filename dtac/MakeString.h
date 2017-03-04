@@ -19,4 +19,4 @@ class MakeString {
 };
 }  // namespace dtac {
 
-#endif  // hpp
+#endif  //.h

@@ -1,8 +1,8 @@
-#include "dtac/BridgeTestBase.hpp"
+#include "dtac/BridgeTestBase.h"
 
 #include <gtest/gtest.h>
 
-#include "dtac/Claim.hpp"
+#include "dtac/Claim.h"
 
 using namespace dtac;
 

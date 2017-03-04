@@ -1,4 +1,4 @@
-#include "dtac/BranchingStats.hpp"
+#include "dtac/BranchingStats.h"
 
 using std::endl;
 using std::ostream;

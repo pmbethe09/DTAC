@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "dtac/Asserts.hpp"
-#include "dtac/Constants.hpp"
+#include "dtac/Asserts.h"
+#include "dtac/Constants.h"
 
 namespace dtac {
 
@@ -29,4 +29,4 @@ bool operator<(const Bid& lhs, const Bid& rhs);
 
 }  // namespace dtac
 
-#endif  // hpp
+#endif  //.h

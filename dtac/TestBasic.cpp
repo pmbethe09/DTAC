@@ -1,9 +1,9 @@
-#include "dtac/BridgeTestBase.hpp"
+#include "dtac/BridgeTestBase.h"
 
 #include <stdarg.h>
 
-#include "dtac/Claim.hpp"
-#include "dtac/WorstSearch.hpp"
+#include "dtac/Claim.h"
+#include "dtac/WorstSearch.h"
 
 #include <gtest/gtest.h>
 

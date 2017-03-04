@@ -1,4 +1,4 @@
-#include "dtac/Hand.hpp"
+#include "dtac/Hand.h"
 
 using std::endl;
 using std::ostream;

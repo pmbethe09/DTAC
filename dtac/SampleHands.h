@@ -5,8 +5,8 @@
 #include <vector>
 
 /// for random sampling of hands
-#include "dtac/Constraints.hpp"
-#include "dtac/Hand.hpp"
+#include "dtac/Constraints.h"
+#include "dtac/Hand.h"
 
 namespace dtac {
 
@@ -59,4 +59,4 @@ class SampleHandsErnie : public SampleHandsBase {
 
 }  // namespace dtac
 
-#endif /* hpp */
+#endif /*.h */

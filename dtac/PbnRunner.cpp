@@ -1,8 +1,8 @@
-#include "dtac/ClaimData.hpp"
-#include "dtac/PBNDeal.hpp"
-#include "dtac/PBNFile.hpp"
-#include "dtac/Trick.hpp"
-#include "dtac/WorstSearch.hpp"
+#include "dtac/ClaimData.h"
+#include "dtac/PBNDeal.h"
+#include "dtac/PBNFile.h"
+#include "dtac/Trick.h"
+#include "dtac/WorstSearch.h"
 
 #include <fstream>
 #include <iomanip>

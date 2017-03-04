@@ -1,4 +1,4 @@
-#include "dtac/PBNDeal.hpp"
+#include "dtac/PBNDeal.h"
 
 #include <sstream>
 

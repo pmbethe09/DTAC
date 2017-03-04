@@ -1,4 +1,4 @@
-#include "dtac/ClaimData.hpp"
+#include "dtac/ClaimData.h"
 
 #include <iostream>
 

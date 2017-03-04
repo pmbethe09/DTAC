@@ -1,4 +1,4 @@
-#include "dtac/Trick.hpp"
+#include "dtac/Trick.h"
 
 #include <sstream>
 

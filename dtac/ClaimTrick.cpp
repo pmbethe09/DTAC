@@ -1,7 +1,7 @@
-#include "dtac/ClaimTrick.hpp"
+#include "dtac/ClaimTrick.h"
 
-#include "dtac/Claim.hpp"
-#include "dtac/CombinedDefender.hpp"
+#include "dtac/Claim.h"
+#include "dtac/CombinedDefender.h"
 
 using namespace std;
 

@@ -1,7 +1,7 @@
 #ifndef _BRIDGE_HANDCACHE_INCLUDED
 #define _BRIDGE_HANDCACHE_INCLUDED /* intentional */
 
-#include "dtac/HandCache1.hpp"
+#include "dtac/HandCache1.h"
 
 namespace dtac {
 

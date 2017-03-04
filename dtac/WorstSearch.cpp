@@ -9,11 +9,11 @@
  * SO: opponents hold J 6th... play the Jack for up to 6 rounds. *
  * Will discover to play A K Q in separate plays - only 3 winners.
  ***************************************************************************/
-#include "dtac/WorstSearch.hpp"
+#include "dtac/WorstSearch.h"
 
 #include <memory>
 
-#include "dtac/SuitState.hpp"
+#include "dtac/SuitState.h"
 
 using std::endl;
 using std::ostream;

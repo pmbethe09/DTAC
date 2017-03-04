@@ -1,8 +1,8 @@
-#include "dtac/SampleHands.hpp"
+#include "dtac/SampleHands.h"
 
-#include "dtac/ClaimData.hpp"  // for stddev
-#include "dtac/Constraints.hpp"
-#include "dtac/Hand.hpp"
+#include "dtac/ClaimData.h"  // for stddev
+#include "dtac/Constraints.h"
+#include "dtac/Hand.h"
 
 #include <iomanip>
 #include <iostream>

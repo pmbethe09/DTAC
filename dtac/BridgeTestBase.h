@@ -1,9 +1,9 @@
 #ifndef _BRIDGE_TEST_BASE_INCLUDED
 #define _BRIDGE_TEST_BASE_INCLUDED
 
-#include "dtac/CombinedDefender.hpp"
-#include "dtac/Hand.hpp"
-#include "dtac/Play.hpp"
+#include "dtac/CombinedDefender.h"
+#include "dtac/Hand.h"
+#include "dtac/Play.h"
 
 namespace dtac {
 

@@ -1,6 +1,6 @@
-#include "dtac/LoseATrick.hpp"
+#include "dtac/LoseATrick.h"
 
-#include "dtac/Claim.hpp"
+#include "dtac/Claim.h"
 
 using std::shared_ptr;
 using std::vector;

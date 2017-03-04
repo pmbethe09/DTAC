@@ -4,7 +4,7 @@ TESTS = glob(["Test*.cpp"])
 
 TEST_LIB = ["BridgeTestBase.cpp"]
 
-TEST_LIB_HDRS = ["BridgeTestBase.hpp"]
+TEST_LIB_HDRS = ["BridgeTestBase.h"]
 
 MAINS = [
     "ClaimStats.cpp",
@@ -13,9 +13,9 @@ MAINS = [
 ]
 
 HDRS = [
-    "Asserts.hpp",
-    "Constants.hpp",
-    "Exceptions.hpp",
+    "Asserts.h",
+    "Constants.h",
+    "Exceptions.h",
 ]
 
 cc_library(
@@ -23,7 +23,7 @@ cc_library(
     hdrs = HDRS,
 )
 
-HAND_HDRS = ["Hand.hpp"]
+HAND_HDRS = ["Hand.h"]
 
 HAND_SRCS = ["Hand.cpp"]
 
@@ -42,7 +42,7 @@ cc_library(
         exclude = MAINS + TESTS + HAND_SRCS + TEST_LIB,
     ),
     hdrs = glob(
-        ["*.hpp"],
+        ["*.h"],
         exclude = HDRS + HAND_HDRS + TEST_LIB_HDRS,
     ),
     copts = ["-Wno-sign-compare"],  # TODO -- fix

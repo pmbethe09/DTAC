@@ -13,11 +13,11 @@
 #include <ostream>
 #include <vector>
 
-#include "dtac/BranchingStats.hpp"
-#include "dtac/Claim.hpp"
-#include "dtac/CombinedDefender.hpp"
-#include "dtac/Hand.hpp"
-#include "dtac/HandCache.hpp"
+#include "dtac/BranchingStats.h"
+#include "dtac/Claim.h"
+#include "dtac/CombinedDefender.h"
+#include "dtac/Hand.h"
+#include "dtac/HandCache.h"
 
 namespace dtac {
 

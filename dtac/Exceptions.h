@@ -13,4 +13,4 @@ class bridge_exception : public std::logic_error {
 
 }  // namespace dtac
 
-#endif  // hpp
+#endif  //.h

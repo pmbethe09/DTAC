@@ -6,7 +6,7 @@
 #include <string>
 #include <vector>
 
-#include "dtac/PBNDeal.hpp"
+#include "dtac/PBNDeal.h"
 
 class PBNFile {
  public:

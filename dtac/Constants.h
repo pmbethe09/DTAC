@@ -118,4 +118,4 @@ static inline bool isNS(DIRECTION d) { return !(d & 1); /* 0 or 2 */ }
 
 }  // namespace dtac
 
-#endif  // hpp
+#endif  //.h
