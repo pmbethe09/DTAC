@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "external/com_github_google_googletest/include/gtest/gtest.h"
+#include <gtest/gtest.h>
 
 using std::string;
 using namespace dtac;

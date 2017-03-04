@@ -1,12 +1,12 @@
 cc_library(
     name = "gtest",
     srcs = glob(
-        ["src/*.cc", "src/*.h"],
-        exclude = ["src/gtest-all.cc"]
+        ["googletest/src/*.cc", "googletest/src/*.h"],
+        exclude = ["googletest/src/gtest-all.cc"]
     ),
-    hdrs = glob(["include/**/*.h"]),
-    copts = ["-Iexternal/gtest_repo/include"],
+    hdrs = glob(["googletest/include/**/*.h"]),
+    copts = ["-Iexternal/com_github_google_googletest/googletest"],
     linkopts = ["-pthread"],
-    includes = ["include"],
+    includes = ["googletest/include"],
     visibility = ["//visibility:public"],
 )

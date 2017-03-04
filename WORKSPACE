@@ -11,7 +11,7 @@ new_git_repository(
     name = "com_github_google_googletest",
     build_file = "third_party/BUILD.gtest",
     remote = "https://github.com/google/googletest",
-    tag = "release-1.7.0",
+    tag = "release-1.8.0",
 )
 
 bind(

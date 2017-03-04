@@ -29,11 +29,11 @@ public class Calls {
   public static Call raw(Call call) {
     return call.toBuilder().clearAlerted().clearDescription().build();
   }
-  
+
   public static boolean equals(Call lhs, Call rhs) {
     return raw(lhs).equals(raw(rhs));
   }
-  
+
   public static Call withDescription(Call call) {
     return withDescription(call, null);
   }
