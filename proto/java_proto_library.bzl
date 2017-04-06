@@ -152,9 +152,9 @@ def common_proto_repositories():
   """Common things to all langauge proto deps."""
   native.http_archive(
       name = "com_github_google_protobuf",
-      url = "https://github.com/google/protobuf/archive/v3.2.0-rc.1.tar.gz",
-      sha256 = "b9ae7afbf6e0bd613df72d29579304c12b574d9f3e3fcfd72823c431904f92c3",
-      strip_prefix = "protobuf-3.2.0-rc.1",
+      url = "https://github.com/google/protobuf/archive/v3.2.1.tar.gz",
+      sha256 = "2eceab4cd58a73aadb7c84642838ee58c886e1f908acd45847a92b874d23c8ef",
+      strip_prefix = "protobuf-3.2.1",
   )
   native.http_archive(
       name = "com_github_grpc_grpc",
