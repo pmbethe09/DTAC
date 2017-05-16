@@ -4,6 +4,8 @@
 
 #include <gtest/gtest.h>
 
+using std::cout;
+using std::endl;
 using std::string;
 using namespace dtac;
 
