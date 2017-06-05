@@ -2,6 +2,7 @@ package edu.nyu.bridge.util;
 
 import javax.annotation.Nullable;
 
+import com.google.auto.value.AutoValue;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
@@ -12,10 +13,13 @@ import edu.nyu.bridge.gen.Bridge.Level;
 import edu.nyu.bridge.gen.Bridge.NonBid;
 import edu.nyu.cards.gen.Cards.Suit;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /** An intelligent wrapper for describing bridge contracts. */
-public class Contract {
+@AutoValue
+public abstract class Contract {
   public static final Contract PASSOUT =
-      new Contract(Call.newBuilder().setNonBid(NonBid.PASS).build(), Direction.NORTH);
+      Contract.of(Call.newBuilder().setNonBid(NonBid.PASS).build(), Direction.NORTH);
 
   public enum Bonus {
     PARTSCORE(50, 50),
@@ -23,7 +27,7 @@ public class Contract {
     SLAM(800, 1250),
     GRAND(1300, 2000);
 
-    public final int nonVulBonus, vulBonus;
+    private final int nonVulBonus, vulBonus;
 
     Bonus(int nonVulBonus, int vulBonus) {
       this.nonVulBonus = nonVulBonus;
@@ -31,16 +35,28 @@ public class Contract {
     }
   }
 
-  public final Call call;
-  public final Direction declarer;
-
-  public Contract(Call call, Direction declarer) {
-    this.call = Preconditions.checkNotNull(call, "call");
-    this.declarer = Preconditions.checkNotNull(declarer, "declarer");
+  public static Contract of(Call call, Direction declarer) {
+    return new AutoValue_Contract(call, declarer);
   }
 
+  public static Contract parse(String c) {
+    return Contract.of(
+        Contracts.string2Contract(c), Directions.fromString(c.substring(c.length() - 1)));
+  }
+
+  public static Contract of(int totalTricks, @Nullable Suit trump, Direction declarer) {
+    Preconditions.checkArgument(totalTricks > BOOK, "Must make a contract with 7 or more tricks");
+    trump = trump == null ? Suit.NOTRUMPS : trump;
+    Call call =
+        Call.newBuilder().setBid(Bids.bid(Level.forNumber(totalTricks - BOOK), trump)).build();
+    return Contract.of(call, declarer);
+  }
+
+  public abstract Call getCall();
+  public abstract Direction getDeclarer();
+
   public boolean isPassout() {
-    return !call.hasBid();
+    return !getCall().hasBid();
   }
 
   public Bonus bonus() {
@@ -57,16 +73,16 @@ public class Contract {
   }
 
   public boolean isGrand() {
-    return Bids.level(call.getBid()).getNumber() == 7;
+    return Bids.level(getCall().getBid()).getNumber() == 7;
   }
 
   public boolean isSlam() {
-    return Bids.level(call.getBid()).getNumber() == 6;
+    return Bids.level(getCall().getBid()).getNumber() == 6;
   }
 
   public boolean isGame() {
-    Level level = Bids.level(call.getBid());
-    switch (Bids.suit(call.getBid())) {
+    Level level = Bids.level(getCall().getBid());
+    switch (Bids.suit(getCall().getBid())) {
       case CLUBS:
       case DIAMONDS:
         return level.getNumber() == 5;
@@ -76,37 +92,15 @@ public class Contract {
       case NOTRUMPS:
         return level.getNumber() >= 3 && level.getNumber() < 6;
       default:
-        throw new IllegalStateException("Suit " + Bids.suit(call.getBid()) + " returned for "
-            + call.getBid() + " was not expected");
+        throw new IllegalStateException("Suit " + Bids.suit(getCall().getBid()) + " returned for "
+            + getCall().getBid() + " was not expected");
     }
-  }
-
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(this)
-        .add("call", Contracts.contract2String(call))
-        .add("declarer", declarer)
-        .toString();
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hashCode(this.call, this.declarer);
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (!(other instanceof Contract)) {
-      return false;
-    }
-    Contract contract = (Contract) other;
-    return this.call.equals(contract.call) && this.declarer == contract.declarer;
   }
 
   /** returns trump or {@code null} if NT. */
   @Nullable
   public Suit getTrump() {
-    Suit trump = Bids.suit(call.getBid());
+    Suit trump = Bids.suit(getCall().getBid());
     return trump == null || trump == Suit.NOTRUMPS ? null : trump;
   }
 
@@ -115,35 +109,23 @@ public class Contract {
     if (current == null) {
       return true;
     }
-    int mLevel = Bids.level(this.call.getBid()).getNumber();
-    int cLevel = Bids.level(current.call.getBid()).getNumber();
+    int mLevel = Bids.level(this.getCall().getBid()).getNumber();
+    int cLevel = Bids.level(current.getCall().getBid()).getNumber();
     if (mLevel > cLevel) {
       return true;
     }
     if (mLevel < cLevel) {
       return false;
     }
-    return Bids.suit(this.call.getBid()).getNumber() > Bids.suit(current.call.getBid()).getNumber();
+    return Bids.suit(this.getCall().getBid()).getNumber()
+        > Bids.suit(current.getCall().getBid()).getNumber();
   }
 
   public String pbnString() {
-    if (!this.call.hasBid()) {
+    if (!this.getCall().hasBid()) {
       return "P";
     }
-    return Contracts.contract2String(this.call) + declarer.name().substring(0, 1);
-  }
-
-  public static Contract parse(String c) {
-    return new Contract(
-        Contracts.string2Contract(c), Directions.fromString(c.substring(c.length() - 1)));
-  }
-
-  public static Contract of(int totalTricks, @Nullable Suit trump, Direction declarer) {
-    Preconditions.checkArgument(totalTricks > BOOK, "Must make a contract with 7 or more tricks");
-    trump = trump == null ? Suit.NOTRUMPS : trump;
-    Call call =
-        Call.newBuilder().setBid(Bids.bid(Level.forNumber(totalTricks - BOOK), trump)).build();
-    return new Contract(call, declarer);
+    return Contracts.contract2String(this.getCall()) + getDeclarer().name().substring(0, 1);
   }
 
   private static final int BOOK = 6;

@@ -110,16 +110,16 @@ public class AuctionsTest {
   }
 
   private Contract contract(String call, Direction declarer) {
-    return new Contract(Contracts.string2Contract(call), declarer);
+    return Contract.of(Contracts.string2Contract(call), declarer);
   }
 
   private Contract contract(String cont, String dir) {
-    return new Contract(call(cont), Directions.fromString(dir));
+    return Contract.of(call(cont), Directions.fromString(dir));
   }
 
   private Contract contract(String cont, Direction dir, Call risk) {
     Call c = call(cont).toBuilder().setNonBid(risk.getNonBid()).build();
-    return new Contract(c, dir);
+    return Contract.of(c, dir);
   }
 
   private static Call call(Bid bid) {

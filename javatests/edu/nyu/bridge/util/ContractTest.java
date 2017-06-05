@@ -23,7 +23,7 @@ public class ContractTest {
   @Test
   public void testOf() {
     assertEquals("deal with tricks/BOOK", Contract.of(10, Suit.SPADES, Direction.WEST),
-        new Contract(Call.newBuilder().setBid(Bid.FOUR_SPADES).build(), Direction.WEST));
+        Contract.of(Call.newBuilder().setBid(Bid.FOUR_SPADES).build(), Direction.WEST));
   }
 
   @Test
@@ -47,6 +47,6 @@ public class ContractTest {
   }
 
   private static Contract contract(String c) {
-    return new Contract(Calls.string2Call(c), Direction.WEST);
+    return Contract.of(Calls.string2Call(c), Direction.WEST);
   }
 }

@@ -81,7 +81,7 @@ public class Auctions {
   }
 
   public static Direction openingLeader(Contract contract) {
-    return Directions.lho(contract.declarer);
+    return Directions.lho(contract.getDeclarer());
   }
 
   /** Returns the final {@link Contract} of an {@link Auction}. */
@@ -125,9 +125,9 @@ public class Auctions {
         result.hasBid(), "Unable to find the dominant bid in a non passout %s", auction);
     Suit suit = Bids.suit(result.getBid());
     if (Directions.isNS(declarer)) {
-      return new Contract(result.build(), firstBidderNS.get(suit));
+      return Contract.of(result.build(), firstBidderNS.get(suit));
     }
-    return new Contract(result.build(), firstBidderEW.get(suit));
+    return Contract.of(result.build(), firstBidderEW.get(suit));
   }
 
   public static boolean isOver(AuctionOrBuilder auction) {
@@ -167,13 +167,13 @@ public class Auctions {
     }
     // TODO perhaps more efficient?
     Contract contract = contract(auction);
-    if (!contract.call.hasBid()) {
+    if (!contract.getCall().hasBid()) {
       return false; // can't X/XX a nothing.
     }
     Direction me = Directions.add(auction.getDealer(), auction.getAuctionCount());
-    if (Directions.opponents(me, contract.declarer)) {
-      return contract.call.getNonBid() == NonBid.PASS && call.getNonBid() == NonBid.DOUBLE;
+    if (Directions.opponents(me, contract.getDeclarer())) {
+      return contract.getCall().getNonBid() == NonBid.PASS && call.getNonBid() == NonBid.DOUBLE;
     }
-    return contract.call.getNonBid() == NonBid.DOUBLE && call.getNonBid() == NonBid.REDOUBLE;
+    return contract.getCall().getNonBid() == NonBid.DOUBLE && call.getNonBid() == NonBid.REDOUBLE;
   }
 }

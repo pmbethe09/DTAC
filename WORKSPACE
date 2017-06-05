@@ -26,6 +26,12 @@ maven_jar(
 )
 
 maven_jar(
+    name = "auto_value_repo",
+    artifact = "com.google.auto.value:auto-value:1.4.1",
+    sha1 = "8172ebbd7970188aff304c8a420b9f17168f6f48",
+)
+
+maven_jar(
     name = "guava_repo",
     artifact = "com.google.guava:guava:19.0",
     sha1 = "6ce200f6b23222af3d8abb6b6459e6c44f4bb0e9",
