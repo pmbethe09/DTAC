@@ -35,11 +35,11 @@ def _external_dirs(files):
   """Compute any needed -I options to protoc from external filegroups."""
   return set(["/".join(f.dirname.split("/")[:2])
               for f in files if f.dirname[:9] == "external/"])
-    
+
 def _include_dirs(protos):
   dirs = _external_dirs(protos)
   if not dirs:
-	return ""
+    return ""
   return " " + " ".join(["-I" + d for d in dirs])
 
 def _java_proto_library_gen_impl(ctx):
@@ -56,7 +56,7 @@ def _java_proto_library_gen_impl(ctx):
                 + ctx.executable._protoc_gen_grpc_java.path + " ")
     grpc_inputs = [ctx.executable._protoc_gen_grpc_java]
   cmds = ["set -e", "rm -rf " + tmpdir, "mkdir -p " + tmpdir,
-          ctx.executable.protoc.path + grpc_cmd + " --java_out=" + tmpdir 
+          ctx.executable.protoc.path + grpc_cmd + " --java_out=" + tmpdir
           + " -I." + _include_dirs(protos)
           + " " + " ".join([f.path for f in ctx.files.srcs]),
           ctx.executable._jar.path + " cf " + ctx.outputs.srcjar.path + " -C " + tmpdir + " ."]
@@ -67,7 +67,7 @@ def _java_proto_library_gen_impl(ctx):
       executable = True)
   ctx.action(
       inputs=(grpc_inputs + protos + ctx.files.srcs + ctx.files._jdk
-      	+ [ctx.executable.protoc, ctx.executable._jar, run]),
+        + [ctx.executable.protoc, ctx.executable._jar, run]),
       outputs=[ctx.outputs.srcjar],
       executable=run,
       mnemonic="GenJavaProto")
@@ -243,7 +243,7 @@ def cc_proto_repositories():
   )
   native.new_http_archive(
     name = "com_github_nanopb_nanopb",
-    # Hack until a grpc tag has the third_party/nanopb/BUILD file 
+    # Hack until a grpc tag has the third_party/nanopb/BUILD file
     url = "https://github.com/grpc/grpc/archive/v1.0.1.tar.gz",
     strip_prefix = "grpc-1.0.1",
     sha256 = "efad782944da13d362aab9b81f001b7b8b1458794751de818e9848c47acd4b32",
