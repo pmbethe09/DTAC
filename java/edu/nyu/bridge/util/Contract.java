@@ -40,8 +40,8 @@ public abstract class Contract {
   }
 
   public static Contract parse(String c) {
-    return Contract.of(
-        Contracts.string2Contract(c), Directions.fromString(c.substring(c.length() - 1)));
+    return Contract.of(Contracts.string2Contract(c.substring(0, c.length() - 1)),
+        Directions.fromString(c.substring(c.length() - 1)));
   }
 
   public static Contract of(int totalTricks, @Nullable Suit trump, Direction declarer) {
@@ -95,6 +95,13 @@ public abstract class Contract {
         throw new IllegalStateException("Suit " + Bids.suit(getCall().getBid()) + " returned for "
             + getCall().getBid() + " was not expected");
     }
+  }
+
+  public int getContractTricks() {
+    if (!getCall().hasBid()) {
+      return 0;
+    }
+    return Bids.level(getCall().getBid()).getNumber();
   }
 
   /** returns trump or {@code null} if NT. */

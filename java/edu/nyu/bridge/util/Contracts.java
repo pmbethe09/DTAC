@@ -37,6 +37,7 @@ public class Contracts {
   }
 
   private static NonBid string2Risk(String call) {
+    call = call.toUpperCase();
     if (call.endsWith("XX")) {
       return NonBid.REDOUBLE;
     }

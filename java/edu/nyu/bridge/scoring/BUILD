@@ -8,6 +8,7 @@ java_library(
         "//cards_proto:cards_proto_java",
         "//java/edu/nyu/bridge/util",
         "//java/edu/nyu/cards",
+        "//third_party/auto_value",
         "@guava_repo//jar",
         "@jsr305_repo//jar",
     ],
