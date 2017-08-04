@@ -81,7 +81,7 @@ _java_proto_library_gen = rule(
             allow_files = [".proto"],
         ),
         "protoc": attr.label(
-            default = Label("@com_github_google_protobuf//:protoc"),
+            default = Label("@com_google_protobuf//:protoc"),
             executable = True,
             single_file = True,
             allow_files = True,
@@ -151,10 +151,16 @@ def java_proto_library(name, srcs, deps = None, visibility = None,
 def common_proto_repositories():
   """Common things to all langauge proto deps."""
   native.http_archive(
-      name = "com_github_google_protobuf",
-      url = "https://github.com/google/protobuf/archive/v3.2.1.tar.gz",
-      sha256 = "2eceab4cd58a73aadb7c84642838ee58c886e1f908acd45847a92b874d23c8ef",
-      strip_prefix = "protobuf-3.2.1",
+        name = "com_google_protobuf",
+        sha256 = "df77b0e60afcd3d90b2654cd305e61ae8ae2e2281b4d6540c7093da4c4245d75",
+        strip_prefix = "protobuf-3.3.1",
+        urls = ["https://github.com/google/protobuf/archive/v3.3.1.zip"],
+  )
+  native.http_archive(
+        name = "com_google_protobuf_java",
+        sha256 = "df77b0e60afcd3d90b2654cd305e61ae8ae2e2281b4d6540c7093da4c4245d75",
+        strip_prefix = "protobuf-3.3.1",
+        urls = ["https://github.com/google/protobuf/archive/v3.3.1.zip"],
   )
   native.http_archive(
       name = "com_github_grpc_grpc",
@@ -168,7 +174,7 @@ cc_binary(
   name = "protoc-gen-grpc-java",
   srcs = glob(["compiler/src/java_plugin/cpp/*"]),
   visibility = ["//visibility:public"],
-  deps = ["@com_github_google_protobuf//:protoc_lib"],
+  deps = ["@com_google_protobuf//:protoc_lib"],
 )
 
 java_library(
@@ -227,11 +233,11 @@ cc_library(
 def cc_proto_repositories():
   native.bind(
     name = "protobuf_clib",
-    actual = "@com_github_google_protobuf//:protobuf",
+    actual = "@com_google_protobuf//:protobuf",
   )
   native.bind(
     name = "protobuf_compiler",
-    actual = "@com_github_google_protobuf//:protoc_lib",
+    actual = "@com_google_protobuf//:protoc_lib",
   )
   native.bind(
     name = "grpc_cpp_plugin",
@@ -288,11 +294,6 @@ def java_proto_repositories(cc = 0, shared = 1):
       strip_prefix = "grpc-java-1.0.1",
       sha256 = "68f65590b00dac1d4afb7e894fc1b99a4ff300db74347880f3be6b295ee6f3ac",
       build_file_content = grpc_build_file,
-  )
-  native.maven_jar(
-      name = "protobuf_java_maven",
-      artifact = "com.google.protobuf:protobuf-java:3.0.0",
-      sha1 = "6d325aa7c921661d84577c0a93d82da4df9fa4c8",
   )
   native.maven_jar(
       name = "protobuf_java_util_maven",

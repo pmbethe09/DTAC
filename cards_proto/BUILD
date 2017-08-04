@@ -1,16 +1,20 @@
 package(default_visibility = ["//visibility:public"])
 
-load("@com_github_google_protobuf//:protobuf.bzl", "cc_proto_library")
-load("//proto:java_proto_library.bzl", "java_proto_library")
+load("@com_google_protobuf//:protobuf.bzl", "cc_proto_library")
 
 cc_proto_library(
     name = "cards_proto_cc",
     srcs = ["cards.proto"],
-    default_runtime = "@com_github_google_protobuf//:protobuf",
-    protoc = "@com_github_google_protobuf//:protoc",
+    default_runtime = "@com_google_protobuf//:protobuf",
+    protoc = "@com_google_protobuf//:protoc",
+)
+
+proto_library(
+    name = "cards_proto",
+    srcs = ["cards.proto"],
 )
 
 java_proto_library(
     name = "cards_proto_java",
-    srcs = ["cards.proto"],
+    deps = [":cards_proto"],
 )
