@@ -1,10 +1,24 @@
 workspace(name = "com_github_pmbethe09_dtac")
 
-load("//proto:java_proto_library.bzl", "java_proto_repositories")
+http_archive(
+    name = "com_google_protobuf",
+    sha256 = "df77b0e60afcd3d90b2654cd305e61ae8ae2e2281b4d6540c7093da4c4245d75",
+    strip_prefix = "protobuf-3.3.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.3.1.zip"],
+)
 
-java_proto_repositories(
-    cc = 1,
-    shared = 1,
+http_archive(
+    name = "com_google_protobuf_java",
+    sha256 = "df77b0e60afcd3d90b2654cd305e61ae8ae2e2281b4d6540c7093da4c4245d75",
+    strip_prefix = "protobuf-3.3.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.3.1.zip"],
+)
+
+http_archive(
+    name = "com_google_protobuf_cc",
+    sha256 = "df77b0e60afcd3d90b2654cd305e61ae8ae2e2281b4d6540c7093da4c4245d75",
+    strip_prefix = "protobuf-3.3.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.3.1.zip"],
 )
 
 new_git_repository(
