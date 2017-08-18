@@ -52,7 +52,7 @@ class Pool {
 class WorstSearch {
  public:
   /* hand of player on lead, their partner, and info on all cards gone
-  */
+   */
   WorstSearch(const Hand& origLead, const Hand& partner, const Hand& played,
               SUIT trumps, bool claimK = true);
   WorstSearch();

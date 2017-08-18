@@ -17,6 +17,6 @@ class MakeString {
     return *this;
   }
 };
-}  // namespace dtac {
+}  // namespace dtac
 
 #endif  //.h

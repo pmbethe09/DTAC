@@ -89,4 +89,4 @@ ostream& CombinedDefender::write(ostream& os) const {
   return os;  // for cascading
 }
 
-}  // namespace dtac {
+}  // namespace dtac

@@ -223,8 +223,8 @@ static void workBackLoser(const Hand &leadin, const Hand &followin,
     for (int i = 0; i < csp->tricks.size(); ++i) {
       const ClaimTrick &ctOrig = claim.tricks[i + offset];
       const ClaimTrick &ct = csp->tricks[i];
-      ASSERT_EQ(ctOrig, ct) << "backtrack '-" << toApply << "' trick " << i
-                            << " did not match.";
+      ASSERT_EQ(ctOrig, ct)
+          << "backtrack '-" << toApply << "' trick " << i << " did not match.";
     }  // end for each trick to match
 
   }  // end for toGo

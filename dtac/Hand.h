@@ -47,14 +47,14 @@ class Hand {
   void addCard(SUIT s, RANK r);
 #else
   inline void removeCard(SUIT s, RANK r) {
-    ASSERT_MSG(hasCard(s, r), "card: " << suit2Char(s) << rank2Char(r)
-                                       << " not in hand");
+    ASSERT_MSG(hasCard(s, r),
+               "card: " << suit2Char(s) << rank2Char(r) << " not in hand");
     cards[(int)s] ^= (int)r;  // remove this card
   }
 
   inline void addCard(SUIT s, RANK r) {
-    ASSERT_MSG(!hasCard(s, r), "card: " << suit2Char(s) << rank2Char(r)
-                                        << " already in hand");
+    ASSERT_MSG(!hasCard(s, r),
+               "card: " << suit2Char(s) << rank2Char(r) << " already in hand");
     cards[(int)s] |= (int)r;  // insert this card (could also xor)
   }
 #endif

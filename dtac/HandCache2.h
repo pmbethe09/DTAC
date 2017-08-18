@@ -19,7 +19,7 @@
 namespace dtac {
 
 /* specific to start position of two hands! (and length of suits?)
-* also deal with 32/64-bit*/
+ * also deal with 32/64-bit*/
 
 class HandCache2 {
  public:
