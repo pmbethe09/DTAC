@@ -73,7 +73,7 @@ public class Hand {
         lastRank = null;
         continue;
       }
-      if (lastRank != null && rank.ordinal() >= lastRank.ordinal()) {
+      if (lastRank != null && rank.getNumber() >= lastRank.getNumber()) {
         // new suit
         currentSuit = lowerSuit(currentSuit);
       }

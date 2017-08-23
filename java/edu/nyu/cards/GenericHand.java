@@ -37,7 +37,7 @@ public class GenericHand {
         lastRank = null;
         continue;
       }
-      if (!isGeneric && lastRank != null && rank.ordinal() >= lastRank.ordinal()) {
+      if (!isGeneric && lastRank != null && rank.getNumber() >= lastRank.getNumber()) {
         // new suit
         currentSuit = lowerSuit(currentSuit);
       }
