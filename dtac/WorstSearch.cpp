@@ -287,7 +287,7 @@ bool WorstSearch::findSolutionFast(
 
   PlayArraySP leadsSP = playArrayPool.getFromPool(),
               follsSP = playArrayPool.getFromPool();
-  vector<Play>&leads = *leadsSP, &follows = *follsSP;
+  vector<Play> &leads = *leadsSP, &follows = *follsSP;
   const int suit_iters = !oppsLead ? NUM_SUITS : 1;
   for (int s = 0; s < suit_iters; ++s) {
     int suitIdx = !oppsLead ? (int)ss.ordering[s] : lastSuit;

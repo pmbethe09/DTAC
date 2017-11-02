@@ -2,23 +2,30 @@ workspace(name = "com_github_pmbethe09_dtac")
 
 http_archive(
     name = "com_google_protobuf",
-    sha256 = "df77b0e60afcd3d90b2654cd305e61ae8ae2e2281b4d6540c7093da4c4245d75",
-    strip_prefix = "protobuf-3.3.1",
-    urls = ["https://github.com/google/protobuf/archive/v3.3.1.zip"],
+    sha256 = "b43ecc30077e960c9ff3d9abd637ff995db3382bf83c537a3f6537f732a94f62",
+    strip_prefix = "protobuf-3.4.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.4.1.zip"],
+)
+
+http_archive(
+    name = "com_github_google_protobuf",
+    sha256 = "b43ecc30077e960c9ff3d9abd637ff995db3382bf83c537a3f6537f732a94f62",
+    strip_prefix = "protobuf-3.4.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.4.1.zip"],
 )
 
 http_archive(
     name = "com_google_protobuf_java",
-    sha256 = "df77b0e60afcd3d90b2654cd305e61ae8ae2e2281b4d6540c7093da4c4245d75",
-    strip_prefix = "protobuf-3.3.1",
-    urls = ["https://github.com/google/protobuf/archive/v3.3.1.zip"],
+    sha256 = "b43ecc30077e960c9ff3d9abd637ff995db3382bf83c537a3f6537f732a94f62",
+    strip_prefix = "protobuf-3.4.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.4.1.zip"],
 )
 
 http_archive(
     name = "com_google_protobuf_cc",
-    sha256 = "df77b0e60afcd3d90b2654cd305e61ae8ae2e2281b4d6540c7093da4c4245d75",
-    strip_prefix = "protobuf-3.3.1",
-    urls = ["https://github.com/google/protobuf/archive/v3.3.1.zip"],
+    sha256 = "b43ecc30077e960c9ff3d9abd637ff995db3382bf83c537a3f6537f732a94f62",
+    strip_prefix = "protobuf-3.4.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.4.1.zip"],
 )
 
 new_git_repository(

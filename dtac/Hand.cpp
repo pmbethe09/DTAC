@@ -48,8 +48,8 @@ Hand Hand::fromString(const std::string& s) {
 #ifdef DEBUG
 // then not inline, for debugging
 void Hand::removeCard(SUIT s, RANK r) {
-  ASSERT_MSG_DBG(hasCard(s, r),
-                 "card: " << suit2Char(s) << rank2Char(r) << " not in hand");
+  ASSERT_MSG_DBG(hasCard(s, r), "card: " << suit2Char(s) << rank2Char(r)
+                                         << " not in hand");
   static int ALL_CARDS = (((int)ACE) << 1) - 1;  // all bits from 2 to A
   cards[(int)s] ^= (int)r;                       // remove this card
   // cards[(int)s] &= (((int)r) ^ ALL_CARDS); // safe way, makes no change even
@@ -59,8 +59,8 @@ void Hand::addCard(SUIT s, RANK r) {
   // ASSERT_MSG_DBG(!hasCard(s, r), "card: " << suit2Char(s) << rank2Char(r) <<
   // " already in hand");
   if (hasCard(s, r)) {
-    ASSERT_MSG_DBG(
-        false, "card: " << suit2Char(s) << rank2Char(r) << " already in hand");
+    ASSERT_MSG_DBG(false, "card: " << suit2Char(s) << rank2Char(r)
+                                   << " already in hand");
   }
   cards[(int)s] |= (int)r;  // insert this card (could also xor)
 }
