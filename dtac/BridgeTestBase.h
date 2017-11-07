@@ -5,6 +5,8 @@
 #include "dtac/Hand.h"
 #include "dtac/Play.h"
 
+#include <memory>
+
 namespace dtac {
 
 class Claim;
