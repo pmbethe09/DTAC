@@ -1,5 +1,6 @@
 package edu.nyu.bridge.util;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +9,7 @@ import static edu.nyu.cards.Cards.STRING_TO_CARD;
 
 import java.util.List;
 
+import com.google.common.collect.ImmutableList;
 import org.junit.Test;
 
 import com.google.common.collect.FluentIterable;
@@ -57,6 +59,6 @@ public class TricksTest {
   }
 
   private static List<Card> trick(String... cards) {
-    return FluentIterable.of(cards).transform(STRING_TO_CARD).toList();
+    return ImmutableList.copyOf(cards).stream().map(STRING_TO_CARD).collect(toImmutableList());
   }
 }

@@ -37,12 +37,12 @@ public class ShortEnumConverter<T extends Enum<T>> extends Converter<String, T> 
   }
 
   @Override
-  public String doBackward(T arg0) {
+  protected String doBackward(T arg0) {
     return checkNotNull(biData.inverse().get(arg0), "%s not back convertable", arg0);
   }
 
   @Override
-  public T doForward(String arg0) {
+  protected T doForward(String arg0) {
     return checkNotNull(
         biData.get(arg0.substring(0, 1).toUpperCase()), "%s not forward conv", arg0);
   }

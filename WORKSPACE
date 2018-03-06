@@ -1,13 +1,14 @@
 workspace(name = "com_github_pmbethe09_dtac")
 
 PROTO_VERS = "3.5.1"
+
 PROTO_SHA = "1f8b9b202e9a4e467ff0b0f25facb1642727cdf5e69092038f15b37c75b99e45"
 
 http_archive(
     name = "com_google_protobuf",
     sha256 = PROTO_SHA,
     strip_prefix = "protobuf-" + PROTO_VERS,
-    urls = ["https://github.com/google/protobuf/archive/v" + PROTO_VERS +".zip"],
+    urls = ["https://github.com/google/protobuf/archive/v" + PROTO_VERS + ".zip"],
 )
 
 http_archive(
@@ -15,20 +16,6 @@ http_archive(
     sha256 = PROTO_SHA,
     strip_prefix = "protobuf-" + PROTO_VERS,
     urls = ["https://github.com/google/protobuf/archive/v" + PROTO_VERS + ".zip"],
-)
-
-http_archive(
-    name = "com_google_protobuf_java",
-    sha256 = PROTO_SHA,
-    strip_prefix = "protobuf-" + PROTO_VERS,
-    urls = ["https://github.com/google/protobuf/archive/v" + PROTO_VERS +".zip"],
-)
-
-http_archive(
-    name = "com_google_protobuf_cc",
-    sha256 = PROTO_SHA,
-    strip_prefix = "protobuf-" + PROTO_VERS,
-    urls = ["https://github.com/google/protobuf/archive/v"+PROTO_VERS+".zip"],
 )
 
 new_git_repository(
@@ -51,26 +38,26 @@ maven_jar(
 
 maven_jar(
     name = "auto_value_repo",
-    artifact = "com.google.auto.value:auto-value:1.4.1",
-    sha1 = "8172ebbd7970188aff304c8a420b9f17168f6f48",
+    artifact = "com.google.auto.value:auto-value:1.5.3",
+    sha1 = "514df6a7c7938de35c7f68dc8b8f22df86037f38",
 )
 
 maven_jar(
     name = "guava_repo",
-    artifact = "com.google.guava:guava:19.0",
-    sha1 = "6ce200f6b23222af3d8abb6b6459e6c44f4bb0e9",
+    artifact = "com.google.guava:guava:24.0-jre",
+    sha1 = "041ac1e74d6b4e1ea1f027139cffeb536c732a81",
 )
 
 maven_jar(
     name = "guice_repo",
-    artifact = "com.google.inject:guice:4.0",
-    sha1 = "0f990a43d3725781b6db7cd0acf0a8b62dfd1649",
+    artifact = "com.google.inject:guice:4.2.0",
+    sha1 = "25e1f4c1d528a1cffabcca0d432f634f3132f6c8",
 )
 
 maven_jar(
     name = "guice_assistedinject_repo",
-    artifact = "com.google.inject.extensions:guice-assistedinject:4.0",
-    sha1 = "8fa6431da1a2187817e3e52e967535899e2e46ca",
+    artifact = "com.google.inject.extensions:guice-assistedinject:4.2.0",
+    sha1 = "e7270305960ad7db56f7e30cb9df6be9ff1cfb45",
 )
 
 maven_jar(
