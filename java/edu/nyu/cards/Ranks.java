@@ -17,24 +17,14 @@ import edu.nyu.cards.gen.Cards.Card.Rank;
 /**
  * Static methods for converting back and forth from {@link Card.Rank} to {@code char}.
  */
-public class Ranks {
+public final class Ranks {
   private Ranks() {}
 
   public static final List<Card.Rank> HIGH_TO_LOW =
       ImmutableList.copyOf(Lists.reverse(Arrays.asList(Card.Rank.values())));
 
   public static final Converter<Character, Card.Rank> CHAR_TO_RANK =
-      new Converter<Character, Card.Rank>() {
-        @Override
-        protected Character doBackward(Rank r) {
-          return rank2Char(r);
-        }
-
-        @Override
-        protected Rank doForward(Character c) {
-          return char2Rank(c);
-        }
-      };
+      Converter.from(Ranks::char2Rank, Ranks::rank2Char);
 
   @Nullable
   public static Card.Rank char2Rank(char r) {

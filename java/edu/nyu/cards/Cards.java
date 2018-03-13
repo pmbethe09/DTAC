@@ -16,15 +16,8 @@ import edu.nyu.cards.gen.Cards.Suit;
 /**
  * Helper functions for stringifying and extracting constants for {@link Card}s
  */
-public class Cards {
+public final class Cards {
   private Cards() {}
-
-  public static final Function<String, Card> STRING_TO_CARD = new Function<String, Card>() {
-    @Override
-    public Card apply(String arg0) {
-      return Cards.string2Card(arg0);
-    }
-  };
 
   /** Returns a prebuilt {@link Card} for the given string. */
   public static Card string2Card(String cardString) {

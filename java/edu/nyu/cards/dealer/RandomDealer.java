@@ -1,6 +1,7 @@
 package edu.nyu.cards.dealer;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static java.util.stream.Collectors.toList;
 
 import java.util.Collections;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
-import com.google.common.collect.FluentIterable;
 import com.google.common.collect.Lists;
 
 import edu.nyu.cards.Hand;
@@ -35,9 +35,10 @@ public class RandomDealer implements Dealer {
     }
     List<Cards.Card> result = Lists.newArrayList(deck.toProto().getCardsList());
     Collections.shuffle(result, random);
-    return FluentIterable.from(Lists.partition(result, result.size() / hands))
-        .transform(Hands.HAND_TO_LIST.reverse())
-        .toList();
+    return Lists.partition(result, result.size() / hands)
+        .stream()
+        .map(Hands.HAND_TO_LIST.reverse())
+        .collect(toList());
   }
 
   @Override

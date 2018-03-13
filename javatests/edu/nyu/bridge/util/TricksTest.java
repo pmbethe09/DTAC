@@ -5,14 +5,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static edu.nyu.cards.Cards.string2Card;
-import static edu.nyu.cards.Cards.STRING_TO_CARD;
 
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+import edu.nyu.cards.Cards;
 import org.junit.Test;
-
-import com.google.common.collect.FluentIterable;
 
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.cards.Hand;
@@ -59,6 +57,6 @@ public class TricksTest {
   }
 
   private static List<Card> trick(String... cards) {
-    return ImmutableList.copyOf(cards).stream().map(STRING_TO_CARD).collect(toImmutableList());
+    return ImmutableList.copyOf(cards).stream().map(Cards::string2Card).collect(toImmutableList());
   }
 }

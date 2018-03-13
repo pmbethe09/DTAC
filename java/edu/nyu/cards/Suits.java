@@ -13,20 +13,11 @@ import edu.nyu.cards.gen.Cards.Suit;
 /**
  * Methods for converting back and forth from {@link Suit} to char.
  */
-public class Suits {
+public final class Suits {
   private Suits() {}
 
-  public static final Converter<Character, Suit> CHAR_TO_RANK = new Converter<Character, Suit>() {
-    @Override
-    protected Character doBackward(Suit s) {
-      return suit2Char(s);
-    }
-
-    @Override
-    protected Suit doForward(Character c) {
-      return char2Suit(c);
-    }
-  };
+  public static final Converter<Character, Suit> CHAR_TO_RANK =
+      Converter.from(Suits::char2Suit, Suits::suit2Char);
 
   @Nullable
   public static Suit char2Suit(char suit) {
