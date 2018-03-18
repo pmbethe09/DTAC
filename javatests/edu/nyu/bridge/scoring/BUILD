@@ -13,5 +13,6 @@ junit_tests(
         "//java/edu/nyu/cards",
         "//java/edu/nyu/util",
         "@guava_repo//jar",
+        "@truth_repo//jar",
     ],
 )

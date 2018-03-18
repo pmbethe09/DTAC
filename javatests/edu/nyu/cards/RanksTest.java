@@ -1,6 +1,6 @@
 package edu.nyu.cards;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import edu.nyu.cards.gen.Cards.Card.Rank;
 public class RanksTest {
   @Test
   public void testRanks() {
-    assertEquals("2convertRank", Rank.KING, Ranks.char2Rank('K'));
-    assertEquals("Seven", '7', Ranks.rank2Char(Ranks.char2Rank('7')));
+    assertThat(Rank.KING).named("2convertRank").isEqualTo(Ranks.char2Rank('K'));
+    assertThat('7').named("Seven").isEqualTo(Ranks.rank2Char(Ranks.char2Rank('7')));
   }
 }

@@ -1,6 +1,6 @@
 package edu.nyu.bridge.util;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
 
@@ -11,9 +11,9 @@ import edu.nyu.cards.gen.Cards.Suit;
 public class BidsTest {
   @Test
   public void testThereAndBackAgain() {
-    assertEquals(Bid.TWO_NOTRUMPS, Bids.bid(Level.TWO, Suit.NOTRUMPS));
-    assertEquals(Bid.THREE_SPADES, Bids.bid(Level.THREE, Suit.SPADES));
-    assertEquals(Bid.FOUR_HEARTS, Bids.bid(Level.FOUR, Suit.HEARTS));
-    assertEquals(Bid.SIX_CLUBS, Bids.bid(Level.SIX, Suit.CLUBS));
+    assertThat(Bids.bid(Level.TWO, Suit.NOTRUMPS)).isEqualTo(Bid.TWO_NOTRUMPS);
+    assertThat(Bids.bid(Level.THREE, Suit.SPADES)).isEqualTo(Bid.THREE_SPADES);
+    assertThat(Bids.bid(Level.FOUR, Suit.HEARTS)).isEqualTo(Bid.FOUR_HEARTS);
+    assertThat(Bids.bid(Level.SIX, Suit.CLUBS)).isEqualTo(Bid.SIX_CLUBS);
   }
 }

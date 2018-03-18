@@ -1,6 +1,6 @@
 package edu.nyu.cards;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
 
@@ -9,6 +9,6 @@ public class GenericHandTest {
   public void testBasic() {
     GenericHand genericHand = GenericHand.fromString("AKxxx.KQx.J9.QTx");
     Hand hand = genericHand.toHand(genericHand.complement());
-    assertEquals("13 cards", 13, hand.size());
+    assertThat(13).named("13 cards").isEqualTo(hand.size());
   }
 }

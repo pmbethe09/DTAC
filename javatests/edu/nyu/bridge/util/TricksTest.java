@@ -1,9 +1,7 @@
 package edu.nyu.bridge.util;
 
 import static com.google.common.collect.ImmutableList.toImmutableList;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.google.common.truth.Truth.assertThat;
 import static edu.nyu.cards.Cards.string2Card;
 
 import java.util.List;
@@ -23,37 +21,48 @@ public class TricksTest {
     Card s5 = string2Card("s5");
     Card sK = string2Card("SK");
     Card hJ = string2Card("hj");
-    assertEquals("correct winner", sK, Tricks.high(s5, sK, null));
-    assertEquals("correct winner", s5, Tricks.high(s5, hJ, null));
-    assertEquals("correct winner", hJ, Tricks.high(s5, hJ, Suit.HEARTS));
-    assertEquals("correct winner", s5, Tricks.high(s5, hJ, Suit.CLUBS));
+    assertThat(sK).named("correct winner").isEqualTo(Tricks.high(s5, sK, null));
+    assertThat(s5).named("correct winner").isEqualTo(Tricks.high(s5, hJ, null));
+    assertThat(hJ).named("correct winner").isEqualTo(Tricks.high(s5, hJ, Suit.HEARTS));
+    assertThat(s5).named("correct winner").isEqualTo(Tricks.high(s5, hJ, Suit.CLUBS));
   }
 
   @Test
   public void testLegal() {
     Hand hand = Hand.fromString("AKQ.KQJ..9753");
-    assertTrue("same suit", Tricks.legal(string2Card("SK"), hand, Suit.SPADES));
-    assertTrue("discard", Tricks.legal(string2Card("SK"), hand, Suit.DIAMONDS));
-    assertFalse("have to follow", Tricks.legal(string2Card("SK"), hand, Suit.HEARTS));
-    assertFalse("have to hold it", Tricks.legal(string2Card("H2"), hand, Suit.HEARTS));
+    assertThat(Tricks.legal(string2Card("SK"), hand, Suit.SPADES)).named("same suit").isTrue();
+    assertThat(Tricks.legal(string2Card("SK"), hand, Suit.DIAMONDS)).named("discard").isTrue();
+    assertThat(Tricks.legal(string2Card("SK"), hand, Suit.HEARTS))
+        .named("have to follow")
+        .isFalse();
+    assertThat(Tricks.legal(string2Card("H2"), hand, Suit.HEARTS))
+        .named("have to hold it")
+        .isFalse();
   }
 
   @Test
   public void testWinner() {
-    assertEquals("still N", Direction.NORTH,
-        Tricks.winner(trick("SK", "S5", "ST", "S9"), Direction.NORTH, null));
-    assertEquals("still N", Direction.NORTH,
-        Tricks.winner(trick("SK", "S5", "SA", "S9"), Direction.SOUTH, null));
-    assertEquals("still N", Direction.NORTH,
-        Tricks.winner(trick("SK", "S5", "SA", "D9"), Direction.SOUTH, null));
-    assertEquals("E ruffs", Direction.EAST,
-        Tricks.winner(trick("SK", "S5", "SA", "D9"), Direction.SOUTH, Suit.DIAMONDS));
-    assertEquals("W ruffs so far", Direction.WEST,
-        Tricks.winner(trick("SA", "D9"), Direction.SOUTH, Suit.DIAMONDS));
-    assertEquals("N overruffs", Direction.NORTH,
-        Tricks.winner(trick("SA", "D9", "DJ"), Direction.SOUTH, Suit.DIAMONDS));
-    assertEquals("N underruffs", Direction.WEST,
-        Tricks.winner(trick("SA", "D9", "D8"), Direction.SOUTH, Suit.DIAMONDS));
+    assertThat(Direction.NORTH)
+        .named("still N")
+        .isEqualTo(Tricks.winner(trick("SK", "S5", "ST", "S9"), Direction.NORTH, null));
+    assertThat(Direction.NORTH)
+        .named("still N")
+        .isEqualTo(Tricks.winner(trick("SK", "S5", "SA", "S9"), Direction.SOUTH, null));
+    assertThat(Direction.NORTH)
+        .named("still N")
+        .isEqualTo(Tricks.winner(trick("SK", "S5", "SA", "D9"), Direction.SOUTH, null));
+    assertThat(Direction.EAST)
+        .named("E ruffs")
+        .isEqualTo(Tricks.winner(trick("SK", "S5", "SA", "D9"), Direction.SOUTH, Suit.DIAMONDS));
+    assertThat(Direction.WEST)
+        .named("W ruffs so far")
+        .isEqualTo(Tricks.winner(trick("SA", "D9"), Direction.SOUTH, Suit.DIAMONDS));
+    assertThat(Direction.NORTH)
+        .named("N overruffs")
+        .isEqualTo(Tricks.winner(trick("SA", "D9", "DJ"), Direction.SOUTH, Suit.DIAMONDS));
+    assertThat(Direction.WEST)
+        .named("N underruffs")
+        .isEqualTo(Tricks.winner(trick("SA", "D9", "D8"), Direction.SOUTH, Suit.DIAMONDS));
   }
 
   private static List<Card> trick(String... cards) {

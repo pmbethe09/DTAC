@@ -1,26 +1,24 @@
 package edu.nyu.bridge.util;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
 
 public class CallsTest {
   @Test
   public void testThereAndBackAgain() {
-    assertEquals("2N", Calls.call2String(Calls.string2Call("2N")));
+    assertThat(Calls.call2String(Calls.string2Call("2N"))).isEqualTo("2N");
   }
 
   @Test
   public void testBidCompare() {
-    assertTrue(Calls.allowed(Calls.string2Call("2N"), Calls.string2Call("3C")));
-    assertTrue(Calls.allowed(Calls.PASS, Calls.string2Call("3C")));
-    assertTrue(Calls.allowed(Calls.PASS, Calls.PASS));
-    assertTrue(Calls.allowed(Calls.string2Call("2N"), Calls.PASS));
+    assertThat(Calls.allowed(Calls.string2Call("2N"), Calls.string2Call("3C"))).isTrue();
+    assertThat(Calls.allowed(Calls.PASS, Calls.string2Call("3C"))).isTrue();
+    assertThat(Calls.allowed(Calls.PASS, Calls.PASS)).isTrue();
+    assertThat(Calls.allowed(Calls.string2Call("2N"), Calls.PASS)).isTrue();
 
-    assertFalse(Calls.allowed(Calls.string2Call("2N"), Calls.string2Call("2N")));
-    assertFalse(Calls.allowed(Calls.string2Call("2N"), Calls.string2Call("2S")));
-    assertFalse(Calls.allowed(Calls.string2Call("2D"), Calls.string2Call("1N")));
+    assertThat(Calls.allowed(Calls.string2Call("2N"), Calls.string2Call("2N"))).isFalse();
+    assertThat(Calls.allowed(Calls.string2Call("2N"), Calls.string2Call("2S"))).isFalse();
+    assertThat(Calls.allowed(Calls.string2Call("2D"), Calls.string2Call("1N"))).isFalse();
   }
 }

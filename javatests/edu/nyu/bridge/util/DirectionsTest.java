@@ -6,9 +6,7 @@ import static edu.nyu.bridge.util.Directions.lho;
 import static edu.nyu.bridge.util.Directions.opponents;
 import static edu.nyu.bridge.util.Directions.offset;
 import static edu.nyu.bridge.util.Directions.partner;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
 
@@ -17,25 +15,25 @@ import edu.nyu.bridge.gen.Bridge.Direction;
 public class DirectionsTest {
   @Test
   public void testBasic() {
-    assertEquals("South", human(Direction.SOUTH));
-    assertEquals(Direction.EAST, lho(Direction.NORTH));
-    assertEquals("ring around", Direction.NORTH, lho(lho(partner(Direction.NORTH))));
+    assertThat("South").isEqualTo(human(Direction.SOUTH));
+    assertThat(Direction.EAST).isEqualTo(lho(Direction.NORTH));
+    assertThat(Direction.NORTH).named("ring around").isEqualTo(lho(lho(partner(Direction.NORTH))));
   }
 
   @Test
   public void testAdd() {
-    assertEquals("5 bids", lho(Direction.SOUTH), add(Direction.SOUTH, 5));
-    assertEquals("12 bids", Direction.WEST, add(Direction.WEST, 12));
+    assertThat(lho(Direction.SOUTH)).named("5 bids").isEqualTo(add(Direction.SOUTH, 5));
+    assertThat(Direction.WEST).named("12 bids").isEqualTo(add(Direction.WEST, 12));
   }
 
   @Test
   public void testOpponents() {
-    assertTrue(opponents(Direction.SOUTH, Direction.WEST));
-    assertFalse(opponents(Direction.SOUTH, Direction.NORTH));
+    assertThat(opponents(Direction.SOUTH, Direction.WEST)).isTrue();
+    assertThat(opponents(Direction.SOUTH, Direction.NORTH)).isFalse();
   }
 
   @Test
   public void testOffset() {
-    assertEquals("lho 1", 1, offset(Direction.SOUTH, Direction.WEST));
+    assertThat(1).named("lho 1").isEqualTo(offset(Direction.SOUTH, Direction.WEST));
   }
 }

@@ -1,6 +1,6 @@
 package edu.nyu.bridge.util;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
 
@@ -12,18 +12,19 @@ import edu.nyu.util.ShortEnumConverter;
 public class CallDirectionTest {
   @Test
   public void testCalls() {
-    assertEquals("2-ways", "2H", Calls.call2String(Calls.string2Call("2H")));
+    assertThat("2H").named("2-ways").isEqualTo(Calls.call2String(Calls.string2Call("2H")));
   }
 
   @Test
   public void testDirectionConverter() {
     Converter<String, Direction> directionConverter = ShortEnumConverter.create(Direction.class);
-    assertEquals("double convert", "N",
-        directionConverter.reverse().convert(directionConverter.convert("N")));
+    assertThat("N")
+        .named("double convert")
+        .isEqualTo(directionConverter.reverse().convert(directionConverter.convert("N")));
   }
 
   @Test
   public void testDirections() {
-    assertEquals("compass", Direction.EAST, Directions.lho(Direction.NORTH));
+    assertThat(Direction.EAST).named("compass").isEqualTo(Directions.lho(Direction.NORTH));
   }
 }

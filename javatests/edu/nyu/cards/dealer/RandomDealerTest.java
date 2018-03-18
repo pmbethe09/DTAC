@@ -1,7 +1,6 @@
 package edu.nyu.cards.dealer;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
+import static com.google.common.truth.Truth.assertThat;
 
 import java.util.List;
 import java.util.Random;
@@ -18,30 +17,32 @@ public class RandomDealerTest {
     for (Cards.Hand proto : new RandomDealer(new Random()).next()) {
       hand.addAll(proto);
     }
-    assertEquals("has all", 52, hand.size());
+    assertThat(52).named("has all").isEqualTo(hand.size());
   }
 
   @Test
   public void testDealHands() {
     Dealer dealer = new RandomDealer(new Random());
     List<Cards.Hand> deal = dealer.next();
-    assertEquals("has 4", 4, deal.size());
-    assertEquals("has 2", 2, dealer.generateDeal(2).size());
+    assertThat(4).named("has 4").isEqualTo(deal.size());
+    assertThat(2).named("has 2").isEqualTo(dealer.generateDeal(2).size());
   }
 
   @Test
   public void testRepeatDealing() {
     for (int i = 0; i < 10; i++) {
-      assertEquals("same seed deal " + i, new RandomDealer(new Random(i)).next(),
-          new RandomDealer(new Random(i)).next());
+      assertThat(new RandomDealer(new Random(i)).next())
+          .named("same seed deal %s", i)
+          .isEqualTo(new RandomDealer(new Random(i)).next());
     }
   }
 
   @Test
   public void testRandomDealing() {
     for (int i = 0; i < 10; i++) {
-      assertNotSame("different seed deal " + i, new RandomDealer(new Random(i)).next(),
-          new RandomDealer(new Random(i + 1)).next());
+      assertThat(new RandomDealer(new Random(i)).next())
+          .named("different seed deal %s", i)
+          .isNotEqualTo(new RandomDealer(new Random(i + 1)).next());
     }
   }
 }

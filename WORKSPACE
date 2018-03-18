@@ -71,3 +71,9 @@ maven_jar(
     artifact = "javax.inject:javax.inject:1",
     sha1 = "6975da39a7040257bd51d21a231b76c915872d38",
 )
+
+maven_jar(
+    name = "truth_repo",
+    artifact = "com.google.truth:truth:0.39",
+    sha1 = "bd1bf5706ff34eb7ff80fef8b0c4320f112ef899",
+)

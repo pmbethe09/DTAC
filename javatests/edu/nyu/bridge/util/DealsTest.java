@@ -1,6 +1,6 @@
 package edu.nyu.bridge.util;
 
-import static org.junit.Assert.assertEquals;
+import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
 
@@ -9,10 +9,10 @@ import edu.nyu.bridge.gen.Bridge.Vulnerability;
 public class DealsTest {
   @Test
   public void testVuls() {
-    assertEquals(Vulnerability.NONE, Deals.getVul(8));
-    assertEquals(Vulnerability.BOTH, Deals.getVul(4));
+    assertThat(Vulnerability.NONE).isEqualTo(Deals.getVul(8));
+    assertThat(Vulnerability.BOTH).isEqualTo(Deals.getVul(4));
 
-    assertEquals(Vulnerability.NS, Deals.getVul(18));
-    assertEquals(Vulnerability.EW, Deals.getVul(32));
+    assertThat(Vulnerability.NS).isEqualTo(Deals.getVul(18));
+    assertThat(Vulnerability.EW).isEqualTo(Deals.getVul(32));
   }
 }
