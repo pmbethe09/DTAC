@@ -6,8 +6,8 @@ junit_tests(
     srcs = glob(["*.java"]),
     visibility = ["//:__pkg__"],
     deps = [
-        "//bridge_proto:bridge_proto_java",
-        "//cards_proto:cards_proto_java",
+        "//bridge_proto:bridge_java_proto",
+        "//cards_proto:cards_java_proto",
         "//java/edu/nyu/bridge/util",
         "//java/edu/nyu/cards",
         "//java/edu/nyu/util",

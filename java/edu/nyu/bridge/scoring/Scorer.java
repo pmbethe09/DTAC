@@ -24,7 +24,8 @@ public class Scorer {
     int trickScore = trickScore(contract) * contract.getCall().getNonBid().getNumber();
     System.out.printf("trickScore=%d\n", trickScore);
     boolean isVul = isVul(contract.getDeclarer(), vul);
-    return Score.of(contract.getDeclarer(), trickScore + insult(contract)
+    return Score.of(contract.getDeclarer(),
+        trickScore + insult(contract)
             + overtrickScore(
                   contract, result.getContractTricks() - contract.getContractTricks(), isVul)
             + makingBonus(contract, trickScore, isVul));

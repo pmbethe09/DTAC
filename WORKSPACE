@@ -4,6 +4,8 @@ PROTO_VERS = "3.5.1"
 
 PROTO_SHA = "1f8b9b202e9a4e467ff0b0f25facb1642727cdf5e69092038f15b37c75b99e45"
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 http_archive(
     name = "com_google_protobuf",
     sha256 = PROTO_SHA,
@@ -25,10 +27,17 @@ new_git_repository(
     tag = "release-1.8.0",
 )
 
-bind(
-    name = "gtest",
-    actual = "@com_github_google_googletest//:gtest",
+git_repository(
+    name = "io_bazel_rules_go",
+    commit = "167cb55932c4a415edf839f750bdd7366f2f1613",
+    remote = "https://github.com/bazelbuild/rules_go.git",
 )
+
+load("@io_bazel_rules_go//go:def.bzl", "go_register_toolchains", "go_rules_dependencies")
+
+go_rules_dependencies()
+
+go_register_toolchains()
 
 maven_jar(
     name = "aopalliance_repo",

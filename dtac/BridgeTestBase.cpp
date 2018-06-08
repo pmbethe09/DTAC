@@ -92,7 +92,7 @@ void BridgeTestBase::workBack(Hand leadin, Hand followin, Hand dfndr,
         << "!=" << claim.tricks.size() << "-" << toApply;
     int offset = toApply;
     // claim.tricks.size() - csp->tricks.size(); // for shorter guys
-    for (int i = 0; i < csp->tricks.size(); ++i) {
+    for (int i = 0; i < (int)csp->tricks.size(); ++i) {
       const ClaimTrick& ctOrig = claim.tricks[i + offset];
       const ClaimTrick& ct = csp->tricks[i];
       bool match = ctOrig == ct;

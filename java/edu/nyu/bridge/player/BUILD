@@ -4,8 +4,8 @@ java_library(
     name = "player",
     srcs = glob(["**/*.java"]),
     deps = [
-        "//bridge_proto:bridge_proto_java",
-        "//cards_proto:cards_proto_java",
+        "//bridge_proto:bridge_java_proto",
+        "//cards_proto:cards_java_proto",
         "//java/edu/nyu/bridge/scoring",
         "@jsr305_repo//jar",
     ],

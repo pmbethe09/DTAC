@@ -4,7 +4,7 @@ java_library(
     name = "cards",
     srcs = glob(["**/*.java"]),
     deps = [
-        "//cards_proto:cards_proto_java",
+        "//cards_proto:cards_java_proto",
         "@guava_repo//jar",
         "@jsr305_repo//jar",
         "@jsr330_repo//jar",
