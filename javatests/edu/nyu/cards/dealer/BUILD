@@ -9,6 +9,6 @@ junit_tests(
         "//cards_proto:cards_java_proto",
         "//java/edu/nyu/cards",
         "//java/edu/nyu/cards/dealer",
-        "@truth_repo//jar",
+        "@com_google_truth_truth//jar",
     ],
 )

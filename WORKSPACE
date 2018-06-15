@@ -5,6 +5,7 @@ PROTO_VERS = "3.5.1"
 PROTO_SHA = "1f8b9b202e9a4e467ff0b0f25facb1642727cdf5e69092038f15b37c75b99e45"
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
 
 http_archive(
     name = "com_google_protobuf",
@@ -22,7 +23,7 @@ http_archive(
 
 new_git_repository(
     name = "com_github_google_googletest",
-    build_file = "third_party/BUILD.gtest",
+    build_file = "//:third_party/BUILD.gtest",
     remote = "https://github.com/google/googletest",
     tag = "release-1.8.0",
 )
@@ -52,7 +53,7 @@ maven_jar(
 )
 
 maven_jar(
-    name = "guava_repo",
+    name = "com_google_guava_guava",
     artifact = "com.google.guava:guava:24.0-jre",
     sha1 = "041ac1e74d6b4e1ea1f027139cffeb536c732a81",
 )
@@ -70,7 +71,7 @@ maven_jar(
 )
 
 maven_jar(
-    name = "jsr305_repo",
+    name = "com_google_code_findbugs_jsr305",
     artifact = "com.google.code.findbugs:jsr305:3.0.1",
     sha1 = "f7be08ec23c21485b9b5a1cf1654c2ec8c58168d",
 )
@@ -82,7 +83,7 @@ maven_jar(
 )
 
 maven_jar(
-    name = "truth_repo",
+    name = "com_google_truth_truth",
     artifact = "com.google.truth:truth:0.39",
     sha1 = "bd1bf5706ff34eb7ff80fef8b0c4320f112ef899",
 )

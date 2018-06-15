@@ -6,8 +6,8 @@ java_library(
     deps = [
         "//cards_proto:cards_java_proto",
         "//java/edu/nyu/cards",
-        "@guava_repo//jar",
-        "@jsr305_repo//jar",
+        "@com_google_code_findbugs_jsr305//jar",
+        "@com_google_guava_guava//jar",
         "@jsr330_repo//jar",
     ],
 )

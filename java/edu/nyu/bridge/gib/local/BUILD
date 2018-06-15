@@ -11,9 +11,9 @@ java_library(
         "//java/edu/nyu/bridge/util",
         "//java/edu/nyu/cards",
         "//third_party/auto_value",
-        "@guava_repo//jar",
+        "@com_google_code_findbugs_jsr305//jar",
+        "@com_google_guava_guava//jar",
         "@guice_repo//jar",
-        "@jsr305_repo//jar",
         "@jsr330_repo//jar",
     ],
 )
