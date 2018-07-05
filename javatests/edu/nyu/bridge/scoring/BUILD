@@ -10,9 +10,6 @@ junit_tests(
         "//cards_proto:cards_java_proto",
         "//java/edu/nyu/bridge/scoring",
         "//java/edu/nyu/bridge/util",
-        "//java/edu/nyu/cards",
-        "//java/edu/nyu/util",
-        "@com_google_guava_guava//jar",
         "@com_google_truth_truth//jar",
     ],
 )

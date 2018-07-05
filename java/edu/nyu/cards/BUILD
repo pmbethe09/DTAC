@@ -7,6 +7,5 @@ java_library(
         "//cards_proto:cards_java_proto",
         "@com_google_code_findbugs_jsr305//jar",
         "@com_google_guava_guava//jar",
-        "@jsr330_repo//jar",
     ],
 )
