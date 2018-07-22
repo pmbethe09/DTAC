@@ -13,6 +13,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.annotations.VisibleForTesting;
 
+import com.google.common.collect.Sets;
 import edu.nyu.cards.gen.Cards;
 import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Card.Rank;
@@ -108,6 +109,17 @@ public class Hand {
   public Hand removeCard(Suit suit, Rank rank) {
     cards.get(suit).remove(rank);
     return this;
+  }
+
+  /** Returns {@code true} if this hand contains all the cards in other. */
+  public boolean hasAll(Hand other) {
+    for (Suit suit : iterateSuitsLowHigh()) {
+      EnumSet<Card.Rank> otherCards = other.cards.get(suit);
+      if (!Sets.intersection(otherCards, cards.get(suit)).equals(otherCards)) {
+        return false;
+      }
+    }
+    return true;
   }
 
   public int size(Suit suit) {

@@ -33,4 +33,13 @@ public class HandTest {
         Suit.CLUBS, EnumSet.of(Rank.ACE, Rank.JACK, Rank.NINE, Rank.SEVEN, Rank.FIVE));
     assertThat(expected).named("expected parse").isEqualTo(hand.cards);
   }
+
+  @Test
+  public void testSubset() {
+    Hand hand = Hand.fromString("AK43.KT7.Q.AJ975");
+    assertThat(hand.hasAll(hand)).isTrue();
+    assertThat(hand.hasAll(Hand.fromString("A43.K7.Q.A75"))).isTrue();
+    // added stray SQ
+    assertThat(hand.hasAll(Hand.fromString("AQ43.K7.Q.A75"))).isFalse();
+  }
 }
