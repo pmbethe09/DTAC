@@ -5,6 +5,7 @@ import static edu.nyu.bridge.gen.Bridge.Direction.NORTH;
 import static edu.nyu.bridge.gen.Bridge.Direction.SOUTH;
 import static edu.nyu.bridge.gen.Bridge.Direction.WEST;
 
+import com.google.common.base.Function;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import javax.annotation.Nullable;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -35,6 +37,11 @@ public class Directions {
       Maps.immutableEnumMap(ImmutableMap.of(NORTH, ImmutableList.of(EAST, SOUTH, WEST), EAST,
           ImmutableList.of(SOUTH, WEST, NORTH), SOUTH, ImmutableList.of(WEST, NORTH, EAST), WEST,
           ImmutableList.of(NORTH, EAST, SOUTH)));
+
+  public static <T> ImmutableMap<Direction, T> map(Function<Direction, T> func) {
+    return Maps.<Direction, T>immutableEnumMap(
+        Maps.<Direction, T>asMap(ImmutableSet.copyOf(Bridge.Direction.values()), func));
+  }
 
   public static ImmutableList<Direction> iterateDirections(Direction start) {
     return DIRECTION_PLUS_FOUR.get(start);
