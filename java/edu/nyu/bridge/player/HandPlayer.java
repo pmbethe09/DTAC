@@ -1,19 +1,16 @@
 package edu.nyu.bridge.player;
 
-import java.io.Closeable;
-import java.util.List;
-
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.scoring.Result;
 import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Hand;
-
+import java.io.Closeable;
+import java.util.List;
 import javax.annotation.concurrent.NotThreadSafe;
 
 /**
- * Knows about current hand, and tracks state.
- * Only good for the current hand, not expected to be thread-safe
- * if multiple calls happen simultaneously.
+ * Knows about current hand, and tracks state. Only good for the current hand, not expected to be
+ * thread-safe if multiple calls happen simultaneously.
  */
 @NotThreadSafe
 public interface HandPlayer extends Closeable {
@@ -36,8 +33,8 @@ public interface HandPlayer extends Closeable {
   void dummy(Hand hand);
 
   /**
-   * The current player to play has claimed this many declarer tricks
-   * (with description for human players.
+   * The current player to play has claimed this many declarer tricks (with description for human
+   * players.
    */
   boolean doesAcceptClaim(Hand claimer, Result claimed, String description);
 }

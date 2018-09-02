@@ -3,21 +3,18 @@ package edu.nyu.cards.dealer;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static java.util.stream.Collectors.toList;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-
-import javax.inject.Inject;
-
 import com.google.common.collect.Lists;
-
 import edu.nyu.cards.Hand;
 import edu.nyu.cards.Hands;
 import edu.nyu.cards.gen.Cards;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import javax.inject.Inject;
 
 /**
- * Implementation of {@link Dealer} that uses the provided source of randomness to shuffle
- * the available cards and then partition into the requested number of hands.
+ * Implementation of {@link Dealer} that uses the provided source of randomness to shuffle the
+ * available cards and then partition into the requested number of hands.
  */
 public class RandomDealer implements Dealer {
   private final Random random;

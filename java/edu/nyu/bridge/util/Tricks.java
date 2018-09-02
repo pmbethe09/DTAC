@@ -1,14 +1,11 @@
 package edu.nyu.bridge.util;
 
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Preconditions;
-
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.cards.Hand;
 import edu.nyu.cards.gen.Cards;
+import java.util.List;
+import javax.annotation.Nullable;
 
 /** Utility functions for determining what is happening in a trick. */
 public class Tricks {

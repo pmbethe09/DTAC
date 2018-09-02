@@ -3,12 +3,11 @@ package edu.nyu.util;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.base.Converter;
+import com.google.common.collect.ImmutableBiMap;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Set;
-
-import com.google.common.base.Converter;
-import com.google.common.collect.ImmutableBiMap;
 
 /**
  * Learn to convert enums using shortened versions as strings.
@@ -24,8 +23,10 @@ public class ShortEnumConverter<T extends Enum<T>> extends Converter<String, T> 
     Set<String> seen = new HashSet<>();
     for (T e : allOf) {
       String oneChar = oneCharFromEnum(e);
-      checkArgument(!seen.contains(oneChar),
-          "Ambiguous starting characters, unable to construct 1-char map for: %s", clazz.getName());
+      checkArgument(
+          !seen.contains(oneChar),
+          "Ambiguous starting characters, unable to construct 1-char map for: %s",
+          clazz.getName());
       builder.put(oneChar, e);
       seen.add(oneChar);
     }

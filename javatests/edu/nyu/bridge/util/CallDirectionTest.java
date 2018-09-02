@@ -2,12 +2,10 @@ package edu.nyu.bridge.util;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.junit.Test;
-
 import com.google.common.base.Converter;
-
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.util.ShortEnumConverter;
+import org.junit.Test;
 
 public class CallDirectionTest {
   @Test

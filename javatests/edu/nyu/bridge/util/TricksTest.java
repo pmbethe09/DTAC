@@ -4,16 +4,14 @@ import static com.google.common.collect.ImmutableList.toImmutableList;
 import static com.google.common.truth.Truth.assertThat;
 import static edu.nyu.cards.Cards.string2Card;
 
-import java.util.List;
-
 import com.google.common.collect.ImmutableList;
-import edu.nyu.cards.Cards;
-import org.junit.Test;
-
 import edu.nyu.bridge.gen.Bridge.Direction;
+import edu.nyu.cards.Cards;
 import edu.nyu.cards.Hand;
 import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Suit;
+import java.util.List;
+import org.junit.Test;
 
 public class TricksTest {
   @Test

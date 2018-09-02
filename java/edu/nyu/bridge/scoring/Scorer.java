@@ -1,13 +1,13 @@
 package edu.nyu.bridge.scoring;
 
-import edu.nyu.bridge.gen.Bridge;
-import edu.nyu.bridge.util.Bids;
-import edu.nyu.bridge.util.Contract;
-import edu.nyu.bridge.gen.Bridge.Vulnerability;
-import edu.nyu.cards.gen.Cards;
-
 import static com.google.common.base.Preconditions.checkArgument;
 import static edu.nyu.bridge.util.Vulnerabilities.isVul;
+
+import edu.nyu.bridge.gen.Bridge;
+import edu.nyu.bridge.gen.Bridge.Vulnerability;
+import edu.nyu.bridge.util.Bids;
+import edu.nyu.bridge.util.Contract;
+import edu.nyu.cards.gen.Cards;
 
 public class Scorer {
   private static int[] NON_VUL_DOUBLED = {100, 300, 500};
@@ -24,10 +24,12 @@ public class Scorer {
     int trickScore = trickScore(contract) * contract.getCall().getNonBid().getNumber();
     System.out.printf("trickScore=%d\n", trickScore);
     boolean isVul = isVul(contract.getDeclarer(), vul);
-    return Score.of(contract.getDeclarer(),
-        trickScore + insult(contract)
+    return Score.of(
+        contract.getDeclarer(),
+        trickScore
+            + insult(contract)
             + overtrickScore(
-                  contract, result.getContractTricks() - contract.getContractTricks(), isVul)
+                contract, result.getContractTricks() - contract.getContractTricks(), isVul)
             + makingBonus(contract, trickScore, isVul));
   }
 
@@ -118,7 +120,6 @@ public class Scorer {
     GAME(300, 500),
     SLAM(800, 1250),
     GRAND(1300, 2000);
-
     final int nonVulBonus, vulBonus;
 
     Bonus(int nonVulBonus, int vulBonus) {

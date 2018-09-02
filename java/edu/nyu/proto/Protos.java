@@ -1,12 +1,8 @@
 package edu.nyu.proto;
 
-import java.io.*;
-import java.nio.file.Files;
-
-import javax.annotation.Nullable;
-
 import com.google.protobuf.Message;
 import com.google.protobuf.TextFormat;
+import java.io.*;
 
 /** General utilites for protos. */
 public final class Protos {
@@ -25,8 +21,10 @@ public final class Protos {
     return (P) builder.build();
   }
 
-  /** Returns a protobuf parsed from the given String using the example (usually
-   * P.getDefaultInstance()). */
+  /**
+   * Returns a protobuf parsed from the given String using the example (usually
+   * P.getDefaultInstance()).
+   */
   public static <P extends Message> P parseText(String input, P example) throws IOException {
     return parseText(new StringReader(input), example);
   }

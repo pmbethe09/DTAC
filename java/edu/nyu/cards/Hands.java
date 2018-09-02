@@ -1,9 +1,8 @@
 package edu.nyu.cards;
 
-import java.util.List;
-
 import com.google.common.base.Converter;
 import edu.nyu.cards.gen.Cards;
+import java.util.List;
 
 /** Utilities for {@link Hand} objects. */
 public final class Hands {

@@ -1,16 +1,15 @@
 package edu.nyu.bridge.util;
 
+import static com.google.common.truth.Truth.assertThat;
 import static edu.nyu.bridge.util.Directions.add;
 import static edu.nyu.bridge.util.Directions.human;
 import static edu.nyu.bridge.util.Directions.lho;
-import static edu.nyu.bridge.util.Directions.opponents;
 import static edu.nyu.bridge.util.Directions.offset;
+import static edu.nyu.bridge.util.Directions.opponents;
 import static edu.nyu.bridge.util.Directions.partner;
-import static com.google.common.truth.Truth.assertThat;
-
-import org.junit.Test;
 
 import edu.nyu.bridge.gen.Bridge.Direction;
+import org.junit.Test;
 
 public class DirectionsTest {
   @Test

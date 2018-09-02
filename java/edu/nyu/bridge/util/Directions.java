@@ -6,37 +6,45 @@ import static edu.nyu.bridge.gen.Bridge.Direction.SOUTH;
 import static edu.nyu.bridge.gen.Bridge.Direction.WEST;
 
 import com.google.common.base.Function;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.cards.Hand;
 import edu.nyu.cards.gen.Cards;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Nullable;
 
-/**
- * Utility methods for getting info related to {@link Direction}.
- */
+/** Utility methods for getting info related to {@link Direction}. */
 public class Directions {
   private static final Map<Direction, ImmutableList<Direction>> DIRECTION_PLUS_FOUR =
-      Maps.immutableEnumMap(ImmutableMap.of(NORTH, ImmutableList.of(NORTH, EAST, SOUTH, WEST), EAST,
-          ImmutableList.of(EAST, SOUTH, WEST, NORTH), SOUTH,
-          ImmutableList.of(WEST, NORTH, EAST, SOUTH), WEST,
-          ImmutableList.of(WEST, NORTH, EAST, SOUTH)));
+      Maps.immutableEnumMap(
+          ImmutableMap.of(
+              NORTH,
+              ImmutableList.of(NORTH, EAST, SOUTH, WEST),
+              EAST,
+              ImmutableList.of(EAST, SOUTH, WEST, NORTH),
+              SOUTH,
+              ImmutableList.of(WEST, NORTH, EAST, SOUTH),
+              WEST,
+              ImmutableList.of(WEST, NORTH, EAST, SOUTH)));
 
   private static final Map<Direction, ImmutableList<Direction>> OTHERS =
-      Maps.immutableEnumMap(ImmutableMap.of(NORTH, ImmutableList.of(EAST, SOUTH, WEST), EAST,
-          ImmutableList.of(SOUTH, WEST, NORTH), SOUTH, ImmutableList.of(WEST, NORTH, EAST), WEST,
-          ImmutableList.of(NORTH, EAST, SOUTH)));
+      Maps.immutableEnumMap(
+          ImmutableMap.of(
+              NORTH,
+              ImmutableList.of(EAST, SOUTH, WEST),
+              EAST,
+              ImmutableList.of(SOUTH, WEST, NORTH),
+              SOUTH,
+              ImmutableList.of(WEST, NORTH, EAST),
+              WEST,
+              ImmutableList.of(NORTH, EAST, SOUTH)));
 
   public static <T> ImmutableMap<Direction, T> map(Function<Direction, T> func) {
     return Maps.<Direction, T>immutableEnumMap(
@@ -145,8 +153,16 @@ public class Directions {
   }
 
   public static final EnumMap<Direction, String> HUMAN_STRINGS =
-      Maps.newEnumMap(ImmutableMap.of(Direction.NORTH, "North", Direction.EAST, "East",
-          Direction.SOUTH, "South", Direction.WEST, "West"));
+      Maps.newEnumMap(
+          ImmutableMap.of(
+              Direction.NORTH,
+              "North",
+              Direction.EAST,
+              "East",
+              Direction.SOUTH,
+              "South",
+              Direction.WEST,
+              "West"));
 
   public static String human(Direction dir) {
     return HUMAN_STRINGS.get(dir);

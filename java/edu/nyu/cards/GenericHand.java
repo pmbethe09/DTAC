@@ -3,22 +3,20 @@ package edu.nyu.cards;
 import static edu.nyu.cards.Suits.iterateSuitsHighLow;
 import static edu.nyu.cards.Suits.lowerSuit;
 
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
+import edu.nyu.cards.gen.Cards.Card;
+import edu.nyu.cards.gen.Cards.Card.Rank;
+import edu.nyu.cards.gen.Cards.Suit;
 import java.util.EnumMap;
 import java.util.EnumSet;
 import java.util.Map;
 
-import com.google.common.base.Preconditions;
-import com.google.common.collect.Maps;
-
-import edu.nyu.cards.gen.Cards.Card;
-import edu.nyu.cards.gen.Cards.Card.Rank;
-import edu.nyu.cards.gen.Cards.Suit;
-
 /**
  * A Generic hand is used for hands with unspecified low cards.
  *
- * E.g. "AK 5th, 3 small, A and 1, J third", which is written "AKxxx.xxx.Ax.Jxx"
- * Where each x represents any low card, usually below 9 or T.
+ * <p>E.g. "AK 5th, 3 small, A and 1, J third", which is written "AKxxx.xxx.Ax.Jxx" Where each x
+ * represents any low card, usually below 9 or T.
  */
 public class GenericHand {
   /** Returns a GenericHand parsed from the normal string format but with 'x's. */
@@ -74,8 +72,8 @@ public class GenericHand {
   }
 
   /**
-   * Returns a real {@link Hand} from this one,
-   * using the provided available cards to replace generic 'x' with actual cards.
+   * Returns a real {@link Hand} from this one, using the provided available cards to replace
+   * generic 'x' with actual cards.
    */
   public Hand toHand(Hand availableCards) {
     Hand result = new Hand();
@@ -92,8 +90,12 @@ public class GenericHand {
           --lowCardsNeeded;
         }
       }
-      Preconditions.checkArgument(lowCardsNeeded == 0, "Unable to find %d %s low cards from %s",
-          lowCardsNeeded, suit, availableCards);
+      Preconditions.checkArgument(
+          lowCardsNeeded == 0,
+          "Unable to find %d %s low cards from %s",
+          lowCardsNeeded,
+          suit,
+          availableCards);
     }
     return result;
   }

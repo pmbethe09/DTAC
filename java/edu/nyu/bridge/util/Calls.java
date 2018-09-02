@@ -3,22 +3,17 @@ package edu.nyu.bridge.util;
 import static com.google.common.collect.Maps.newEnumMap;
 import static com.google.common.collect.Maps.newHashMap;
 
-import java.util.EnumMap;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.NonBid;
 import edu.nyu.cards.gen.Cards.Suit;
+import java.util.EnumMap;
+import java.util.Map;
+import javax.annotation.Nullable;
 
-/**
- * Static methods for converting string to {@link Call} and back.
- */
+/** Static methods for converting string to {@link Call} and back. */
 public class Calls {
   private Calls() {}
 
@@ -68,9 +63,8 @@ public class Calls {
   /**
    * Returns {@code true} if the next bid is allowed after the previous one.
    *
-   * Note: it is up to the caller to ask the right question.
-   * e.g. 1H Pass 1C -- if the caller asks if 1C is legal after Pass, the answer is true
-   * but after 1H, not so much.
+   * <p>Note: it is up to the caller to ask the right question. e.g. 1H Pass 1C -- if the caller
+   * asks if 1C is legal after Pass, the answer is true but after 1H, not so much.
    */
   public static boolean allowed(@Nullable Call previous, Call next) {
     // TODO: this could be wrong if prev was a pass

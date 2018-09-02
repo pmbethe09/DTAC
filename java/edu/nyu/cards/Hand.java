@@ -5,24 +5,21 @@ import static edu.nyu.cards.Suits.iterateSuitsHighLow;
 import static edu.nyu.cards.Suits.iterateSuitsLowHigh;
 import static edu.nyu.cards.Suits.lowerSuit;
 
-import java.util.Collection;
-import java.util.EnumMap;
-import java.util.EnumSet;
-
-import javax.annotation.Nullable;
-
 import com.google.common.annotations.VisibleForTesting;
-
 import com.google.common.collect.Sets;
 import edu.nyu.cards.gen.Cards;
 import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Card.Rank;
 import edu.nyu.cards.gen.Cards.Suit;
+import java.util.Collection;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import javax.annotation.Nullable;
 
 /**
- * Represent a hand as the set of cards in each suit. optimized to use EnumSets,
- * but can map to/from {@link Cards.Hand} for transport.
- * Explicitly mutable, use a Cards.Hand for an Immutable representation.
+ * Represent a hand as the set of cards in each suit. optimized to use EnumSets, but can map to/from
+ * {@link Cards.Hand} for transport. Explicitly mutable, use a Cards.Hand for an Immutable
+ * representation.
  */
 public class Hand {
   // for each suit, a Set with the cards held.

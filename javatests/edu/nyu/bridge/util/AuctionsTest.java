@@ -2,14 +2,12 @@ package edu.nyu.bridge.util;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import java.util.Arrays;
-
-import org.junit.Test;
-
 import edu.nyu.bridge.gen.Bridge.Auction;
-import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Call;
+import edu.nyu.bridge.gen.Bridge.Direction;
+import java.util.Arrays;
+import org.junit.Test;
 
 public class AuctionsTest {
   @Test
@@ -19,28 +17,59 @@ public class AuctionsTest {
         .isEqualTo(Auctions.contract(auction(call("1S"), PASS, call("2S"), PASS)));
     assertThat(contract("4H", Direction.EAST))
         .named("right contract")
-        .isEqualTo(Auctions.contract(
-            auction(call("1S"), call("2H"), call("2S"), call("4H"), PASS, PASS, PASS)));
+        .isEqualTo(
+            Auctions.contract(
+                auction(call("1S"), call("2H"), call("2S"), call("4H"), PASS, PASS, PASS)));
     assertThat(contract("5C", Direction.WEST))
         .named("right contract")
         .isEqualTo(Auctions.contract(auction(call("1S"), PASS, call("2S"), call("5C"))));
     assertThat(contract("4HX", Direction.EAST))
         .named("right contract")
-        .isEqualTo(Auctions.contract(
-            auction(call("1S"), call("2H"), call("2S"), call("4H"), call("X"), PASS, PASS, PASS)));
+        .isEqualTo(
+            Auctions.contract(
+                auction(
+                    call("1S"), call("2H"), call("2S"), call("4H"), call("X"), PASS, PASS, PASS)));
 
     assertThat(contract("3C", Direction.SOUTH))
         .named("right contract")
-        .isEqualTo(Auctions.contract(auction(Direction.EAST, call("1D"), PASS, PASS, call("X"),
-            call("P"), call("2C"), PASS, call("3C"), PASS, PASS, PASS)));
+        .isEqualTo(
+            Auctions.contract(
+                auction(
+                    Direction.EAST,
+                    call("1D"),
+                    PASS,
+                    PASS,
+                    call("X"),
+                    call("P"),
+                    call("2C"),
+                    PASS,
+                    call("3C"),
+                    PASS,
+                    PASS,
+                    PASS)));
   }
 
   @Test
   public void testFancyContract() {
     assertThat(contract("5S", Direction.EAST, Calls.DOUBLE))
         .named("right contract")
-        .isEqualTo(Auctions.contract(auction(call("1H"), call("1S"), PASS, call("3S"), call("4C"),
-            call("4H"), call("4S"), PASS, call("5C"), call("5S"), DOUBLE, PASS, PASS, PASS)));
+        .isEqualTo(
+            Auctions.contract(
+                auction(
+                    call("1H"),
+                    call("1S"),
+                    PASS,
+                    call("3S"),
+                    call("4C"),
+                    call("4H"),
+                    call("4S"),
+                    PASS,
+                    call("5C"),
+                    call("5S"),
+                    DOUBLE,
+                    PASS,
+                    PASS,
+                    PASS)));
   }
 
   @Test

@@ -1,10 +1,9 @@
 package edu.nyu.bridge.gib.local;
 
-import com.google.inject.BindingAnnotation;
-
-import java.lang.annotation.Retention;
-
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
+
+import com.google.inject.BindingAnnotation;
+import java.lang.annotation.Retention;
 
 public final class Annotations {
   @BindingAnnotation

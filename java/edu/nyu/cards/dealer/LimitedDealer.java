@@ -2,9 +2,8 @@ package edu.nyu.cards.dealer;
 
 import static com.google.common.base.Preconditions.checkState;
 
-import java.util.List;
-
 import edu.nyu.cards.gen.Cards.Hand;
+import java.util.List;
 
 /** Deals only N deals from the underlying dealer. */
 public class LimitedDealer implements Dealer {

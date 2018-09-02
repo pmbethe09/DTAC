@@ -1,11 +1,10 @@
 package edu.nyu.cards.dealer;
 
+import com.google.common.base.Preconditions;
+import edu.nyu.cards.gen.Cards;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
-
-import com.google.common.base.Preconditions;
-import edu.nyu.cards.gen.Cards;
 
 /** Implements a {@link Dealer} using a pre-canned collection of {@link Deal}s. */
 public class PresetDealer implements Dealer {

@@ -1,9 +1,9 @@
 package edu.nyu.bridge.gib.local;
 
-import javax.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import javax.inject.Inject;
 
 /** GiB session which shells out to Gib.exe. */
 public class CmdLineSession implements LocalGibPlayer.Session {

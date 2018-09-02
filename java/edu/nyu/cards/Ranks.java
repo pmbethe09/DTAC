@@ -1,22 +1,16 @@
 package edu.nyu.cards;
 
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.List;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Converter;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-
 import edu.nyu.cards.gen.Cards.Card;
-import edu.nyu.cards.gen.Cards.Card.Rank;
+import java.util.Arrays;
+import java.util.EnumSet;
+import java.util.List;
+import javax.annotation.Nullable;
 
-/**
- * Static methods for converting back and forth from {@link Card.Rank} to {@code char}.
- */
+/** Static methods for converting back and forth from {@link Card.Rank} to {@code char}. */
 public final class Ranks {
   private Ranks() {}
 
@@ -58,6 +52,13 @@ public final class Ranks {
           .build();
 
   private static final EnumSet<Card.Rank> LOW_CARDS =
-      EnumSet.of(Card.Rank.TWO, Card.Rank.THREE, Card.Rank.FOUR, Card.Rank.FIVE, Card.Rank.SIX,
-          Card.Rank.SEVEN, Card.Rank.EIGHT, Card.Rank.NINE);
+      EnumSet.of(
+          Card.Rank.TWO,
+          Card.Rank.THREE,
+          Card.Rank.FOUR,
+          Card.Rank.FIVE,
+          Card.Rank.SIX,
+          Card.Rank.SEVEN,
+          Card.Rank.EIGHT,
+          Card.Rank.NINE);
 }

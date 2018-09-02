@@ -2,12 +2,11 @@ package edu.nyu.bridge.util;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.junit.Test;
-
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.cards.gen.Cards.Suit;
+import org.junit.Test;
 
 public class ContractTest {
   @Test

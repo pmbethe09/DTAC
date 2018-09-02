@@ -1,31 +1,41 @@
 package edu.nyu.bridge.util;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import com.google.common.base.Functions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
-
 import edu.nyu.bridge.gen.Bridge.Deal;
 import edu.nyu.bridge.gen.Bridge.DealOrBuilder;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.gen.Bridge.Vulnerability;
 import edu.nyu.cards.Hand;
+import java.util.List;
+import java.util.Map;
+import javax.annotation.Nullable;
 
-/**
- * Utilities for talking about Deal properties.
- */
+/** Utilities for talking about Deal properties. */
 public class Deals {
-  private static final Vulnerability[] VUL_ROTATION = {Vulnerability.NONE, Vulnerability.NS,
-      Vulnerability.EW, Vulnerability.BOTH, Vulnerability.NS, Vulnerability.EW, Vulnerability.BOTH,
-      Vulnerability.NONE, Vulnerability.EW, Vulnerability.BOTH, Vulnerability.NONE,
-      Vulnerability.NS, Vulnerability.BOTH, Vulnerability.NONE, Vulnerability.NS, Vulnerability.EW};
+  private static final Vulnerability[] VUL_ROTATION = {
+    Vulnerability.NONE,
+    Vulnerability.NS,
+    Vulnerability.EW,
+    Vulnerability.BOTH,
+    Vulnerability.NS,
+    Vulnerability.EW,
+    Vulnerability.BOTH,
+    Vulnerability.NONE,
+    Vulnerability.EW,
+    Vulnerability.BOTH,
+    Vulnerability.NONE,
+    Vulnerability.NS,
+    Vulnerability.BOTH,
+    Vulnerability.NONE,
+    Vulnerability.NS,
+    Vulnerability.EW
+  };
 
   private static final Direction[] DEALERS = {
-      Direction.WEST, Direction.NORTH, Direction.EAST, Direction.SOUTH};
+    Direction.WEST, Direction.NORTH, Direction.EAST, Direction.SOUTH
+  };
 
   // Uses either vul field or board number index.
   // returns null if not available.
@@ -58,7 +68,10 @@ public class Deals {
   }
 
   public static List<Hand> fromNorth(Map<Direction, Hand> deal) {
-    return ImmutableList.of(deal.get(Direction.NORTH), deal.get(Direction.EAST),
-        deal.get(Direction.SOUTH), deal.get(Direction.WEST));
+    return ImmutableList.of(
+        deal.get(Direction.NORTH),
+        deal.get(Direction.EAST),
+        deal.get(Direction.SOUTH),
+        deal.get(Direction.WEST));
   }
 }

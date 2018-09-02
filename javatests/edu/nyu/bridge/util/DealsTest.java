@@ -2,9 +2,8 @@ package edu.nyu.bridge.util;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.junit.Test;
-
 import edu.nyu.bridge.gen.Bridge.Vulnerability;
+import org.junit.Test;
 
 public class DealsTest {
   @Test

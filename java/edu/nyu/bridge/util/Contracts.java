@@ -1,13 +1,10 @@
 package edu.nyu.bridge.util;
 
-import javax.annotation.Nullable;
-
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.NonBid;
+import javax.annotation.Nullable;
 
-/**
- * Common conversions from string<-> contract [reusing Call proto]
- */
+/** Common conversions from string<-> contract [reusing Call proto] */
 public class Contracts {
   @Nullable
   public static Contract highest(Iterable<Contract> from) {

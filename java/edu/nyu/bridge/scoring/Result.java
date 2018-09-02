@@ -11,9 +11,7 @@ public abstract class Result {
     return new AutoValue_Result(tricks);
   }
 
-  /**
-   * The total tricks, as in '10', rather than the 'contract tricks' which would be '4'
-   */
+  /** The total tricks, as in '10', rather than the 'contract tricks' which would be '4' */
   public abstract int getTotalTricks();
 
   public int getContractTricks() {

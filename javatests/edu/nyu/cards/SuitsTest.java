@@ -2,9 +2,8 @@ package edu.nyu.cards;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import org.junit.Test;
-
 import edu.nyu.cards.gen.Cards.Suit;
+import org.junit.Test;
 
 public class SuitsTest {
   @Test

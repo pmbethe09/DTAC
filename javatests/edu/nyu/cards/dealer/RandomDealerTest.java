@@ -2,13 +2,11 @@ package edu.nyu.cards.dealer;
 
 import static com.google.common.truth.Truth.assertThat;
 
-import java.util.List;
-import java.util.Random;
-
-import org.junit.Test;
-
 import edu.nyu.cards.Hand;
 import edu.nyu.cards.gen.Cards;
+import java.util.List;
+import java.util.Random;
+import org.junit.Test;
 
 public class RandomDealerTest {
   @Test

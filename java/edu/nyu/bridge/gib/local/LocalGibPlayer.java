@@ -4,22 +4,7 @@ import static com.google.common.base.Preconditions.checkState;
 import static edu.nyu.cards.Cards.card2String;
 import static edu.nyu.cards.Cards.string2Card;
 
-import java.io.BufferedReader;
-import java.io.Closeable;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.util.List;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.inject.Inject;
-
 import com.google.inject.Provider;
-
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.gen.Bridge.Vulnerability;
@@ -32,19 +17,32 @@ import edu.nyu.bridge.util.Directions;
 import edu.nyu.cards.Hand;
 import edu.nyu.cards.gen.Cards;
 import edu.nyu.cards.gen.Cards.Card;
+import java.io.BufferedReader;
+import java.io.Closeable;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.util.List;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.inject.Inject;
 
 /**
- * Implements the {@link BridgePlayer}/{@link HandPlayer} protocols
- * while using an underlying commandline GiB session to determine moves.
+ * Implements the {@link BridgePlayer}/{@link HandPlayer} protocols while using an underlying
+ * commandline GiB session to determine moves.
  */
 public class LocalGibPlayer implements BridgePlayer {
   private static final Logger log = Logger.getLogger(LocalGibPlayer.class.getName());
   private static final Pattern I_BID = Pattern.compile("I bid (\\w+)");
   private static final Pattern I_PLAY = Pattern.compile("I play (\\w)(\\w)");
 
-  /** Session with Gib.  Usually commandline but abstracted for testing. */
+  /** Session with Gib. Usually commandline but abstracted for testing. */
   public interface Session extends Closeable {
     InputStream getInputStream();
+
     OutputStream getOutputStream();
   }
 

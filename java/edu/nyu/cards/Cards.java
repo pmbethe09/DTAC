@@ -2,20 +2,15 @@ package edu.nyu.cards;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import java.util.EnumMap;
-import java.util.Map;
-
-import com.google.common.base.Function;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
 import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Card.Rank;
 import edu.nyu.cards.gen.Cards.Suit;
+import java.util.EnumMap;
+import java.util.Map;
 
-/**
- * Helper functions for stringifying and extracting constants for {@link Card}s
- */
+/** Helper functions for stringifying and extracting constants for {@link Card}s */
 public final class Cards {
   private Cards() {}
 

@@ -19,6 +19,6 @@ public interface RecordingHandPlayer extends HandPlayer {
   /** Returns true if it is this hand's turn to play. */
   boolean isMyPlay();
 
-  /** Returns the number of the trick being played.  0 means none yet, 14 means hand over. */
+  /** Returns the number of the trick being played. 0 means none yet, 14 means hand over. */
   int currentTrick();
 }

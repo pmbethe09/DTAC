@@ -1,19 +1,13 @@
 package edu.nyu.bridge.util;
 
-import javax.annotation.Nullable;
-
 import com.google.auto.value.AutoValue;
-import com.google.common.base.MoreObjects;
-import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
-
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.gen.Bridge.Level;
 import edu.nyu.bridge.gen.Bridge.NonBid;
 import edu.nyu.cards.gen.Cards.Suit;
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import javax.annotation.Nullable;
 
 /** An intelligent wrapper for describing bridge contracts. */
 @AutoValue
@@ -26,7 +20,6 @@ public abstract class Contract {
     GAME(300, 500),
     SLAM(800, 1250),
     GRAND(1300, 2000);
-
     private final int nonVulBonus, vulBonus;
 
     Bonus(int nonVulBonus, int vulBonus) {
@@ -40,7 +33,8 @@ public abstract class Contract {
   }
 
   public static Contract parse(String c) {
-    return Contract.of(Contracts.string2Contract(c.substring(0, c.length() - 1)),
+    return Contract.of(
+        Contracts.string2Contract(c.substring(0, c.length() - 1)),
         Directions.fromString(c.substring(c.length() - 1)));
   }
 
@@ -53,6 +47,7 @@ public abstract class Contract {
   }
 
   public abstract Call getCall();
+
   public abstract Direction getDeclarer();
 
   public boolean isPassout() {
@@ -92,8 +87,12 @@ public abstract class Contract {
       case NOTRUMPS:
         return level.getNumber() >= 3 && level.getNumber() < 6;
       default:
-        throw new IllegalStateException("Suit " + Bids.suit(getCall().getBid()) + " returned for "
-            + getCall().getBid() + " was not expected");
+        throw new IllegalStateException(
+            "Suit "
+                + Bids.suit(getCall().getBid())
+                + " returned for "
+                + getCall().getBid()
+                + " was not expected");
     }
   }
 

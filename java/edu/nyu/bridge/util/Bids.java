@@ -5,11 +5,9 @@ import static com.google.common.collect.Maps.newEnumMap;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Level;
 import edu.nyu.cards.gen.Cards.Suit;
-
 import java.util.EnumMap;
 
 /** Provides helper methods for switching between {@link Bid} and {@link Suit}/{@link Level}. */
