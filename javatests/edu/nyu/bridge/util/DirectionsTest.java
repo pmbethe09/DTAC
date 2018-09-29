@@ -8,6 +8,7 @@ import static edu.nyu.bridge.util.Directions.offset;
 import static edu.nyu.bridge.util.Directions.opponents;
 import static edu.nyu.bridge.util.Directions.partner;
 
+import com.google.common.collect.ImmutableList;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import org.junit.Test;
 
@@ -34,5 +35,18 @@ public class DirectionsTest {
   @Test
   public void testOffset() {
     assertThat(1).named("lho 1").isEqualTo(offset(Direction.SOUTH, Direction.WEST));
+  }
+
+  @Test
+  public void directionsMap() {
+    for (Direction direction : Direction.values()) {
+      ImmutableList<Direction> directionList = Directions.iterateDirections(direction);
+      assertThat(directionList.get(0)).isEqualTo(direction);
+      Direction previous = direction;
+      for (Direction fromList : directionList) {
+        assertThat(fromList).isEqualTo(previous);
+        previous = Directions.lho(fromList);
+      }
+    }
   }
 }

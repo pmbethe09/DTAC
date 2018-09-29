@@ -30,7 +30,7 @@ public class Directions {
               EAST,
               ImmutableList.of(EAST, SOUTH, WEST, NORTH),
               SOUTH,
-              ImmutableList.of(WEST, NORTH, EAST, SOUTH),
+              ImmutableList.of(SOUTH, WEST, NORTH, EAST),
               WEST,
               ImmutableList.of(WEST, NORTH, EAST, SOUTH)));
 
