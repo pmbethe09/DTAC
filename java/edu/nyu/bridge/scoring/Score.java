@@ -1,8 +1,10 @@
 package edu.nyu.bridge.scoring;
 
+import static edu.nyu.bridge.util.Directions.isNS;
+
 import com.google.auto.value.AutoValue;
+import com.google.common.base.Objects;
 import edu.nyu.bridge.gen.Bridge.Direction;
-import edu.nyu.bridge.util.Directions;
 
 /** Represents a score with Duplicate bonuses. */
 @AutoValue
@@ -19,9 +21,27 @@ public abstract class Score {
 
   /** Score always NS relative so if EW make 4H white, score is -420. */
   public Score absolute() {
-    if (Directions.isNS(getDirection())) {
+    if (isNS(getDirection())) {
       return this;
     }
     return of(Direction.NORTH, -getScore());
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (!(other instanceof Score)) {
+      return false;
+    }
+    Score otherScore = (Score) other;
+    int thisScore = isNS(getDirection()) ? getScore() : -getScore();
+    int thatScore =
+        isNS(otherScore.getDirection()) ? otherScore.getScore() : -otherScore.getScore();
+    return thisScore == thatScore;
+  }
+
+  @Override
+  public int hashCode() {
+    Score abs = this.absolute();
+    return Objects.hashCode(abs.getDirection(), abs.getScore());
   }
 }
