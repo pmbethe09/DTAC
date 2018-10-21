@@ -22,7 +22,6 @@ public class Scorer {
       return Score.of(contract.getDeclarer(), -undertricks(contract, vul, result));
     }
     int trickScore = trickScore(contract) * contract.getCall().getNonBid().getNumber();
-    System.out.printf("trickScore=%d\n", trickScore);
     boolean isVul = isVul(contract.getDeclarer(), vul);
     return Score.of(
         contract.getDeclarer(),
@@ -46,7 +45,6 @@ public class Scorer {
 
   private static int makingBonus(Contract contract, int trickScore, boolean isVul) {
     Bonus bonus = Bonus.bonus(contract, trickScore);
-    System.out.printf("bonus=%s\n", bonus);
     return isVul ? bonus.vulBonus : bonus.nonVulBonus;
   }
 
@@ -108,7 +106,6 @@ public class Scorer {
   }
 
   private static int doubledScore(int[] starter, int down) {
-    System.out.printf("down=%d", down);
     if (down < starter.length) {
       return starter[down - 1];
     }
