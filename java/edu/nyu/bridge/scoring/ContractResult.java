@@ -19,5 +19,5 @@ public abstract class ContractResult {
   public abstract Contract contract();
 
   // number of tricks from perspective of declarer, e.g. 4S, 10 tricks.
-  public abstract Result score();
+  public abstract Result result();
 }
