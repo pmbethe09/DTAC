@@ -18,6 +18,11 @@ public abstract class ContractResult {
 
   public abstract Contract contract();
 
-  // number of tricks from perspective of declarer, e.g. 4S, 10 tricks.
+  /** number of tricks from perspective of declarer, e.g. 4S, 10 tricks. */
   public abstract Result result();
+
+  /** Given the vulnerability, compute the {@link ContractScore}. */
+  public ContractScore score(Bridge.Vulnerability vul) {
+    return ContractScore.of(contract(), Scorer.score(contract(), vul, result()));
+  }
 }
