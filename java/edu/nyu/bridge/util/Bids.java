@@ -11,7 +11,7 @@ import edu.nyu.cards.gen.Cards.Suit;
 import java.util.EnumMap;
 
 /** Provides helper methods for switching between {@link Bid} and {@link Suit}/{@link Level}. */
-public class Bids {
+public final class Bids {
   private Bids() {}
 
   private static final ImmutableMap<Level, EnumMap<Suit, Bid>> BID_MAP;

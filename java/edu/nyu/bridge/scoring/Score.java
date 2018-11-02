@@ -4,10 +4,12 @@ import static edu.nyu.bridge.util.Directions.isNS;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Objects;
+import com.google.errorprone.annotations.Immutable;
 import edu.nyu.bridge.gen.Bridge.Direction;
 
 /** Represents a score with Duplicate bonuses. */
 @AutoValue
+@Immutable
 public abstract class Score {
   public static Score of(Direction direction, int score) {
     return new AutoValue_Score(direction, score);

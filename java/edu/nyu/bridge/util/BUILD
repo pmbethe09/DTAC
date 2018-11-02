@@ -10,5 +10,6 @@ java_library(
         "//third_party/auto_value",
         "@com_google_code_findbugs_jsr305//jar",
         "@com_google_guava_guava//jar",
+        "@errorprone_repo//jar",
     ],
 )

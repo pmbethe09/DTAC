@@ -21,7 +21,9 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 /** Utility methods for getting info related to {@link Direction}. */
-public class Directions {
+public final class Directions {
+  private Directions() {}
+
   private static final Map<Direction, ImmutableList<Direction>> DIRECTION_PLUS_FOUR =
       Maps.immutableEnumMap(
           ImmutableMap.of(

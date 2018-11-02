@@ -8,7 +8,9 @@ import java.util.List;
 import javax.annotation.Nullable;
 
 /** Utility functions for determining what is happening in a trick. */
-public class Tricks {
+public final class Tricks {
+  private Tricks() {}
+
   /** Is this a legal play from this hand given the suitLead? (which can be null for the leader). */
   public static boolean legal(Cards.Card card, Hand from, @Nullable Cards.Suit suitLead) {
     if (!from.hasCard(card)) {

@@ -10,6 +10,13 @@ import org.junit.Test;
 
 public class ScorerTest {
   @Test
+  public void testFromContract() {
+    Contract contract = Contract.of(8, Suit.CLUBS, Direction.SOUTH);
+    assertThat(ContractResult.making(contract).score(Bridge.Vulnerability.NONE))
+        .isEqualTo(ContractScore.of(contract, Score.of(Direction.SOUTH, 90)));
+  }
+
+  @Test
   public void testBasicScores() {
     assertThat(
             Scorer.score(

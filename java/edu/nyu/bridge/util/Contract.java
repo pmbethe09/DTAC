@@ -2,6 +2,7 @@ package edu.nyu.bridge.util;
 
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Preconditions;
+import com.google.errorprone.annotations.Immutable;
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.gen.Bridge.Level;
@@ -11,6 +12,7 @@ import javax.annotation.Nullable;
 
 /** An intelligent wrapper for describing bridge contracts. */
 @AutoValue
+@Immutable
 public abstract class Contract {
   public static final Contract PASSOUT =
       Contract.of(Call.newBuilder().setNonBid(NonBid.PASS).build(), Direction.NORTH);
@@ -20,7 +22,7 @@ public abstract class Contract {
     GAME(300, 500),
     SLAM(800, 1250),
     GRAND(1300, 2000);
-    private final int nonVulBonus, vulBonus;
+    public final int nonVulBonus, vulBonus;
 
     Bonus(int nonVulBonus, int vulBonus) {
       this.nonVulBonus = nonVulBonus;
@@ -45,6 +47,8 @@ public abstract class Contract {
         Call.newBuilder().setBid(Bids.bid(Level.forNumber(totalTricks - BOOK), trump)).build();
     return Contract.of(call, declarer);
   }
+
+  Contract() {}
 
   public abstract Call getCall();
 

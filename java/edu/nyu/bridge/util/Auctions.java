@@ -12,7 +12,7 @@ import java.util.EnumMap;
 import javax.annotation.Nullable;
 
 /** Helper methods for acting on an {@link Auction}. */
-public class Auctions {
+public final class Auctions {
   private Auctions() {}
 
   /** Represents the role each player takes in an Auction. */

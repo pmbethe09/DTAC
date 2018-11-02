@@ -13,7 +13,9 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 /** Utilities for talking about Deal properties. */
-public class Deals {
+public final class Deals {
+  private Deals() {}
+
   private static final Vulnerability[] VUL_ROTATION = {
     Vulnerability.NONE,
     Vulnerability.NS,

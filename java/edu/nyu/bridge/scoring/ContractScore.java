@@ -1,12 +1,14 @@
 package edu.nyu.bridge.scoring;
 
 import com.google.auto.value.AutoValue;
+import com.google.errorprone.annotations.Immutable;
 import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.util.Calls;
 import edu.nyu.bridge.util.Contract;
 
 /** Wraps up a {@link Contract} and its {@link Score}. */
 @AutoValue
+@Immutable
 public abstract class ContractScore {
   public static ContractScore of(Contract contract, Score score) {
     return new AutoValue_ContractScore(contract, score);

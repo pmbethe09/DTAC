@@ -1,9 +1,11 @@
 package edu.nyu.bridge.scoring;
 
 import com.google.auto.value.AutoValue;
+import com.google.errorprone.annotations.Immutable;
 
 /** Represents a resulting number of tricks. */
 @AutoValue
+@Immutable
 public abstract class Result {
   public static final int BOOK_TRICKS = 6;
 

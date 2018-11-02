@@ -5,7 +5,9 @@ import edu.nyu.bridge.gen.Bridge.NonBid;
 import javax.annotation.Nullable;
 
 /** Common conversions from string<-> contract [reusing Call proto] */
-public class Contracts {
+public final class Contracts {
+  private Contracts() {}
+
   @Nullable
   public static Contract highest(Iterable<Contract> from) {
     Contract highest = null;

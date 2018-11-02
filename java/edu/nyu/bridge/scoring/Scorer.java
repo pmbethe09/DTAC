@@ -7,9 +7,12 @@ import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Vulnerability;
 import edu.nyu.bridge.util.Bids;
 import edu.nyu.bridge.util.Contract;
+import edu.nyu.bridge.util.Contract.Bonus;
 import edu.nyu.cards.gen.Cards;
 
-public class Scorer {
+public final class Scorer {
+  private Scorer() {}
+
   private static int[] NON_VUL_DOUBLED = {100, 300, 500};
   private static int[] VUL_DOUBLED = {200, 500};
 
@@ -44,7 +47,7 @@ public class Scorer {
   }
 
   private static int makingBonus(Contract contract, int trickScore, boolean isVul) {
-    Bonus bonus = Bonus.bonus(contract, trickScore);
+    Bonus bonus = bonus(contract, trickScore);
     return isVul ? bonus.vulBonus : bonus.nonVulBonus;
   }
 
@@ -112,26 +115,13 @@ public class Scorer {
     return starter[starter.length - 1] + (down - starter.length) * 300;
   }
 
-  enum Bonus {
-    PARTSCORE(50, 50),
-    GAME(300, 500),
-    SLAM(800, 1250),
-    GRAND(1300, 2000);
-    final int nonVulBonus, vulBonus;
-
-    Bonus(int nonVulBonus, int vulBonus) {
-      this.nonVulBonus = nonVulBonus;
-      this.vulBonus = vulBonus;
+  public static Bonus bonus(Contract contract, int trickScore) {
+    if (contract.isGrand()) {
+      return Bonus.GRAND;
     }
-
-    public static Bonus bonus(Contract contract, int trickScore) {
-      if (contract.isGrand()) {
-        return Bonus.GRAND;
-      }
-      if (contract.isSlam()) {
-        return Bonus.SLAM;
-      }
-      return trickScore < 100 ? Bonus.PARTSCORE : Bonus.GAME;
+    if (contract.isSlam()) {
+      return Bonus.SLAM;
     }
+    return trickScore < 100 ? Bonus.PARTSCORE : Bonus.GAME;
   }
 }

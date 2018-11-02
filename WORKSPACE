@@ -30,8 +30,8 @@ new_git_repository(
 
 git_repository(
     name = "io_bazel_rules_go",
-    commit = "167cb55932c4a415edf839f750bdd7366f2f1613",
     remote = "https://github.com/bazelbuild/rules_go.git",
+    tag = "0.16.1",
 )
 
 load("@io_bazel_rules_go//go:def.bzl", "go_register_toolchains", "go_rules_dependencies")
@@ -50,6 +50,12 @@ maven_jar(
     name = "auto_value_repo",
     artifact = "com.google.auto.value:auto-value:1.5.3",
     sha1 = "514df6a7c7938de35c7f68dc8b8f22df86037f38",
+)
+
+maven_jar(
+    name = "errorprone_repo",
+    artifact = "com.google.errorprone:error_prone_annotations:jar:2.3.2",
+    sha1 = "d1a0c5032570e0f64be6b4d9c90cdeb103129029",
 )
 
 maven_jar(

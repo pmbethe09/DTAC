@@ -14,7 +14,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 /** Static methods for converting string to {@link Call} and back. */
-public class Calls {
+public final class Calls {
   private Calls() {}
 
   public static final Call PASS = Call.newBuilder().setNonBid(NonBid.PASS).build();

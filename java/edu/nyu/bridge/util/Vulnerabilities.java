@@ -2,7 +2,9 @@ package edu.nyu.bridge.util;
 
 import edu.nyu.bridge.gen.Bridge;
 
-public class Vulnerabilities {
+public final class Vulnerabilities {
+  private Vulnerabilities() {}
+
   public static boolean isVul(Bridge.Direction dir, Bridge.Vulnerability vul) {
     switch (vul) {
       case NONE:

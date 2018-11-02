@@ -4,13 +4,13 @@ import static edu.nyu.cards.Suits.iterateSuitsHighLow;
 import static edu.nyu.cards.Suits.lowerSuit;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Card.Rank;
 import edu.nyu.cards.gen.Cards.Suit;
 import java.util.EnumMap;
 import java.util.EnumSet;
-import java.util.Map;
 
 /**
  * A Generic hand is used for hands with unspecified low cards.
@@ -54,7 +54,7 @@ public class GenericHand {
     return result.build();
   }
 
-  private final Map<Suit, Integer> lowCards;
+  private final ImmutableMap<Suit, Integer> lowCards;
   private final Hand knownCards;
 
   private GenericHand(EnumMap<Suit, Integer> lowCards, Hand knownCards) {
