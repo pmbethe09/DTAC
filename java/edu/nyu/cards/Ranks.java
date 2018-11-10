@@ -22,7 +22,7 @@ public final class Ranks {
 
   @Nullable
   public static Card.Rank char2Rank(char r) {
-    return biData.get(r);
+    return biData.get(Character.toUpperCase(r));
   }
 
   public static char rank2Char(Card.Rank r) {
