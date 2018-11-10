@@ -1,8 +1,8 @@
 workspace(name = "com_github_pmbethe09_dtac")
 
-PROTO_VERS = "3.5.1"
+PROTO_VERS = "3.6.1"
 
-PROTO_SHA = "1f8b9b202e9a4e467ff0b0f25facb1642727cdf5e69092038f15b37c75b99e45"
+PROTO_SHA = "d7a221b3d4fb4f05b7473795ccea9e05dab3b8721f6286a95fffbffc2d926f8b"
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
