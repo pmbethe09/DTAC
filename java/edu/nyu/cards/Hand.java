@@ -1,5 +1,6 @@
 package edu.nyu.cards;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static edu.nyu.cards.Cards.card;
 import static edu.nyu.cards.Suits.iterateSuitsHighLow;
 import static edu.nyu.cards.Suits.iterateSuitsLowHigh;
@@ -58,6 +59,10 @@ public class Hand {
 
   /** Returns a hand parsed from the given string in PBN format. */
   public static Hand fromString(String hand) {
+    if (hand.charAt(0) == 's' || hand.charAt(0) == 'S') {
+      return fromLinString(hand);
+    }
+
     Hand result = new Hand();
     // TODO: support several formats...
     Suit currentSuit = Suit.NOTRUMPS;
@@ -78,6 +83,23 @@ public class Hand {
       result.addCard(currentSuit, rank);
       lastRank = rank;
       // lowerSuit
+    }
+    return result;
+  }
+
+  /** Parses a {@link Hand} from a BBO lin-string format {suit}{rank*}+. */
+  private static Hand fromLinString(String hand) {
+    Hand result = new Hand();
+    Suit currentSuit = Suit.NOTRUMPS;
+    for (char c : hand.toCharArray()) {
+      Rank rank = Ranks.char2Rank(c);
+      if (rank != null) {
+        result.addCard(currentSuit, rank);
+        continue;
+      }
+      Suit newSuit = Suits.char2Suit(c);
+      checkArgument(newSuit != null, "input %s contains non-suit/non-rank character", hand);
+      currentSuit = newSuit;
     }
     return result;
   }
