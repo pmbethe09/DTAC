@@ -13,6 +13,7 @@ import com.google.common.collect.Maps;
 import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 
@@ -185,6 +186,10 @@ public final class Directions {
    * Takes an array of hands oriented from {@code NORTH}, and returns in the specified direction.
    */
   public static <T> ImmutableList<T> fromNorth(Bridge.Direction dealer, T... hands) {
+    return fromNorth(dealer, ImmutableList.copyOf(hands));
+  }
+
+  public static <T> ImmutableList<T> fromNorth(Bridge.Direction dealer, List<T> hands) {
     int offset;
     switch (dealer) {
       case NORTH:
@@ -203,17 +208,21 @@ public final class Directions {
         throw new IllegalArgumentException("unexpected value of dealer");
     }
     ImmutableList.Builder<T> result = ImmutableList.builder();
-    for (int i = offset; i < hands.length; ++i) {
-      result.add(hands[i]);
+    for (int i = offset; i < hands.size(); ++i) {
+      result.add(hands.get(i));
     }
     for (int i = 0; i < offset; ++i) {
-      result.add(hands[i]);
+      result.add(hands.get(i));
     }
     return result.build();
   }
 
   /** Takes an array of hands oriented as {@code direction} and re-orients as {@code NORTH}. */
   public static <T> ImmutableList<T> toNorth(Bridge.Direction direction, T... hands) {
+    return toNorth(direction, ImmutableList.copyOf(hands));
+  }
+
+  public static <T> ImmutableList<T> toNorth(Bridge.Direction direction, List<T> hands) {
     return isNS(direction) ? fromNorth(direction, hands) : fromNorth(partner(direction), hands);
   }
 }
