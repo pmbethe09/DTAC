@@ -185,7 +185,7 @@ public final class Directions {
     }
   }
 
-  public static List<Cards.Hand> fromNorth(Bridge.Direction dealer, Hand... hands) {
+  public static <T> ImmutableList<T> fromNorth(Bridge.Direction dealer, T... hands) {
     int offset;
     switch (dealer) {
       case NORTH:
@@ -203,13 +203,13 @@ public final class Directions {
       default:
         throw new IllegalArgumentException("unexpected value of dealer");
     }
-    List<Cards.Hand> result = Lists.newArrayList();
+    ImmutableList.Builder<T> result = ImmutableList.builder();
     for (int i = offset; i < hands.length; ++i) {
-      result.add(hands[i].toProto());
+      result.add(hands[i]);
     }
     for (int i = 0; i < offset; ++i) {
-      result.add(hands[i].toProto());
+      result.add(hands[i]);
     }
-    return result;
+    return result.build();
   }
 }
