@@ -9,14 +9,10 @@ import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Direction;
-import edu.nyu.cards.Hand;
-import edu.nyu.cards.gen.Cards;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
 import javax.annotation.Nullable;
 
@@ -185,6 +181,9 @@ public final class Directions {
     }
   }
 
+  /**
+   * Takes an array of hands oriented from {@code NORTH}, and returns in the specified direction.
+   */
   public static <T> ImmutableList<T> fromNorth(Bridge.Direction dealer, T... hands) {
     int offset;
     switch (dealer) {
@@ -211,5 +210,10 @@ public final class Directions {
       result.add(hands[i]);
     }
     return result.build();
+  }
+
+  /** Takes an array of hands oriented as {@code direction} and re-orients as {@code NORTH}. */
+  public static <T> ImmutableList<T> toNorth(Bridge.Direction direction, T... hands) {
+    return isNS(direction) ? fromNorth(direction, hands) : fromNorth(partner(direction), hands);
   }
 }
