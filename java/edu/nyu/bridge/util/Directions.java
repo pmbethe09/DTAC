@@ -14,14 +14,13 @@ import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 import javax.annotation.Nullable;
 
 /** Utility methods for getting info related to {@link Direction}. */
 public final class Directions {
   private Directions() {}
 
-  private static final Map<Direction, ImmutableList<Direction>> DIRECTION_PLUS_FOUR =
+  private static final ImmutableMap<Direction, ImmutableList<Direction>> DIRECTION_PLUS_FOUR =
       Maps.immutableEnumMap(
           ImmutableMap.of(
               NORTH,
@@ -33,7 +32,7 @@ public final class Directions {
               WEST,
               ImmutableList.of(WEST, NORTH, EAST, SOUTH)));
 
-  private static final Map<Direction, ImmutableList<Direction>> OTHERS =
+  private static final ImmutableMap<Direction, ImmutableList<Direction>> OTHERS =
       Maps.immutableEnumMap(
           ImmutableMap.of(
               NORTH,

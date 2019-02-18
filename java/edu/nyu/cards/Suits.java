@@ -5,6 +5,7 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.EnumHashBiMap;
 import com.google.common.collect.ImmutableBiMap;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Maps;
 import edu.nyu.cards.gen.Cards.Suit;
 import javax.annotation.Nullable;
 
@@ -57,12 +58,13 @@ public final class Suits {
       ImmutableList.of(Suit.CLUBS, Suit.DIAMONDS, Suit.HEARTS, Suit.SPADES);
 
   private static BiMap<Suit, Character> SUIT_2_CHAR_BI =
-      EnumHashBiMap.create(
-          ImmutableBiMap.<Suit, Character>builder() // trick
-              .put(Suit.SPADES, 'S')
-              .put(Suit.HEARTS, 'H')
-              .put(Suit.DIAMONDS, 'D')
-              .put(Suit.CLUBS, 'C')
-              .put(Suit.NOTRUMPS, 'N')
-              .build());
+      Maps.unmodifiableBiMap(
+          EnumHashBiMap.create(
+              ImmutableBiMap.<Suit, Character>builder() // trick
+                  .put(Suit.SPADES, 'S')
+                  .put(Suit.HEARTS, 'H')
+                  .put(Suit.DIAMONDS, 'D')
+                  .put(Suit.CLUBS, 'C')
+                  .put(Suit.NOTRUMPS, 'N')
+                  .build()));
 }

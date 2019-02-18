@@ -8,7 +8,6 @@ import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Card.Rank;
 import edu.nyu.cards.gen.Cards.Suit;
 import java.util.EnumMap;
-import java.util.Map;
 
 /** Helper functions for stringifying and extracting constants for {@link Card}s */
 public final class Cards {
@@ -42,14 +41,14 @@ public final class Cards {
         PREBUILT_CARDS.get(suit).get(rank), "No card found for suit=%s rank=%s", suit, rank);
   }
 
-  private static final Map<Suit, Map<Rank, String>> CARD_2_STRING;
-  private static final Map<Suit, Map<Rank, Card>> PREBUILT_CARDS;
-  private static final Map<String, Card> STRING_2_CARD;
+  private static final ImmutableMap<Suit, ImmutableMap<Rank, String>> CARD_2_STRING;
+  private static final ImmutableMap<Suit, ImmutableMap<Rank, Card>> PREBUILT_CARDS;
+  private static final ImmutableMap<String, Card> STRING_2_CARD;
 
   static {
     ImmutableMap.Builder<String, Card> builder = ImmutableMap.builder();
-    ImmutableMap.Builder<Suit, Map<Rank, String>> cardBuilder = ImmutableMap.builder();
-    ImmutableMap.Builder<Suit, Map<Rank, Card>> preBuilder = ImmutableMap.builder();
+    ImmutableMap.Builder<Suit, ImmutableMap<Rank, String>> cardBuilder = ImmutableMap.builder();
+    ImmutableMap.Builder<Suit, ImmutableMap<Rank, Card>> preBuilder = ImmutableMap.builder();
     for (Suit suit : Suit.values()) {
       EnumMap<Rank, Card> thisSuit = Maps.newEnumMap(Rank.class);
       EnumMap<Rank, String> thisSuitStrings = Maps.newEnumMap(Rank.class);

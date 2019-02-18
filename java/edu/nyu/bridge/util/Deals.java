@@ -1,6 +1,7 @@
 package edu.nyu.bridge.util;
 
-import com.google.common.base.Functions;
+import static com.google.common.base.Functions.toStringFunction;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import edu.nyu.bridge.gen.Bridge.Deal;
@@ -16,28 +17,29 @@ import javax.annotation.Nullable;
 public final class Deals {
   private Deals() {}
 
-  private static final Vulnerability[] VUL_ROTATION = {
-    Vulnerability.NONE,
-    Vulnerability.NS,
-    Vulnerability.EW,
-    Vulnerability.BOTH,
-    Vulnerability.NS,
-    Vulnerability.EW,
-    Vulnerability.BOTH,
-    Vulnerability.NONE,
-    Vulnerability.EW,
-    Vulnerability.BOTH,
-    Vulnerability.NONE,
-    Vulnerability.NS,
-    Vulnerability.BOTH,
-    Vulnerability.NONE,
-    Vulnerability.NS,
-    Vulnerability.EW
-  };
+  private static final ImmutableList<Vulnerability> VUL_ROTATION =
+      ImmutableList.copyOf(
+          new Vulnerability[] {
+            Vulnerability.NONE,
+            Vulnerability.NS,
+            Vulnerability.EW,
+            Vulnerability.BOTH,
+            Vulnerability.NS,
+            Vulnerability.EW,
+            Vulnerability.BOTH,
+            Vulnerability.NONE,
+            Vulnerability.EW,
+            Vulnerability.BOTH,
+            Vulnerability.NONE,
+            Vulnerability.NS,
+            Vulnerability.BOTH,
+            Vulnerability.NONE,
+            Vulnerability.NS,
+            Vulnerability.EW
+          });
 
-  private static final Direction[] DEALERS = {
-    Direction.WEST, Direction.NORTH, Direction.EAST, Direction.SOUTH
-  };
+  private static final ImmutableList<Direction> DEALERS =
+      ImmutableList.of(Direction.WEST, Direction.NORTH, Direction.EAST, Direction.SOUTH);
 
   // Uses either vul field or board number index.
   // returns null if not available.
@@ -53,11 +55,11 @@ public final class Deals {
   }
 
   public static Vulnerability getVul(int boardNumber) {
-    return VUL_ROTATION[(boardNumber - 1) % 16];
+    return VUL_ROTATION.get((boardNumber - 1) % 16);
   }
 
   public static Direction getDealer(int boardNum) {
-    return DEALERS[boardNum % 4];
+    return DEALERS.get(boardNum % 4);
   }
 
   public static Deal of(int boardNumber, Iterable<Hand> hands) {
@@ -65,7 +67,7 @@ public final class Deals {
         .setBoard(boardNumber)
         .setDealer(getDealer(boardNumber))
         .setVulnerable(getVul(boardNumber))
-        .addAllHands(Iterables.transform(hands, Functions.toStringFunction()))
+        .addAllHands(Iterables.transform(hands, toStringFunction()))
         .build();
   }
 

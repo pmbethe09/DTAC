@@ -11,6 +11,7 @@ import edu.nyu.cards.gen.Cards.Card.Rank;
 import edu.nyu.cards.gen.Cards.Suit;
 import java.util.EnumMap;
 import java.util.EnumSet;
+import java.util.Map;
 
 /**
  * A Generic hand is used for hands with unspecified low cards.
@@ -57,7 +58,7 @@ public class GenericHand {
   private final ImmutableMap<Suit, Integer> lowCards;
   private final Hand knownCards;
 
-  private GenericHand(EnumMap<Suit, Integer> lowCards, Hand knownCards) {
+  private GenericHand(Map<Suit, Integer> lowCards, Hand knownCards) {
     this.lowCards = Maps.immutableEnumMap(lowCards);
     this.knownCards = knownCards;
   }
