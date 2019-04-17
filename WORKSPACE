@@ -31,10 +31,10 @@ new_git_repository(
 git_repository(
     name = "io_bazel_rules_go",
     remote = "https://github.com/bazelbuild/rules_go.git",
-    tag = "0.16.1",
+    tag = "0.18.2",
 )
 
-load("@io_bazel_rules_go//go:def.bzl", "go_register_toolchains", "go_rules_dependencies")
+load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
 
 go_rules_dependencies()
 
