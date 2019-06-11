@@ -1,5 +1,6 @@
 package(default_visibility = ["//visibility:public"])
 
+#load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
 load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
 
 cc_proto_library(
@@ -22,3 +23,8 @@ go_proto_library(
     importpath = "github.com/pmbethe09/dtac/cards_proto",
     proto = ":cards_proto",
 )
+
+#py_proto_library(
+#    name = "cards_py_proto",
+#    srcs = ["cards.proto"],
+#)

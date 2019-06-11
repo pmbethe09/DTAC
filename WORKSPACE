@@ -1,8 +1,8 @@
 workspace(name = "com_github_pmbethe09_dtac")
 
-PROTO_VERS = "3.6.1.2"
+PROTO_VERS = "3.8.0"
 
-PROTO_SHA = "d6618d117698132dadf0f830b762315807dc424ba36ab9183f1f436008a2fdb6"
+PROTO_SHA = "1e622ce4b84b88b6d2cdf1db38d1a634fe2392d74f0b7b74ff98f3a51838ee53"
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
@@ -13,6 +13,11 @@ http_archive(
     strip_prefix = "protobuf-" + PROTO_VERS,
     urls = ["https://github.com/google/protobuf/archive/v" + PROTO_VERS + ".zip"],
 )
+
+load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+
+# Load common dependencies.
+protobuf_deps()
 
 http_archive(
     name = "com_github_google_protobuf",
@@ -31,7 +36,7 @@ new_git_repository(
 git_repository(
     name = "io_bazel_rules_go",
     remote = "https://github.com/bazelbuild/rules_go.git",
-    tag = "0.18.2",
+    tag = "0.18.5",
 )
 
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")

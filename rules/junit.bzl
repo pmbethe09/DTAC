@@ -37,7 +37,7 @@ def _CodeRootIndex(toks):
     )
 
 def _AsClassName(fname):
-    fname = [x.path for x in fname.files][0]
+    fname = [x.path for x in fname.files.to_list()][0]
     toks = fname[:-5].split("/")  # remove .java and dir-split
     findex = _CodeRootIndex(toks)
     return ".".join(toks[findex:]) + ".class"
@@ -46,7 +46,7 @@ def _junit_tests_impl(ctx):
     classes = ",".join(
         [_AsClassName(x) for x in ctx.attr.srcs],
     )
-    ctx.file_action(output = ctx.outputs.out, content = _OUTPUT % (
+    ctx.actions.write(output = ctx.outputs.out, content = _OUTPUT % (
         classes,
         ctx.attr.outname,
     ))
