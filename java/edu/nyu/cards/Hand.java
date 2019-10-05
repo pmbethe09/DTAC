@@ -1,12 +1,16 @@
 package edu.nyu.cards;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.ImmutableList.toImmutableList;
 import static edu.nyu.cards.Cards.card;
 import static edu.nyu.cards.Suits.iterateSuitsHighLow;
 import static edu.nyu.cards.Suits.iterateSuitsLowHigh;
 import static edu.nyu.cards.Suits.lowerSuit;
 
 import com.google.common.annotations.VisibleForTesting;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
 import edu.nyu.cards.gen.Cards;
 import edu.nyu.cards.gen.Cards.Card;
@@ -15,6 +19,7 @@ import edu.nyu.cards.gen.Cards.Suit;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.EnumSet;
+import java.util.Iterator;
 import javax.annotation.Nullable;
 
 /**
@@ -22,9 +27,9 @@ import javax.annotation.Nullable;
  * {@link Cards.Hand} for transport. Explicitly mutable, use a Cards.Hand for an Immutable
  * representation.
  */
-public class Hand {
+public class Hand implements Iterable<Cards.Card> {
   // for each suit, a Set with the cards held.
-  @VisibleForTesting EnumMap<Suit, EnumSet<Card.Rank>> cards;
+  @VisibleForTesting final EnumMap<Suit, EnumSet<Card.Rank>> cards;
 
   public Hand() {
     // default - init the map
@@ -39,12 +44,17 @@ public class Hand {
     return new Hand().complement();
   }
 
-  public static Hand fromProto(Cards.Hand hand) {
+  /** Returns a hand with all of {@code cards}. */
+  public static Hand create(Iterable<Card> cards) {
     Hand result = new Hand();
-    for (Cards.Card card : hand.getCardsList()) {
+    for (Cards.Card card : cards) {
       result.addCard(card);
     }
     return result;
+  }
+
+  public static Hand fromProto(Cards.Hand hand) {
+    return create(hand.getCardsList());
   }
 
   public Cards.Hand toProto() {
@@ -267,5 +277,15 @@ public class Hand {
       }
     }
     return result;
+  }
+
+  public ImmutableList<Card> asList() {
+    return cards.entrySet().stream().flatMap(e -> e.getValue().stream().map(
+        r -> Card.newBuilder().setRank(r).setSuit(e.getKey()).build())).collect(toImmutableList());
+  }
+
+  @Override
+  public Iterator<Card> iterator() {
+    return asList().iterator();
   }
 }
