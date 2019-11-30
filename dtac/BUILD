@@ -83,6 +83,7 @@ cc_test(
         ":dtac",
         ":testlib",
         "@com_github_google_googletest//:gtest",
+        "@com_github_google_googletest//:gtest_main",
     ],
 )
 

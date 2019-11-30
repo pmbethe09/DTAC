@@ -1,42 +1,32 @@
 workspace(name = "com_github_pmbethe09_dtac")
 
-PROTO_VERS = "3.8.0"
-
-PROTO_SHA = "1e622ce4b84b88b6d2cdf1db38d1a634fe2392d74f0b7b74ff98f3a51838ee53"
-
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_repository")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+# 1.25
+GRPC_VERS = "06a61758461284d210b1481ad5592d3fb6f05002"
 
 http_archive(
-    name = "com_google_protobuf",
-    sha256 = PROTO_SHA,
-    strip_prefix = "protobuf-" + PROTO_VERS,
-    urls = ["https://github.com/google/protobuf/archive/v" + PROTO_VERS + ".zip"],
+    name = "com_github_grpc_grpc",
+    strip_prefix = "grpc-" + GRPC_VERS,
+    urls = [
+        "https://github.com/grpc/grpc/archive/%s.tar.gz" % GRPC_VERS,
+    ],
 )
 
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
+load("@com_github_grpc_grpc//bazel:grpc_deps.bzl", "grpc_deps")
 
-# Load common dependencies.
-protobuf_deps()
+grpc_deps()
+
+RULES_GO_VERS = "v0.20.2/rules_go-v0.20.2.tar.gz"
 
 http_archive(
-    name = "com_github_google_protobuf",
-    sha256 = PROTO_SHA,
-    strip_prefix = "protobuf-" + PROTO_VERS,
-    urls = ["https://github.com/google/protobuf/archive/v" + PROTO_VERS + ".zip"],
-)
-
-new_git_repository(
-    name = "com_github_google_googletest",
-    build_file = "//:third_party/BUILD.gtest",
-    remote = "https://github.com/google/googletest",
-    tag = "release-1.8.0",
-)
-
-git_repository(
     name = "io_bazel_rules_go",
-    remote = "https://github.com/bazelbuild/rules_go.git",
-    tag = "0.18.5",
+    sha256 = "b9aa86ec08a292b97ec4591cf578e020b35f98e12173bbd4a921f84f583aebd9",
+    urls = [
+        "https://storage.googleapis.com/bazel-mirror/github.com/bazelbuild/rules_go/releases/download/" + RULES_GO_VERS,
+        "https://github.com/bazelbuild/rules_go/releases/download/" + RULES_GO_VERS,
+    ],
 )
 
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
