@@ -9,6 +9,6 @@ java_library(
         "//java/edu/nyu/bridge/util",
         "//third_party/auto_value",
         "@com_google_guava_guava//jar",
-        "@errorprone_repo//jar",
+        "@com_google_errorprone_error_prone_annotations//jar",
     ],
 )
