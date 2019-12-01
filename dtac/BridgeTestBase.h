@@ -1,11 +1,11 @@
 #ifndef _BRIDGE_TEST_BASE_INCLUDED
 #define _BRIDGE_TEST_BASE_INCLUDED
 
+#include <memory>
+
 #include "dtac/CombinedDefender.h"
 #include "dtac/Hand.h"
 #include "dtac/Play.h"
-
-#include <memory>
 
 namespace dtac {
 

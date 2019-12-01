@@ -10,19 +10,18 @@ import org.junit.Test;
 public class CallDirectionTest {
   @Test
   public void testCalls() {
-    assertThat("2H").named("2-ways").isEqualTo(Calls.call2String(Calls.string2Call("2H")));
+    assertThat("2H").isEqualTo(Calls.call2String(Calls.string2Call("2H")));
   }
 
   @Test
   public void testDirectionConverter() {
     Converter<String, Direction> directionConverter = ShortEnumConverter.create(Direction.class);
     assertThat("N")
-        .named("double convert")
         .isEqualTo(directionConverter.reverse().convert(directionConverter.convert("N")));
   }
 
   @Test
   public void testDirections() {
-    assertThat(Direction.EAST).named("compass").isEqualTo(Directions.lho(Direction.NORTH));
+    assertThat(Direction.EAST).isEqualTo(Directions.lho(Direction.NORTH));
   }
 }

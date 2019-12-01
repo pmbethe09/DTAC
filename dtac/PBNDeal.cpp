@@ -2,11 +2,11 @@
 
 #include <sstream>
 
+using std::istringstream;
 using std::ostream;
 using std::pair;
 using std::string;
 using std::vector;
-using std::istringstream;
 
 // this is in PBNFile.cpp, to get access to the enums
 // void PBNDeal::printDeal(ostream & os) const;

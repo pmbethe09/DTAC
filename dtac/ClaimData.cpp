@@ -2,10 +2,10 @@
 
 #include <iostream>
 
-using std::endl;
 using std::cout;
-using std::string;
+using std::endl;
 using std::ostringstream;
+using std::string;
 using std::vector;
 
 namespace dtac {

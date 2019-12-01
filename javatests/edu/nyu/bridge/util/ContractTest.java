@@ -11,18 +11,13 @@ import org.junit.Test;
 public class ContractTest {
   @Test
   public void testPbnParse() {
-    assertThat(Contract.of(8, Suit.CLUBS, Direction.SOUTH))
-        .named("same both ways")
-        .isEqualTo(Contract.parse("2CS"));
-    assertThat(Contract.of(11, Suit.DIAMONDS, Direction.EAST))
-        .named("same both ways")
-        .isEqualTo(Contract.parse("5DE"));
+    assertThat(Contract.of(8, Suit.CLUBS, Direction.SOUTH)).isEqualTo(Contract.parse("2CS"));
+    assertThat(Contract.of(11, Suit.DIAMONDS, Direction.EAST)).isEqualTo(Contract.parse("5DE"));
   }
 
   @Test
   public void testOf() {
     assertThat(Contract.of(10, Suit.SPADES, Direction.WEST))
-        .named("deal with tricks/BOOK")
         .isEqualTo(Contract.of(Call.newBuilder().setBid(Bid.FOUR_SPADES).build(), Direction.WEST));
   }
 

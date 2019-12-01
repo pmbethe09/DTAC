@@ -1,8 +1,8 @@
-#include "dtac/HandCache2.h"
+#include <gtest/gtest.h>
 
 #include <string>
 
-#include <gtest/gtest.h>
+#include "dtac/HandCache2.h"
 
 using std::cout;
 using std::endl;
@@ -66,8 +66,8 @@ TEST(NewCacheWhiteBoxTest, testBadHit) {
   HandCache2::cacheType::value_type vt =
       hc2.getCacheKey(lead, follow, claim, true);
 
-  ASSERT_EQ(vt.first, testKey) << "Get the right key: " << vt.first << " not "
-                               << testKey;
+  ASSERT_EQ(vt.first, testKey)
+      << "Get the right key: " << vt.first << " not " << testKey;
 
   claim.round_of[0] = 0;
   claim.round_of[1] = 2;

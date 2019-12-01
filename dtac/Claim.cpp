@@ -3,11 +3,11 @@
 #include <fstream>
 
 using std::endl;
-using std::shared_ptr;
-using std::string;
 using std::ofstream;
 using std::ostream;
 using std::ostringstream;
+using std::shared_ptr;
+using std::string;
 using std::vector;
 
 namespace dtac {

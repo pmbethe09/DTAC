@@ -17,17 +17,17 @@
 
 #include "dtac/PBNTags.h"
 
-using std::unique_ptr;
-using std::pair;
-using std::make_pair;
 using std::endl;
 using std::ifstream;
 using std::istream;
+using std::istringstream;
+using std::make_pair;
 using std::map;
 using std::ostream;
-using std::istringstream;
+using std::pair;
 using std::string;
 using std::stringstream;
+using std::unique_ptr;
 using std::vector;
 
 static const char *tags_inorder[] = {

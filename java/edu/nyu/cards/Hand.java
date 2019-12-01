@@ -9,8 +9,6 @@ import static edu.nyu.cards.Suits.lowerSuit;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Sets;
 import edu.nyu.cards.gen.Cards;
 import edu.nyu.cards.gen.Cards.Card;
@@ -280,8 +278,12 @@ public class Hand implements Iterable<Cards.Card> {
   }
 
   public ImmutableList<Card> asList() {
-    return cards.entrySet().stream().flatMap(e -> e.getValue().stream().map(
-        r -> Card.newBuilder().setRank(r).setSuit(e.getKey()).build())).collect(toImmutableList());
+    return cards.entrySet().stream()
+        .flatMap(
+            e ->
+                e.getValue().stream()
+                    .map(r -> Card.newBuilder().setRank(r).setSuit(e.getKey()).build()))
+        .collect(toImmutableList());
   }
 
   @Override

@@ -10,13 +10,12 @@ import org.junit.Test;
 public class CardsTest {
   @Test
   public void testConvert() {
-    assertThat("H2").named("convert").isEqualTo(Cards.card2String(Cards.string2Card("H2")));
+    assertThat("H2").isEqualTo(Cards.card2String(Cards.string2Card("H2")));
   }
 
   @Test
   public void testEnum() {
     assertThat(Card.newBuilder().setRank(Rank.TWO).setSuit(Suit.HEARTS).build())
-        .named("parse")
         .isEqualTo(Cards.string2Card("H2"));
   }
 }

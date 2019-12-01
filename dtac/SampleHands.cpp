@@ -1,13 +1,13 @@
 #include "dtac/SampleHands.h"
 
-#include "dtac/ClaimData.h"  // for stddev
-#include "dtac/Constraints.h"
-#include "dtac/Hand.h"
+#include <stdlib.h>
 
 #include <iomanip>
 #include <iostream>
 
-#include <stdlib.h>
+#include "dtac/ClaimData.h"  // for stddev
+#include "dtac/Constraints.h"
+#include "dtac/Hand.h"
 
 using std::cout;
 using std::endl;

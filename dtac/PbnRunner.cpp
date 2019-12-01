@@ -1,25 +1,25 @@
-#include "dtac/ClaimData.h"
-#include "dtac/PBNDeal.h"
-#include "dtac/PBNFile.h"
-#include "dtac/Trick.h"
-#include "dtac/WorstSearch.h"
+#include <sys/time.h>
 
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 
-#include <sys/time.h>
+#include "dtac/ClaimData.h"
+#include "dtac/PBNDeal.h"
+#include "dtac/PBNFile.h"
+#include "dtac/Trick.h"
+#include "dtac/WorstSearch.h"
 
 using std::cerr;
 using std::cout;
 using std::endl;
 using std::exception;
+using std::ios;
 using std::lower_bound;
 using std::resetiosflags;
-using std::vector;
-using std::ios;
 using std::setprecision;
+using std::vector;
 
 using namespace dtac;
 

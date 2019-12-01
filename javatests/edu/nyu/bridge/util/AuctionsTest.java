@@ -13,25 +13,20 @@ public class AuctionsTest {
   @Test
   public void testContract() {
     assertThat(contract("2S", Direction.NORTH))
-        .named("right contract")
         .isEqualTo(Auctions.contract(auction(call("1S"), PASS, call("2S"), PASS)));
     assertThat(contract("4H", Direction.EAST))
-        .named("right contract")
         .isEqualTo(
             Auctions.contract(
                 auction(call("1S"), call("2H"), call("2S"), call("4H"), PASS, PASS, PASS)));
     assertThat(contract("5C", Direction.WEST))
-        .named("right contract")
         .isEqualTo(Auctions.contract(auction(call("1S"), PASS, call("2S"), call("5C"))));
     assertThat(contract("4HX", Direction.EAST))
-        .named("right contract")
         .isEqualTo(
             Auctions.contract(
                 auction(
                     call("1S"), call("2H"), call("2S"), call("4H"), call("X"), PASS, PASS, PASS)));
 
     assertThat(contract("3C", Direction.SOUTH))
-        .named("right contract")
         .isEqualTo(
             Auctions.contract(
                 auction(
@@ -52,7 +47,6 @@ public class AuctionsTest {
   @Test
   public void testFancyContract() {
     assertThat(contract("5S", Direction.EAST, Calls.DOUBLE))
-        .named("right contract")
         .isEqualTo(
             Auctions.contract(
                 auction(
@@ -88,40 +82,31 @@ public class AuctionsTest {
 
   @Test
   public void testPassout() {
-    assertThat(Auctions.isPassout(auction(call("1S"), PASS, PASS, PASS)))
-        .named("passed out")
-        .isFalse();
-    assertThat(Auctions.isPassout(auction(PASS, PASS, PASS, PASS)))
-        .named("all passed out")
-        .isTrue();
+    assertThat(Auctions.isPassout(auction(call("1S"), PASS, PASS, PASS))).isFalse();
+    assertThat(Auctions.isPassout(auction(PASS, PASS, PASS, PASS))).isTrue();
   }
 
   @Test
   public void testOver() {
-    assertThat(Auctions.isOver(auction(call("1S"), PASS, PASS, PASS))).named("passed out").isTrue();
-    assertThat(Auctions.isOver(auction(PASS, PASS, PASS, PASS))).named("all passed out").isTrue();
-    assertThat(Auctions.isOver(auction(call("1S"), PASS, call("2S"), PASS, PASS, PASS)))
-        .named("passed out")
-        .isTrue();
+    assertThat(Auctions.isOver(auction(call("1S"), PASS, PASS, PASS))).isTrue();
+    assertThat(Auctions.isOver(auction(PASS, PASS, PASS, PASS))).isTrue();
+    assertThat(Auctions.isOver(auction(call("1S"), PASS, call("2S"), PASS, PASS, PASS))).isTrue();
   }
 
   @Test
   public void testNotOver() {
-    assertThat(Auctions.isOver(auction(call("1S"), PASS, PASS))).named("live").isFalse();
-    assertThat(Auctions.isOver(auction(PASS, PASS, PASS))).named("3 initial passes").isFalse();
+    assertThat(Auctions.isOver(auction(call("1S"), PASS, PASS))).isFalse();
+    assertThat(Auctions.isOver(auction(PASS, PASS, PASS))).isFalse();
     assertThat(Auctions.isOver(auction(call("1S"), PASS, call("2S"), PASS, PASS, call("X"))))
-        .named("passed out")
         .isFalse();
   }
 
   @Test
   public void testDeclarer() {
     assertThat(contract("2s", "N"))
-        .named("right declarer")
         .isEqualTo(Auctions.contract(auction(call("1S"), PASS, call("2S"), PASS, PASS, PASS)));
 
     assertThat(contract("4s", "W"))
-        .named("right declarer")
         .isEqualTo(
             Auctions.contract(auction(call("1H"), PASS, call("2H"), call("4S"), PASS, PASS, PASS)));
   }
@@ -132,23 +117,23 @@ public class AuctionsTest {
     Auction a = auction(call("1H"), PASS, call("2H"), highBid);
     for (Bid bid : Bid.values()) {
       if (bid.getNumber() <= highBid.getBid().getNumber()) {
-        assertThat(Auctions.isValid(a, call(bid))).named("Can not bid %s", bid).isFalse();
+        assertThat(Auctions.isValid(a, call(bid))).isFalse();
       } else {
-        assertThat(Auctions.isValid(a, call(bid))).named("Can bid %s", bid).isTrue();
+        assertThat(Auctions.isValid(a, call(bid))).isTrue();
       }
     }
-    assertThat(Auctions.isValid(a, call("X"))).named("Can double opps").isTrue();
-    assertThat(Auctions.isValid(a, call("XX"))).named("Can not redouble opps").isFalse();
+    assertThat(Auctions.isValid(a, call("X"))).isTrue();
+    assertThat(Auctions.isValid(a, call("XX"))).isFalse();
     Auction aPass = a.toBuilder().addAuction(PASS).build();
-    assertThat(Auctions.isValid(aPass, call("X"))).named("Can not double pard").isFalse();
-    assertThat(Auctions.isValid(aPass, call("XX"))).named("Can not redouble w/o Dbl").isFalse();
+    assertThat(Auctions.isValid(aPass, call("X"))).isFalse();
+    assertThat(Auctions.isValid(aPass, call("XX"))).isFalse();
     Auction aDbl = a.toBuilder().addAuction(call("X")).build();
-    assertThat(Auctions.isValid(aDbl, call("X"))).named("Can not double pard").isFalse();
-    assertThat(Auctions.isValid(aDbl, call("XX"))).named("Can redouble after Dbl").isTrue();
+    assertThat(Auctions.isValid(aDbl, call("X"))).isFalse();
+    assertThat(Auctions.isValid(aDbl, call("XX"))).isTrue();
   }
 
   private void isRole(Auctions.Role role, Auction auction) {
-    assertThat(role).named("expected role from: %s", auction).isEqualTo(Auctions.nextRole(auction));
+    assertThat(role).isEqualTo(Auctions.nextRole(auction));
   }
 
   private Contract contract(String call, Direction declarer) {

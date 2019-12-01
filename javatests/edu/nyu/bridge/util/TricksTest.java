@@ -19,47 +19,36 @@ public class TricksTest {
     Card s5 = string2Card("s5");
     Card sK = string2Card("SK");
     Card hJ = string2Card("hj");
-    assertThat(sK).named("correct winner").isEqualTo(Tricks.high(s5, sK, null));
-    assertThat(s5).named("correct winner").isEqualTo(Tricks.high(s5, hJ, null));
-    assertThat(hJ).named("correct winner").isEqualTo(Tricks.high(s5, hJ, Suit.HEARTS));
-    assertThat(s5).named("correct winner").isEqualTo(Tricks.high(s5, hJ, Suit.CLUBS));
+    assertThat(sK).isEqualTo(Tricks.high(s5, sK, null));
+    assertThat(s5).isEqualTo(Tricks.high(s5, hJ, null));
+    assertThat(hJ).isEqualTo(Tricks.high(s5, hJ, Suit.HEARTS));
+    assertThat(s5).isEqualTo(Tricks.high(s5, hJ, Suit.CLUBS));
   }
 
   @Test
   public void testLegal() {
     Hand hand = Hand.fromString("AKQ.KQJ..9753");
-    assertThat(Tricks.legal(string2Card("SK"), hand, Suit.SPADES)).named("same suit").isTrue();
-    assertThat(Tricks.legal(string2Card("SK"), hand, Suit.DIAMONDS)).named("discard").isTrue();
-    assertThat(Tricks.legal(string2Card("SK"), hand, Suit.HEARTS))
-        .named("have to follow")
-        .isFalse();
-    assertThat(Tricks.legal(string2Card("H2"), hand, Suit.HEARTS))
-        .named("have to hold it")
-        .isFalse();
+    assertThat(Tricks.legal(string2Card("SK"), hand, Suit.SPADES)).isTrue();
+    assertThat(Tricks.legal(string2Card("SK"), hand, Suit.DIAMONDS)).isTrue();
+    assertThat(Tricks.legal(string2Card("SK"), hand, Suit.HEARTS)).isFalse();
+    assertThat(Tricks.legal(string2Card("H2"), hand, Suit.HEARTS)).isFalse();
   }
 
   @Test
   public void testWinner() {
     assertThat(Direction.NORTH)
-        .named("still N")
         .isEqualTo(Tricks.winner(trick("SK", "S5", "ST", "S9"), Direction.NORTH, null));
     assertThat(Direction.NORTH)
-        .named("still N")
         .isEqualTo(Tricks.winner(trick("SK", "S5", "SA", "S9"), Direction.SOUTH, null));
     assertThat(Direction.NORTH)
-        .named("still N")
         .isEqualTo(Tricks.winner(trick("SK", "S5", "SA", "D9"), Direction.SOUTH, null));
     assertThat(Direction.EAST)
-        .named("E ruffs")
         .isEqualTo(Tricks.winner(trick("SK", "S5", "SA", "D9"), Direction.SOUTH, Suit.DIAMONDS));
     assertThat(Direction.WEST)
-        .named("W ruffs so far")
         .isEqualTo(Tricks.winner(trick("SA", "D9"), Direction.SOUTH, Suit.DIAMONDS));
     assertThat(Direction.NORTH)
-        .named("N overruffs")
         .isEqualTo(Tricks.winner(trick("SA", "D9", "DJ"), Direction.SOUTH, Suit.DIAMONDS));
     assertThat(Direction.WEST)
-        .named("N underruffs")
         .isEqualTo(Tricks.winner(trick("SA", "D9", "D8"), Direction.SOUTH, Suit.DIAMONDS));
   }
 

@@ -11,14 +11,14 @@ import org.junit.Test;
 public class HandTest {
   @Test
   public void testDeck() {
-    assertThat(52).named("52 cards").isEqualTo(Hand.deck().size());
+    assertThat(52).isEqualTo(Hand.deck().size());
   }
 
   @Test
   public void testThereAndBack() {
     Hand hand = Hand.fromString("AK43.KT7.Q.AJ975");
-    assertThat(13).named("13 card parse").isEqualTo(hand.size());
-    assertThat(hand).named("converted equals").isEqualTo(Hand.fromProto(hand.toProto()));
+    assertThat(13).isEqualTo(hand.size());
+    assertThat(hand).isEqualTo(Hand.fromProto(hand.toProto()));
   }
 
   @Test
@@ -34,7 +34,7 @@ public class HandTest {
             EnumSet.of(Rank.QUEEN),
             Suit.CLUBS,
             EnumSet.of(Rank.ACE, Rank.JACK, Rank.NINE, Rank.SEVEN, Rank.FIVE));
-    assertThat(expected).named("expected parse").isEqualTo(hand.cards);
+    assertThat(expected).isEqualTo(hand.cards);
   }
 
   @Test

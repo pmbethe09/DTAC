@@ -3,13 +3,14 @@
 
 /** verify claim
  */
-#include "dtac/PBNDeal.h"
-#include "dtac/Trick.h"
-
 #include <math.h>
+
 #include <ostream>
 #include <string>
 #include <vector>
+
+#include "dtac/PBNDeal.h"
+#include "dtac/Trick.h"
 
 namespace dtac {
 
@@ -45,7 +46,7 @@ class SingleClaim {
   bool tookAll; /* true if roundsInclaim == tricksTakenInclaim */
   int roundsInclaim, tricksTakenInclaim;  // record of what happened
   Hand declarer, LHO, dummy, RHO;         /* hands - state as of last play */
-  SumValue<int> *onLead, *oppsLead;       // can be null, otherwise record stats
+  SumValue<int>*onLead, *oppsLead;        // can be null, otherwise record stats
   DIRECTION nextToLead;
   SUIT partialLead; /* NOTRUMP, OR, if the nextToLead played a card, then a
                        claim happened -- this has the suit lead */

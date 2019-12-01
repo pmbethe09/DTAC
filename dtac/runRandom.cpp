@@ -1,10 +1,10 @@
 
-#include "dtac/Hand.h"
-#include "dtac/SampleHands.h"
-
 #include <stdlib.h>
 
 #include <iostream>
+
+#include "dtac/Hand.h"
+#include "dtac/SampleHands.h"
 
 using dtac::CLUBS;
 using dtac::NOTRUMP;
@@ -12,8 +12,8 @@ using dtac::SUIT;
 using dtac::WEST;
 
 using dtac::AnyShape;
-using dtac::bridge_exception;
 using dtac::Balanced;
+using dtac::bridge_exception;
 using dtac::Hand;
 using dtac::IConstraint;
 using dtac::PointRange;
@@ -26,9 +26,9 @@ using dtac::Unbalanced;
 using std::cerr;
 using std::cout;
 using std::endl;
+using std::pair;
 using std::string;
 using std::vector;
-using std::pair;
 
 static void dump(const string &name, const SampleReport &all, int size) {
   cout << name << " tot=" << all.total / (double)size

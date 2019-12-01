@@ -5,8 +5,8 @@
 
 #include "dtac/Hand.h"
 
-using std::string;
 using std::ostringstream;
+using std::string;
 
 namespace dtac {
 

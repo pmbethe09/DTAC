@@ -12,9 +12,9 @@
 #include "dtac/CombinedDefender.h"
 
 using std::endl;
+using std::istream;
 using std::istringstream;
 using std::ostream;
-using std::istream;
 using std::string;
 
 namespace dtac {

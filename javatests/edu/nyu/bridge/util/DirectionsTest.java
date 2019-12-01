@@ -17,13 +17,13 @@ public class DirectionsTest {
   public void testBasic() {
     assertThat("South").isEqualTo(human(Direction.SOUTH));
     assertThat(Direction.EAST).isEqualTo(lho(Direction.NORTH));
-    assertThat(Direction.NORTH).named("ring around").isEqualTo(lho(lho(partner(Direction.NORTH))));
+    assertThat(Direction.NORTH).isEqualTo(lho(lho(partner(Direction.NORTH))));
   }
 
   @Test
   public void testAdd() {
-    assertThat(lho(Direction.SOUTH)).named("5 bids").isEqualTo(add(Direction.SOUTH, 5));
-    assertThat(Direction.WEST).named("12 bids").isEqualTo(add(Direction.WEST, 12));
+    assertThat(lho(Direction.SOUTH)).isEqualTo(add(Direction.SOUTH, 5));
+    assertThat(Direction.WEST).isEqualTo(add(Direction.WEST, 12));
   }
 
   @Test
@@ -34,7 +34,7 @@ public class DirectionsTest {
 
   @Test
   public void testOffset() {
-    assertThat(1).named("lho 1").isEqualTo(offset(Direction.SOUTH, Direction.WEST));
+    assertThat(1).isEqualTo(offset(Direction.SOUTH, Direction.WEST));
   }
 
   @Test

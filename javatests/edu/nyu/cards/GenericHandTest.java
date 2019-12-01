@@ -9,6 +9,6 @@ public class GenericHandTest {
   public void testBasic() {
     GenericHand genericHand = GenericHand.fromString("AKxxx.KQx.J9.QTx");
     Hand hand = genericHand.toHand(genericHand.complement());
-    assertThat(13).named("13 cards").isEqualTo(hand.size());
+    assertThat(13).isEqualTo(hand.size());
   }
 }

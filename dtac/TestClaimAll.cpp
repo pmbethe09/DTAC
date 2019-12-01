@@ -1,7 +1,6 @@
-#include "dtac/BridgeTestBase.h"
-
 #include <gtest/gtest.h>
 
+#include "dtac/BridgeTestBase.h"
 #include "dtac/Claim.h"
 
 using namespace dtac;
@@ -19,9 +18,8 @@ using std::string;
 TEST(BlackBoxTest, eitherOr) {
   // 3=8=1=1
   const char* hands[] = {
-      "Q32.AJ876543..",
-      "AKJT94.K.J7.QJ"}; /* A of clubs, then (luckily) diamond to the Q, Ace
-                            (so decl on lead) */
+      "Q32.AJ876543..", "AKJT94.K.J7.QJ"}; /* A of clubs, then (luckily) diamond
+                                              to the Q, Ace (so decl on lead) */
   // no claim if both 3-1
   const char* cdef0 = "S: (8, 3, 1); H: (Q, 3, 1); D: (K, 7, 0); C: (K, 7, 0)";
   ClaimSP c = runOneConstr(hands[1], hands[0], SPADES, cdef0);
