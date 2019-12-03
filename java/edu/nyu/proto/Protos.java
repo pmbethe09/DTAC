@@ -28,4 +28,16 @@ public final class Protos {
   public static <P extends Message> P parseText(String input, P example) throws IOException {
     return parseText(new StringReader(input), example);
   }
+
+  /**
+   * Returns a protobuf parsed from the given String using the example (usually
+   * P.getDefaultInstance()).
+   */
+  public static <P extends Message> P parseUnchecked(String input, P example) {
+    try {
+      return parseText(new StringReader(input), example);
+    } catch (IOException e) {
+      throw new IllegalArgumentException(String.format("unable to parse input '%s'", input), e);
+    }
+  }
 }
