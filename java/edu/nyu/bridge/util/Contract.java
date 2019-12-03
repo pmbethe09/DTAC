@@ -3,6 +3,7 @@ package edu.nyu.bridge.util;
 import com.google.auto.value.AutoValue;
 import com.google.common.base.Preconditions;
 import com.google.errorprone.annotations.Immutable;
+import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.gen.Bridge.Level;
@@ -81,6 +82,14 @@ public abstract class Contract {
         return of(getCall().toBuilder().setNonBid(NonBid.REDOUBLE).build(), getDeclarer());
     }
     throw new AssertionError("switch not exhaustive");
+  }
+
+  /** Returns a copy of this contract but at the new level, wipes out risk. */
+  public Contract atLevel(Bridge.Level level) {
+    if (level == Bids.level(getCall().getBid())) {
+      return this;
+    }
+    return of(level.getNumber() + BOOK, getTrump(), getDeclarer());
   }
 
   public Bonus bonus() {

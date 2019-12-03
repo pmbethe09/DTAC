@@ -2,6 +2,7 @@ package edu.nyu.bridge.util;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
@@ -15,6 +16,15 @@ public class ContractTest {
         .isEqualTo(Contract.parse("2CXS"));
     assertThat(Contract.of(11, Suit.DIAMONDS, Direction.EAST).redoubled())
         .isEqualTo(Contract.parse("5DXXE"));
+  }
+
+  @Test
+  public void testAtLevel() {
+    assertThat(Contract.of(8, Suit.CLUBS, Direction.SOUTH).doubled().atLevel(Bridge.Level.THREE))
+            .isEqualTo(Contract.parse("3CS"));
+    Contract c2 = Contract.of(8, Suit.CLUBS, Direction.SOUTH);
+    assertThat(c2.atLevel(Bridge.Level.TWO))
+            .isSameInstanceAs(c2);
   }
 
   @Test
