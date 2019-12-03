@@ -10,6 +10,14 @@ import org.junit.Test;
 
 public class ContractTest {
   @Test
+  public void testDSL() {
+    assertThat(Contract.of(8, Suit.CLUBS, Direction.SOUTH).doubled())
+        .isEqualTo(Contract.parse("2CXS"));
+    assertThat(Contract.of(11, Suit.DIAMONDS, Direction.EAST).redoubled())
+        .isEqualTo(Contract.parse("5DXXE"));
+  }
+
+  @Test
   public void testPbnParse() {
     assertThat(Contract.of(8, Suit.CLUBS, Direction.SOUTH)).isEqualTo(Contract.parse("2CS"));
     assertThat(Contract.of(11, Suit.DIAMONDS, Direction.EAST)).isEqualTo(Contract.parse("5DE"));

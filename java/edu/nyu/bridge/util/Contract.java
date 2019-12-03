@@ -35,8 +35,7 @@ public abstract class Contract {
   }
 
   public static Contract parse(String c) {
-    return Contract.of(
-        Contracts.string2Contract(c.substring(0, c.length() - 1)),
+    return Contract.of(Contracts.string2Contract(c.substring(0, c.length() - 1)),
         Directions.fromString(c.substring(c.length() - 1)));
   }
 
@@ -56,6 +55,32 @@ public abstract class Contract {
 
   public boolean isPassout() {
     return !getCall().hasBid();
+  }
+
+  /** Returns a copy of this contract but {@code DOUBLED}. */
+  public Contract doubled() {
+    switch (getCall().getNonBid()) {
+      case DOUBLE:
+        return this;
+      case PASS:
+        return of(getCall().toBuilder().setNonBid(NonBid.DOUBLE).build(), getDeclarer());
+      case REDOUBLE:
+        throw new IllegalStateException("can't double a redoubled");
+    }
+    throw new AssertionError("switch not exhaustive");
+  }
+
+  /** Returns a copy of this contract but {@code REDOUBLED}. */
+  public Contract redoubled() {
+    switch (getCall().getNonBid()) {
+      case REDOUBLE:
+        return this;
+      case PASS:
+      // fallthrough
+      case DOUBLE:
+        return of(getCall().toBuilder().setNonBid(NonBid.REDOUBLE).build(), getDeclarer());
+    }
+    throw new AssertionError("switch not exhaustive");
   }
 
   public Bonus bonus() {
@@ -91,12 +116,8 @@ public abstract class Contract {
       case NOTRUMPS:
         return level.getNumber() >= 3 && level.getNumber() < 6;
       default:
-        throw new IllegalStateException(
-            "Suit "
-                + Bids.suit(getCall().getBid())
-                + " returned for "
-                + getCall().getBid()
-                + " was not expected");
+        throw new IllegalStateException("Suit " + Bids.suit(getCall().getBid()) + " returned for "
+            + getCall().getBid() + " was not expected");
     }
   }
 
