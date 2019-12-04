@@ -29,10 +29,18 @@ public abstract class ContractResult {
   public static ContractResult making(Contract contract, int contractTricks) {
     checkArgument(
         contractTricks >= contract.getContractTricks(),
-        "making %s < contract %s",
+        "making %s < contract %s (maybe use down)",
         contractTricks,
         contract.getContractTricks());
     return of(contract, Result.total(Result.BOOK_TRICKS + contractTricks));
+  }
+
+  /** {@link Contract} down the number of of contract tricks. e.g. {@code 4S down 2} */
+  public static ContractResult down(Contract contract, int underTricks) {
+    int totalTricks = contract.getTotalTricks();
+    int actualTricks = totalTricks - underTricks;
+    checkArgument(totalTricks >= 0, "down %s exceeds available tricks %s", underTricks, totalTricks);
+    return of(contract, Result.total(actualTricks));
   }
 
   /** {@link Contract} of the total number of of contract tricks. e.g. {@code 4S, 10 tricks} */

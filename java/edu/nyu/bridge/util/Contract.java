@@ -137,6 +137,11 @@ public abstract class Contract {
     return Bids.level(getCall().getBid()).getNumber();
   }
 
+  public int getTotalTricks() {
+    int ct = getContractTricks();
+    return ct > 0 ? ct + BOOK : 0;
+  }
+
   /** returns trump or {@code null} if NT. */
   @Nullable
   public Suit getTrump() {
