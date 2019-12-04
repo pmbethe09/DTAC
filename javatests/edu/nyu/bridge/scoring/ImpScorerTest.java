@@ -6,7 +6,10 @@ import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.util.Contract;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class ImpScorerTest {
 
   @Test

@@ -7,7 +7,10 @@ import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.util.Contract;
 import edu.nyu.cards.gen.Cards.Suit;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class ScorerTest {
   @Test
   public void testFromContract() {

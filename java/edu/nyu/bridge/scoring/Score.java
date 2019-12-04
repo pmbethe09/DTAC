@@ -29,6 +29,14 @@ public abstract class Score {
     return of(Direction.NORTH, -getScore());
   }
 
+  /** Opposite of {@code absolute}. */
+  public Score forEW() {
+    if (!isNS(getDirection())) {
+      return this;
+    }
+    return of(Direction.EAST, -getScore());
+  }
+
   @Override
   public boolean equals(Object other) {
     if (!(other instanceof Score)) {

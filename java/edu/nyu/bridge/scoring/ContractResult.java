@@ -60,4 +60,9 @@ public abstract class ContractResult {
   public ContractScore score(Bridge.Vulnerability vul) {
     return ContractScore.of(contract(), Scorer.score(contract(), vul, result()));
   }
+
+  /** Given the vulnerability, compute the {@link ScoreResult}. */
+  public ScoreResult scoreResult(Bridge.Vulnerability vul) {
+    return ScoreResult.of(contract(), Scorer.score(contract(), vul, result()), result());
+  }
 }
