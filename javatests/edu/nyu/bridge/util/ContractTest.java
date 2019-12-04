@@ -21,10 +21,9 @@ public class ContractTest {
   @Test
   public void testAtLevel() {
     assertThat(Contract.of(8, Suit.CLUBS, Direction.SOUTH).doubled().atLevel(Bridge.Level.THREE))
-            .isEqualTo(Contract.parse("3CS"));
+        .isEqualTo(Contract.parse("3CS"));
     Contract c2 = Contract.of(8, Suit.CLUBS, Direction.SOUTH);
-    assertThat(c2.atLevel(Bridge.Level.TWO))
-            .isSameInstanceAs(c2);
+    assertThat(c2.atLevel(Bridge.Level.TWO)).isSameInstanceAs(c2);
   }
 
   @Test

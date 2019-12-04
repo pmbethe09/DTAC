@@ -39,7 +39,8 @@ public abstract class ContractResult {
   public static ContractResult down(Contract contract, int underTricks) {
     int totalTricks = contract.getTotalTricks();
     int actualTricks = totalTricks - underTricks;
-    checkArgument(totalTricks >= 0, "down %s exceeds available tricks %s", underTricks, totalTricks);
+    checkArgument(
+        totalTricks >= 0, "down %s exceeds available tricks %s", underTricks, totalTricks);
     return of(contract, Result.total(actualTricks));
   }
 

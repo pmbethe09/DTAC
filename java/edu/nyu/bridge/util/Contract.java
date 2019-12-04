@@ -36,7 +36,8 @@ public abstract class Contract {
   }
 
   public static Contract parse(String c) {
-    return Contract.of(Contracts.string2Contract(c.substring(0, c.length() - 1)),
+    return Contract.of(
+        Contracts.string2Contract(c.substring(0, c.length() - 1)),
         Directions.fromString(c.substring(c.length() - 1)));
   }
 
@@ -77,7 +78,7 @@ public abstract class Contract {
       case REDOUBLE:
         return this;
       case PASS:
-      // fallthrough
+        // fallthrough
       case DOUBLE:
         return of(getCall().toBuilder().setNonBid(NonBid.REDOUBLE).build(), getDeclarer());
     }
@@ -125,8 +126,12 @@ public abstract class Contract {
       case NOTRUMPS:
         return level.getNumber() >= 3 && level.getNumber() < 6;
       default:
-        throw new IllegalStateException("Suit " + Bids.suit(getCall().getBid()) + " returned for "
-            + getCall().getBid() + " was not expected");
+        throw new IllegalStateException(
+            "Suit "
+                + Bids.suit(getCall().getBid())
+                + " returned for "
+                + getCall().getBid()
+                + " was not expected");
     }
   }
 
