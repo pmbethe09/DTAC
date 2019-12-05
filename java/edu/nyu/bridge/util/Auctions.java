@@ -173,4 +173,9 @@ public final class Auctions {
     }
     return contract.getCall().getNonBid() == NonBid.DOUBLE && call.getNonBid() == NonBid.REDOUBLE;
   }
+
+  public static boolean onlyPasses(AuctionOrBuilder auction) {
+    return auction.getAuctionCount() < 4
+        && auction.getAuctionList().stream().allMatch(Auctions::isPass);
+  }
 }
