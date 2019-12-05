@@ -2,6 +2,7 @@ package edu.nyu.bridge.util;
 
 import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.truth.Truth.assertThat;
+import static edu.nyu.bridge.util.Bids.bidRange;
 import static edu.nyu.bridge.util.Bids.bidRangeAfter;
 
 import com.google.common.collect.ImmutableList;
@@ -27,6 +28,9 @@ public class AuctionsTest {
 
   @Test
   public void legalBids() {
+    runLegalBids(bidRangeAfter(Bid.SEVEN_NOTRUMPS), CAN_DOUBLE, call("7N"));
+    runLegalBids(bidRange(Bid.ONE_CLUB, Bid.SEVEN_NOTRUMPS), ONLY_PASS);
+
     runLegalBids(bidRangeAfter(Bid.TWO_SPADES), ONLY_PASS, call("1S"), PASS, call("2S"), PASS);
     runLegalBids(bidRangeAfter(Bid.TWO_SPADES), CAN_DOUBLE, call("1S"), PASS, call("2S"));
     runLegalBids(
