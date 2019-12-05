@@ -2,6 +2,7 @@ package edu.nyu.bridge.util;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import com.google.common.collect.Sets;
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Level;
 import edu.nyu.cards.gen.Cards.Suit;
@@ -14,5 +15,11 @@ public class BidsTest {
     assertThat(Bids.bid(Level.THREE, Suit.SPADES)).isEqualTo(Bid.THREE_SPADES);
     assertThat(Bids.bid(Level.FOUR, Suit.HEARTS)).isEqualTo(Bid.FOUR_HEARTS);
     assertThat(Bids.bid(Level.SIX, Suit.CLUBS)).isEqualTo(Bid.SIX_CLUBS);
+  }
+
+  @Test
+  public void testBidRange() {
+    assertThat(Sets.complementOf(Bids.bidRangeAfter(Bid.ONE_HEART)))
+            .containsExactly(Bid.ONE_HEART, Bid.ONE_DIAMOND, Bid.ONE_CLUB);
   }
 }

@@ -59,6 +59,19 @@ public abstract class Contract {
     return !getCall().hasBid();
   }
 
+  public boolean isDoubled() {
+    return getCall().getNonBid() == NonBid.DOUBLE;
+  }
+
+  public boolean isRedoubled() {
+    return getCall().getNonBid() == NonBid.REDOUBLE;
+  }
+
+  /** Returns true if not {@code DOUBLED} or {@code REDOUBLED}. */
+  public boolean unDoubled() {
+    return getCall().getNonBid() == NonBid.PASS;
+  }
+
   /** Returns a copy of this contract but {@code DOUBLED}. */
   public Contract doubled() {
     switch (getCall().getNonBid()) {

@@ -3,6 +3,7 @@ package edu.nyu.bridge.util;
 import static com.google.common.collect.Maps.newEnumMap;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import edu.nyu.bridge.gen.Bridge.Bid;
@@ -28,6 +29,25 @@ public final class Bids {
 
   public static Bid bid(Level level, Suit suit) {
     return BID_MAP.get(level).get(suit);
+  }
+
+  /** Returns all bids (after, 7NT], in increasing order. */
+  public static ImmutableList<Bid> bidRangeAfter(Bid after) {
+    return bidRangeAfter(after, Bid.SEVEN_NOTRUMPS);
+  }
+
+  /** Returns all bids (after, high], in increasing order. */
+  public static ImmutableList<Bid> bidRangeAfter(Bid after, Bid high) {
+    return bidRange(Bid.forNumber(after.getNumber()+1), high);
+  }
+
+  /** Returns all bids [low, high], in increasing order. */
+  public static ImmutableList<Bid> bidRange(Bid low, Bid high) {
+    ImmutableList.Builder<Bid> builder = ImmutableList.builder();
+    for (int i = low.getNumber(); i <= high.getNumber(); i++) {
+      builder.add(Bid.forNumber(i));
+    }
+    return builder.build();
   }
 
   private static class BidPair {

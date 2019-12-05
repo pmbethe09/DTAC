@@ -1,15 +1,95 @@
 package edu.nyu.bridge.util;
 
+import static com.google.common.collect.ImmutableSet.toImmutableSet;
 import static com.google.common.truth.Truth.assertThat;
+import static edu.nyu.bridge.util.Bids.bidRangeAfter;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Sets;
+import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Auction;
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
 import org.junit.Test;
 
 public class AuctionsTest {
+  private static final ImmutableSet<Bridge.NonBid> ONLY_PASS = ImmutableSet.of(Bridge.NonBid.PASS);
+  private static final ImmutableSet<Bridge.NonBid> CAN_DOUBLE =
+      ImmutableSet.of(Bridge.NonBid.PASS, Bridge.NonBid.DOUBLE);
+  private static final ImmutableSet<Bridge.NonBid> CAN_REDOUBLE =
+      ImmutableSet.of(Bridge.NonBid.PASS, Bridge.NonBid.REDOUBLE);
+
+  @Test
+  public void legalBids() {
+    runLegalBids(bidRangeAfter(Bid.TWO_SPADES), ONLY_PASS, call("1S"), PASS, call("2S"), PASS);
+    runLegalBids(bidRangeAfter(Bid.TWO_SPADES), CAN_DOUBLE, call("1S"), PASS, call("2S"));
+    runLegalBids(
+        bidRangeAfter(Bid.TWO_SPADES), CAN_REDOUBLE, call("1S"), PASS, call("2S"), Calls.DOUBLE);
+    runLegalBids(
+        bidRangeAfter(Bid.TWO_SPADES), ONLY_PASS, call("1S"), PASS, call("2S"), Calls.DOUBLE, PASS);
+    runLegalBids(
+        bidRangeAfter(Bid.TWO_SPADES),
+        CAN_REDOUBLE,
+        call("1S"),
+        PASS,
+        call("2S"),
+        Calls.DOUBLE,
+        PASS,
+        PASS);
+    runLegalBids(
+        bidRangeAfter(Bid.TWO_SPADES),
+        ONLY_PASS,
+        call("1S"),
+        PASS,
+        call("2S"),
+        Calls.DOUBLE,
+        PASS,
+        PASS,
+        Calls.REDOUBLE);
+    runLegalBids(
+        bidRangeAfter(Bid.TWO_SPADES),
+        ONLY_PASS,
+        call("1S"),
+        PASS,
+        call("2S"),
+        Calls.DOUBLE,
+        PASS,
+        PASS,
+        Calls.REDOUBLE,
+        PASS);
+    runLegalBids(
+        bidRangeAfter(Bid.TWO_SPADES),
+        ONLY_PASS,
+        call("1S"),
+        PASS,
+        call("2S"),
+        Calls.DOUBLE,
+        PASS,
+        PASS,
+        Calls.REDOUBLE,
+        PASS,
+        PASS);
+  }
+
+  private void runLegalBids(
+      List<Bid> expectedBids, Set<Bridge.NonBid> expectedNonBids, Call... calls) {
+    ImmutableList<Call> legalCalls = Auctions.legalBids(auction(calls));
+    // confirms that only bid xor non-bid set
+    legalCalls.forEach(c -> assertThat(c.hasBid() ^ c.hasNonBid()).isTrue());
+    Set<Bridge.NonBid> nonBids =
+        legalCalls.stream().filter(Call::hasNonBid).map(Call::getNonBid).collect(toImmutableSet());
+    Set<Bid> bids =
+        legalCalls.stream().filter(Call::hasBid).map(Call::getBid).collect(toImmutableSet());
+    assertThat(nonBids).containsExactlyElementsIn(expectedNonBids);
+    assertThat(bids).containsExactlyElementsIn(expectedBids);
+  }
+
   @Test
   public void testContract() {
     assertThat(contract("2S", Direction.NORTH))

@@ -1,15 +1,24 @@
 package edu.nyu.bridge.util;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
+import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Auction;
 import edu.nyu.bridge.gen.Bridge.AuctionOrBuilder;
 import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.gen.Bridge.NonBid;
 import edu.nyu.cards.gen.Cards.Suit;
+import jdk.nashorn.internal.ir.annotations.Immutable;
+
+import java.util.Arrays;
 import java.util.EnumMap;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
+
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static edu.nyu.bridge.util.Bids.bidRangeAfter;
 
 /** Helper methods for acting on an {@link Auction}. */
 public final class Auctions {
@@ -178,4 +187,31 @@ public final class Auctions {
     return auction.getAuctionCount() < 4
         && auction.getAuctionList().stream().allMatch(Auctions::isPass);
   }
+
+  public static ImmutableList<Call> legalBids(AuctionOrBuilder auction) {
+    if (Auctions.onlyPasses(auction)) {
+      return OPEN_CALLS;
+    }
+    Contract current = contract(auction);
+    Direction me = Directions.add(auction.getDealer(), auction.getAuctionCount());
+    boolean opponents = Directions.opponents(me, current.getDeclarer());
+    ImmutableList.Builder<Call> builder = ImmutableList.builder();
+    if (opponents && current.unDoubled()) {
+      builder.add(Calls.DOUBLE);
+    }
+    if (!opponents && current.isDoubled()) {
+      builder.add(Calls.REDOUBLE);
+    }
+    bidRangeAfter(current.getCall().getBid(), Bridge.Bid.SEVEN_NOTRUMPS).forEach(
+            b -> builder.add(Calls.bid2Call(b))
+    );
+    return builder.add(Calls.PASS).build();
+  }
+
+  private static final ImmutableList<Call> OPEN_CALLS =
+      ImmutableList.<Call>builder()
+          .add(Calls.PASS)
+          .addAll(
+              Arrays.stream(Bridge.Bid.values()).map(Calls::bid2Call).collect(toImmutableList()))
+          .build();
 }
