@@ -202,9 +202,8 @@ public final class Auctions {
     if (!opponents && current.isDoubled()) {
       builder.add(Calls.REDOUBLE);
     }
-    bidRangeAfter(current.getCall().getBid(), Bridge.Bid.SEVEN_NOTRUMPS).forEach(
-            b -> builder.add(Calls.bid2Call(b))
-    );
+    bidRangeAfter(current.getCall().getBid(), Bridge.Bid.SEVEN_NOTRUMPS)
+        .forEach(b -> builder.add(Calls.bid2Call(b)));
     return builder.add(Calls.PASS).build();
   }
 
