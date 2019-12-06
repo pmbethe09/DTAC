@@ -10,9 +10,8 @@ import com.google.common.collect.Maps;
 import edu.nyu.bridge.gen.Bridge.Bid;
 import edu.nyu.bridge.gen.Bridge.Level;
 import edu.nyu.cards.gen.Cards.Suit;
-
-import javax.annotation.Nullable;
 import java.util.EnumMap;
+import javax.annotation.Nullable;
 
 /** Provides helper methods for switching between {@link Bid} and {@link Suit}/{@link Level}. */
 public final class Bids {

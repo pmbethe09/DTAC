@@ -20,6 +20,6 @@ public class BidsTest {
   @Test
   public void testBidRange() {
     assertThat(Sets.complementOf(Bids.bidRangeAfter(Bid.ONE_HEART)))
-            .containsExactly(Bid.ONE_HEART, Bid.ONE_DIAMOND, Bid.ONE_CLUB);
+        .containsExactly(Bid.ONE_HEART, Bid.ONE_DIAMOND, Bid.ONE_CLUB);
   }
 }

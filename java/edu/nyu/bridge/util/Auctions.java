@@ -1,5 +1,8 @@
 package edu.nyu.bridge.util;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+import static edu.nyu.bridge.util.Bids.bidRangeAfter;
+
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -10,15 +13,9 @@ import edu.nyu.bridge.gen.Bridge.Call;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.bridge.gen.Bridge.NonBid;
 import edu.nyu.cards.gen.Cards.Suit;
-import jdk.nashorn.internal.ir.annotations.Immutable;
-
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.stream.Collectors;
 import javax.annotation.Nullable;
-
-import static com.google.common.collect.ImmutableList.toImmutableList;
-import static edu.nyu.bridge.util.Bids.bidRangeAfter;
 
 /** Helper methods for acting on an {@link Auction}. */
 public final class Auctions {

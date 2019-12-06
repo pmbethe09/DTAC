@@ -7,7 +7,6 @@ import static edu.nyu.bridge.util.Bids.bidRangeAfter;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import edu.nyu.bridge.gen.Bridge;
 import edu.nyu.bridge.gen.Bridge.Auction;
 import edu.nyu.bridge.gen.Bridge.Bid;
@@ -16,7 +15,6 @@ import edu.nyu.bridge.gen.Bridge.Direction;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
-
 import org.junit.Test;
 
 public class AuctionsTest {
