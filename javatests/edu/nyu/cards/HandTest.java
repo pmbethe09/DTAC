@@ -8,10 +8,23 @@ import edu.nyu.cards.gen.Cards.Suit;
 import java.util.EnumSet;
 import org.junit.Test;
 
-public class HandTest {
+public final class HandTest {
   @Test
   public void testDeck() {
     assertThat(52).isEqualTo(Hand.deck().size());
+  }
+
+  @Test
+  public void testEmpty() {
+    assertThat(Hand.fromString("")).hasSize(0);
+  }
+
+  @Test
+  public void testNoSpades() {
+    Hand hand = Hand.fromString(".K8654.AT762.J93");
+    assertThat(hand.size(Suit.SPADES)).isEqualTo(0);
+    assertThat(hand.size()).isEqualTo(13);
+    assertThat(hand).isEqualTo(Hand.fromProto(hand.toProto()));
   }
 
   @Test

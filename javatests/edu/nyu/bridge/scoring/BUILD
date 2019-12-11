@@ -10,6 +10,6 @@ junit_tests(
         "//cards_proto:cards_java_proto",
         "//java/edu/nyu/bridge/scoring",
         "//java/edu/nyu/bridge/util",
-        "@com_google_truth_truth//jar",
+        "//third_party/truth",
     ],
 )

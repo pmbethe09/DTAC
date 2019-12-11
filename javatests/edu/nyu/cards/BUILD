@@ -8,7 +8,7 @@ junit_tests(
     deps = [
         "//cards_proto:cards_java_proto",
         "//java/edu/nyu/cards",
+        "//third_party/truth",
         "@com_google_guava_guava//jar",
-        "@com_google_truth_truth//jar",
     ],
 )

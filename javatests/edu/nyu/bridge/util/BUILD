@@ -11,7 +11,7 @@ junit_tests(
         "//java/edu/nyu/bridge/util",
         "//java/edu/nyu/cards",
         "//java/edu/nyu/util",
+        "//third_party/truth",
         "@com_google_guava_guava//jar",
-        "@com_google_truth_truth//jar",
     ],
 )

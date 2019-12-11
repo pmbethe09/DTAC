@@ -57,3 +57,9 @@ def dtac_deps():
         artifact = "javax.inject:javax.inject:1",
         sha256 = "91c77044a50c481636c32d916fd89c9118a72195390452c81065080f957de7ff",
     )
+
+    maven_jar(
+        name = "com_googlecode_diffutils",
+        artifact = "com.googlecode.java-diff-utils:diffutils:jar:1.3.0",
+        sha256 = "61ba4dc49adca95243beaa0569adc2a23aedb5292ae78aa01186fa782ebdc5c2",
+    )

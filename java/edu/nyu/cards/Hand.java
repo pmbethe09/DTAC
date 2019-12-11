@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
  * {@link Cards.Hand} for transport. Explicitly mutable, use a Cards.Hand for an Immutable
  * representation.
  */
-public class Hand implements Iterable<Cards.Card> {
+public final class Hand implements Iterable<Cards.Card> {
   // for each suit, a Set with the cards held.
   @VisibleForTesting final EnumMap<Suit, EnumSet<Card.Rank>> cards;
 
@@ -67,13 +67,16 @@ public class Hand implements Iterable<Cards.Card> {
 
   /** Returns a hand parsed from the given string in PBN format. */
   public static Hand fromString(String hand) {
+    if (hand.length() == 0) {
+      return new Hand();
+    }
     if (hand.charAt(0) == 's' || hand.charAt(0) == 'S') {
       return fromLinString(hand);
     }
 
     Hand result = new Hand();
     // TODO: support several formats...
-    Suit currentSuit = Suit.NOTRUMPS;
+    Suit currentSuit = hand.charAt(0) == '.' ? Suit.SPADES : Suit.NOTRUMPS;
     Rank lastRank = Rank.TWO;
     for (char c : hand.toCharArray()) {
       Rank rank = Ranks.char2Rank(c);
