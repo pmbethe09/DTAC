@@ -236,6 +236,13 @@ public class Hand implements Iterable<Cards.Card> {
     return this;
   }
 
+  public Hand removeAll(Cards.Hand hand) {
+    for (Cards.Card card : hand.getCardsList()) {
+      removeCard(card.getSuit(), card.getRank());
+    }
+    return this;
+  }
+
   /** Returns all cards Not explicitly in this hand. */
   public Hand complement() {
     Hand result = new Hand();
