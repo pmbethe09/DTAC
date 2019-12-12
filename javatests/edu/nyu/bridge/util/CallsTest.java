@@ -2,12 +2,20 @@ package edu.nyu.bridge.util;
 
 import static com.google.common.truth.Truth.assertThat;
 
+import edu.nyu.bridge.gen.Bridge;
 import org.junit.Test;
 
 public class CallsTest {
   @Test
   public void testThereAndBackAgain() {
     assertThat(Calls.call2String(Calls.string2Call("2N"))).isEqualTo("2N");
+  }
+
+  @Test
+  public void testNonBidAndBack() {
+    for (Bridge.NonBid nonBid : Bridge.NonBid.values()) {
+      assertThat(Calls.bid2Call(nonBid).getNonBid()).isEqualTo(nonBid);
+    }
   }
 
   @Test

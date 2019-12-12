@@ -60,6 +60,18 @@ public final class Calls {
     return BID_TO_CALL.get(bid);
   }
 
+  public static Call bid2Call(NonBid nonBid) {
+    switch (nonBid) {
+      case PASS:
+        return PASS;
+      case DOUBLE:
+        return DOUBLE;
+      case REDOUBLE:
+        return REDOUBLE;
+    }
+    throw new IllegalArgumentException("no matching Call for: " + nonBid);
+  }
+
   /**
    * Returns {@code true} if the next bid is allowed after the previous one.
    *
