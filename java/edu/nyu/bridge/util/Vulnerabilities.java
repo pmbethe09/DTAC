@@ -13,8 +13,10 @@ public final class Vulnerabilities {
           .put("none", Bridge.Vulnerability.NONE)
           // Note that n -> NS, not none
           .put("n", Bridge.Vulnerability.NS)
+          .put("ns", Bridge.Vulnerability.NS)
           .put("north", Bridge.Vulnerability.NS)
           .put("e", Bridge.Vulnerability.EW)
+          .put("ew", Bridge.Vulnerability.EW)
           .put("east", Bridge.Vulnerability.EW)
           .put("all", Bridge.Vulnerability.BOTH)
           .put("both", Bridge.Vulnerability.BOTH)
