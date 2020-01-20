@@ -115,6 +115,10 @@ public final class Hand implements Iterable<Cards.Card> {
     return result;
   }
 
+  public HandView view() {
+    return HandView.of(this);
+  }
+
   public Hand addCard(Card card) {
     return addCard(card.getSuit(), card.getRank());
   }
