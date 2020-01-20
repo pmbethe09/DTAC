@@ -1,15 +1,33 @@
 package edu.nyu.bridge.util;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableList;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.cards.Hand;
 import edu.nyu.cards.gen.Cards;
 import java.util.List;
 import javax.annotation.Nullable;
 
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
 /** Utility functions for determining what is happening in a trick. */
 public final class Tricks {
   private Tricks() {}
+
+  public static ImmutableList<Cards.Card> legalPlays(List<Cards.Card> currentTrick,
+          Hand from) {
+    return legalPlays(from, currentTrick.size() > 0 ? currentTrick.get(0).getSuit() : null);
+  }
+
+  public static ImmutableList<Cards.Card> legalPlays(
+          Hand from, @Nullable Cards.Suit suitLead) {
+    if (suitLead == null || from.size(suitLead) == 0) {
+      return ImmutableList.copyOf(from);
+    }
+    return from.suit(suitLead).stream()
+            .map(r -> edu.nyu.cards.Cards.card(suitLead, r))
+            .collect(toImmutableList());
+  }
 
   /** Is this a legal play from this hand given the suitLead? (which can be null for the leader). */
   public static boolean legal(Cards.Card card, Hand from, @Nullable Cards.Suit suitLead) {

@@ -26,6 +26,18 @@ public class TricksTest {
   }
 
   @Test
+  public void testLegalPlays() {
+    Hand hand = Hand.fromString("AKQ.KQJ..9753");
+    assertThat(Tricks.legalPlays(hand, null)).containsExactlyElementsIn(hand);
+
+    assertThat(Tricks.legalPlays(hand, Suit.DIAMONDS)).containsExactlyElementsIn(hand);
+    assertThat(Tricks.legalPlays(hand, Suit.SPADES))
+            .containsExactly(string2Card("SA"), string2Card("SK"), string2Card("SQ"));
+    assertThat(Tricks.legalPlays(ImmutableList.of(string2Card("CA")), hand))
+            .hasSize(4);
+  }
+
+  @Test
   public void testLegal() {
     Hand hand = Hand.fromString("AKQ.KQJ..9753");
     assertThat(Tricks.legal(string2Card("SK"), hand, Suit.SPADES)).isTrue();
