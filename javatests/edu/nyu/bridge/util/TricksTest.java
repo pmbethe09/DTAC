@@ -8,6 +8,7 @@ import com.google.common.collect.ImmutableList;
 import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.cards.Cards;
 import edu.nyu.cards.Hand;
+import edu.nyu.cards.HandView;
 import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Suit;
 import java.util.List;
@@ -27,7 +28,7 @@ public class TricksTest {
 
   @Test
   public void testLegalPlays() {
-    Hand hand = Hand.fromString("AKQ.KQJ..9753");
+    HandView hand = Hand.fromString("AKQ.KQJ..9753").view();
     assertThat(Tricks.legalPlays(hand, null)).containsExactlyElementsIn(hand);
 
     assertThat(Tricks.legalPlays(hand, Suit.DIAMONDS)).containsExactlyElementsIn(hand);
@@ -39,7 +40,7 @@ public class TricksTest {
 
   @Test
   public void testLegal() {
-    Hand hand = Hand.fromString("AKQ.KQJ..9753");
+    HandView hand = Hand.fromString("AKQ.KQJ..9753").view();
     assertThat(Tricks.legal(string2Card("SK"), hand, Suit.SPADES)).isTrue();
     assertThat(Tricks.legal(string2Card("SK"), hand, Suit.DIAMONDS)).isTrue();
     assertThat(Tricks.legal(string2Card("SK"), hand, Suit.HEARTS)).isFalse();
