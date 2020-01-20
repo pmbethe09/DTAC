@@ -2,6 +2,7 @@ package edu.nyu.cards;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import edu.nyu.cards.gen.Cards.Card;
@@ -12,6 +13,13 @@ import java.util.EnumMap;
 /** Helper functions for stringifying and extracting constants for {@link Card}s */
 public final class Cards {
   private Cards() {}
+
+  public static int compare(Card lhs, Card rhs) {
+    return ComparisonChain.start()
+        .compare(lhs.getSuit(), rhs.getSuit())
+        .compare(lhs.getRank(), rhs.getRank())
+        .result();
+  }
 
   /** Returns a prebuilt {@link Card} for the given string. */
   public static Card string2Card(String cardString) {
