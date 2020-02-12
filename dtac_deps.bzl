@@ -4,7 +4,7 @@ load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
 
 # 1.25
 GRPC_VERS = "06a61758461284d210b1481ad5592d3fb6f05002"
-GRPC_JAVA_VERS = "1.24.2"
+GRPC_JAVA_VERS = "1.27.0"
 RULES_GO_VERS = "v0.20.2/rules_go-v0.20.2.tar.gz"
 
 def maven_jar(name, artifact, sha256):
@@ -12,7 +12,7 @@ def maven_jar(name, artifact, sha256):
         name = name,
         artifact = artifact,
         artifact_sha256 = sha256,
-        server_urls = ["http://central.maven.org/maven2"],
+        server_urls = ["https://repo.maven.apache.org/maven2"],
     )
 
 def dtac_deps():
@@ -35,7 +35,7 @@ def dtac_deps():
 
     http_archive(
         name = "io_grpc_grpc_java",
-        sha256 = "4fddae88f00f73c0771957ce07e07128c9ac33ca41486aa07364a1218b6abdb5",
+        sha256 = "49a723e1aef022567a5e2c8d6395b908b431329530c1b8024b43eb9ca360fa1e",
         strip_prefix = "grpc-java-" + GRPC_JAVA_VERS,
         urls = ["https://github.com/grpc/grpc-java/archive/v%s.zip" % GRPC_JAVA_VERS],
     )

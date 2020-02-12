@@ -10,4 +10,4 @@ def dtac_loads():
     go_register_toolchains()
 
     # grpc uses android java, we want jre java
-    grpc_java_repositories(omit_com_google_guava = True)
+    grpc_java_repositories()
