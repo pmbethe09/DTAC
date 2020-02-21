@@ -32,8 +32,13 @@ public final class Tricks {
     return ImmutableList.copyOf(from.suit(suitLead));
   }
 
-  public static ImmutableList<Cards.Card> legalPlays(List<Cards.Card> currentTrick,
-                                                     Cards.Hand from) {
+  public static ImmutableList<Cards.Card> legalPlays(
+      Cards.Hand from, Cards.Card... currentTrick) {
+    return legalPlays(from, ImmutableList.copyOf(currentTrick));
+  }
+
+  public static ImmutableList<Cards.Card> legalPlays(
+      Cards.Hand from, List<Cards.Card> currentTrick) {
     return legalPlays(from, currentTrick.size() > 0 ? currentTrick.get(0).getSuit() : null);
   }
 
@@ -64,6 +69,10 @@ public final class Tricks {
       return next.getSuit() == trump ? next : winning;
     }
     return next.getRank().getNumber() > winning.getRank().getNumber() ? next : winning;
+  }
+
+  public static Direction winner(Direction leader, @Nullable Cards.Suit trump, Cards.Card... trick) {
+    return winner(ImmutableList.copyOf(trick), leader, trump);
   }
 
   /**

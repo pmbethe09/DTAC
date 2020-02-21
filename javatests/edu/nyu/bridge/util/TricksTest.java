@@ -43,12 +43,12 @@ public class TricksTest {
   @Test
   public void testLegalProtoPlays() {
     edu.nyu.cards.gen.Cards.Hand hand = Hand.fromString("AKQ.KQJ..9753").toProto();
-    assertThat(Tricks.legalPlays(hand, null)).containsExactlyElementsIn(hand.getCardsList());
+    assertThat(Tricks.legalPlays(hand, (Suit) null)).containsExactlyElementsIn(hand.getCardsList());
 
     assertThat(Tricks.legalPlays(hand, Suit.DIAMONDS)).containsExactlyElementsIn(hand.getCardsList());
     assertThat(Tricks.legalPlays(hand, Suit.SPADES))
         .containsExactly(string2Card("SA"), string2Card("SK"), string2Card("SQ"));
-    assertThat(Tricks.legalPlays(ImmutableList.of(string2Card("CA")), hand))
+    assertThat(Tricks.legalPlays(hand, ImmutableList.of(string2Card("CA"))))
         .hasSize(4);
   }
 
@@ -76,7 +76,8 @@ public class TricksTest {
     assertThat(Direction.NORTH)
         .isEqualTo(Tricks.winner(trick("SA", "D9", "DJ"), Direction.SOUTH, Suit.DIAMONDS));
     assertThat(Direction.WEST)
-        .isEqualTo(Tricks.winner(trick("SA", "D9", "D8"), Direction.SOUTH, Suit.DIAMONDS));
+        .isEqualTo(Tricks.winner(Direction.SOUTH, Suit.DIAMONDS,
+            string2Card("SA"), string2Card("D9"), string2Card("D8")));
   }
 
   private static List<Card> trick(String... cards) {
