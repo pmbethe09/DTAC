@@ -10,6 +10,7 @@ import edu.nyu.cards.gen.Cards;
 import java.util.List;
 import javax.annotation.Nullable;
 
+import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.collect.ImmutableList.toImmutableList;
 
 /**
@@ -71,6 +72,12 @@ public final class Tricks {
     return next.getRank().getNumber() > winning.getRank().getNumber() ? next : winning;
   }
 
+  public static Direction winner(Direction leader, @Nullable Cards.Suit trump, List<Cards.Card> already,
+                                 Cards.Card... trick) {
+    ImmutableList<Cards.Card> cards = ImmutableList.<Cards.Card>builder().addAll(already).add(trick).build();
+    return winner(cards, leader, trump);
+  }
+
   public static Direction winner(Direction leader, @Nullable Cards.Suit trump, Cards.Card... trick) {
     return winner(ImmutableList.copyOf(trick), leader, trump);
   }
@@ -80,7 +87,7 @@ public final class Tricks {
    */
   public static Direction winner(
       List<Cards.Card> trick, Direction leader, @Nullable Cards.Suit trump) {
-    Preconditions.checkArgument(
+    checkArgument(
         trick.size() > 0 && trick.size() <= 4, "A trick consists of 1-4 cards, not %s", trick);
     Direction winner = leader;
     Cards.Card highCard = trick.get(0);
