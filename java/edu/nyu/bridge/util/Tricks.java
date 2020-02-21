@@ -6,12 +6,18 @@ import edu.nyu.bridge.gen.Bridge.Direction;
 import edu.nyu.cards.Hand;
 import edu.nyu.cards.HandView;
 import edu.nyu.cards.gen.Cards;
+
 import java.util.List;
 import javax.annotation.Nullable;
 
-/** Utility functions for determining what is happening in a trick. */
+import static com.google.common.collect.ImmutableList.toImmutableList;
+
+/**
+ * Utility functions for determining what is happening in a trick.
+ */
 public final class Tricks {
-  private Tricks() {}
+  private Tricks() {
+  }
 
   public static ImmutableList<Cards.Card> legalPlays(List<Cards.Card> currentTrick,
                                                      HandView from) {
@@ -19,14 +25,30 @@ public final class Tricks {
   }
 
   public static ImmutableList<Cards.Card> legalPlays(
-          HandView from, @Nullable Cards.Suit suitLead) {
+      HandView from, @Nullable Cards.Suit suitLead) {
     if (suitLead == null || from.size(suitLead) == 0) {
       return ImmutableList.copyOf(from);
     }
     return ImmutableList.copyOf(from.suit(suitLead));
   }
 
-  /** Is this a legal play from this hand given the suitLead? (which can be null for the leader). */
+  public static ImmutableList<Cards.Card> legalPlays(List<Cards.Card> currentTrick,
+                                                     Cards.Hand from) {
+    return legalPlays(from, currentTrick.size() > 0 ? currentTrick.get(0).getSuit() : null);
+  }
+
+  public static ImmutableList<Cards.Card> legalPlays(
+      Cards.Hand from, @Nullable Cards.Suit suitLead) {
+    ImmutableList suit = from.getCardsList().stream().filter(c -> c.getSuit() == suitLead).collect(toImmutableList());
+    if (suitLead == null || suit.size() == 0) {
+      return ImmutableList.copyOf(from.getCardsList());
+    }
+    return suit;
+  }
+
+  /**
+   * Is this a legal play from this hand given the suitLead? (which can be null for the leader).
+   */
   public static boolean legal(Cards.Card card, HandView from, @Nullable Cards.Suit suitLead) {
     if (!from.hasCard(card)) {
       return false;
@@ -34,7 +56,9 @@ public final class Tricks {
     return suitLead == null || card.getSuit() == suitLead || from.size(suitLead) == 0;
   }
 
-  /** Returns the high-card of the winner so far, and the next card played. */
+  /**
+   * Returns the high-card of the winner so far, and the next card played.
+   */
   public static Cards.Card high(Cards.Card winning, Cards.Card next, @Nullable Cards.Suit trump) {
     if (next.getSuit() != winning.getSuit()) {
       return next.getSuit() == trump ? next : winning;
@@ -42,7 +66,9 @@ public final class Tricks {
     return next.getRank().getNumber() > winning.getRank().getNumber() ? next : winning;
   }
 
-  /** Returns the winner so far in this trick */
+  /**
+   * Returns the winner so far in this trick
+   */
   public static Direction winner(
       List<Cards.Card> trick, Direction leader, @Nullable Cards.Suit trump) {
     Preconditions.checkArgument(

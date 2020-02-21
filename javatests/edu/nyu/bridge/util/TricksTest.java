@@ -11,7 +11,9 @@ import edu.nyu.cards.Hand;
 import edu.nyu.cards.HandView;
 import edu.nyu.cards.gen.Cards.Card;
 import edu.nyu.cards.gen.Cards.Suit;
+
 import java.util.List;
+
 import org.junit.Test;
 
 public class TricksTest {
@@ -33,9 +35,21 @@ public class TricksTest {
 
     assertThat(Tricks.legalPlays(hand, Suit.DIAMONDS)).containsExactlyElementsIn(hand);
     assertThat(Tricks.legalPlays(hand, Suit.SPADES))
-            .containsExactly(string2Card("SA"), string2Card("SK"), string2Card("SQ"));
+        .containsExactly(string2Card("SA"), string2Card("SK"), string2Card("SQ"));
     assertThat(Tricks.legalPlays(ImmutableList.of(string2Card("CA")), hand))
-            .hasSize(4);
+        .hasSize(4);
+  }
+
+  @Test
+  public void testLegalProtoPlays() {
+    edu.nyu.cards.gen.Cards.Hand hand = Hand.fromString("AKQ.KQJ..9753").toProto();
+    assertThat(Tricks.legalPlays(hand, null)).containsExactlyElementsIn(hand.getCardsList());
+
+    assertThat(Tricks.legalPlays(hand, Suit.DIAMONDS)).containsExactlyElementsIn(hand.getCardsList());
+    assertThat(Tricks.legalPlays(hand, Suit.SPADES))
+        .containsExactly(string2Card("SA"), string2Card("SK"), string2Card("SQ"));
+    assertThat(Tricks.legalPlays(ImmutableList.of(string2Card("CA")), hand))
+        .hasSize(4);
   }
 
   @Test
