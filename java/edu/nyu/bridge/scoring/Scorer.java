@@ -52,7 +52,7 @@ public final class Scorer {
   }
 
   private static int overtrickScore(Contract contract, int overtricks, boolean isVul) {
-    checkArgument(overtricks >= 0, "overtricks %d should not be neg", overtricks);
+    checkArgument(overtricks >= 0, "overtricks %s should not be neg", overtricks);
     int doubledTrick = isVul ? 200 : 100;
     switch (contract.getCall().getNonBid()) {
       case REDOUBLE:
@@ -95,7 +95,7 @@ public final class Scorer {
   private static int undertricks(Contract contract, Vulnerability vulnerability, Result result) {
     // Bridge.NonBid risk, Vulnerability vul, int number) {
     int down = contract.getContractTricks() - result.getContractTricks();
-    checkArgument(down > 0, "expected positive undertricks down=%d", down);
+    checkArgument(down > 0, "expected positive undertricks down=%s", down);
     boolean vul = isVul(contract.getDeclarer(), vulnerability);
     switch (contract.getCall().getNonBid()) {
       case PASS:

@@ -93,7 +93,7 @@ public class GenericHand {
       }
       Preconditions.checkArgument(
           lowCardsNeeded == 0,
-          "Unable to find %d %s low cards from %s",
+          "Unable to find %s %s low cards from %s",
           lowCardsNeeded,
           suit,
           availableCards);
