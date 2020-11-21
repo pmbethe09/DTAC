@@ -46,7 +46,7 @@ public final class Contracts {
     return NonBid.PASS;
   }
 
-  private static String call2Risk(Call call) {
+  public static String call2Risk(Call call) {
     switch (call.getNonBid()) {
       case PASS:
         return "";
