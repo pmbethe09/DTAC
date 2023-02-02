@@ -2,10 +2,11 @@ load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository", "new_git_r
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 load("@bazel_tools//tools/build_defs/repo:jvm.bzl", "jvm_maven_import_external")
 
-# 1.25
-GRPC_VERS = "06a61758461284d210b1481ad5592d3fb6f05002"
-GRPC_JAVA_VERS = "1.27.0"
-RULES_GO_VERS = "v0.20.2/rules_go-v0.20.2.tar.gz"
+GRPC_VERS = "1.46.6"
+GRPC_JAVA_VERS = "1.52.1"
+
+RULES_JVM_EXTERNAL_TAG = "4.5"
+RULES_JVM_EXTERNAL_SHA = "b17d7388feb9bfa7f2fa09031b32707df529f26c91ab9e5d909eb1676badd9a6"
 
 def maven_jar(name, artifact, sha256):
     jvm_maven_import_external(
@@ -17,25 +18,37 @@ def maven_jar(name, artifact, sha256):
 
 def dtac_deps():
     http_archive(
+        name = "rules_jvm_external",
+        strip_prefix = "rules_jvm_external-%s" % RULES_JVM_EXTERNAL_TAG,
+        sha256 = RULES_JVM_EXTERNAL_SHA,
+        url = "https://github.com/bazelbuild/rules_jvm_external/archive/%s.zip" % RULES_JVM_EXTERNAL_TAG,
+    )
+    http_archive(
+        name = "rules_python",
+        sha256 = "8c15896f6686beb5c631a4459a3aa8392daccaab805ea899c9d14215074b60ef",
+        strip_prefix = "rules_python-0.17.3",
+        url = "https://github.com/bazelbuild/rules_python/archive/refs/tags/0.17.3.tar.gz",
+    )
+    http_archive(
         name = "com_github_grpc_grpc",
         strip_prefix = "grpc-" + GRPC_VERS,
         urls = [
-            "https://github.com/grpc/grpc/archive/%s.tar.gz" % GRPC_VERS,
+            "https://github.com/grpc/grpc/archive/refs/tags/v%s.tar.gz" % GRPC_VERS,
         ],
     )
 
     http_archive(
         name = "io_bazel_rules_go",
-        sha256 = "b9aa86ec08a292b97ec4591cf578e020b35f98e12173bbd4a921f84f583aebd9",
+        sha256 = "56d8c5a5c91e1af73eca71a6fab2ced959b67c86d12ba37feedb0a2dfea441a6",
         urls = [
-            "https://storage.googleapis.com/bazel-mirror/github.com/bazelbuild/rules_go/releases/download/" + RULES_GO_VERS,
-            "https://github.com/bazelbuild/rules_go/releases/download/" + RULES_GO_VERS,
+            "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.37.0/rules_go-v0.37.0.zip",
+            "https://github.com/bazelbuild/rules_go/releases/download/v0.37.0/rules_go-v0.37.0.zip",
         ],
     )
 
     http_archive(
         name = "io_grpc_grpc_java",
-        sha256 = "49a723e1aef022567a5e2c8d6395b908b431329530c1b8024b43eb9ca360fa1e",
+        sha256 = "2484054e9ac47d3b4d4a797b9a0caaf4f50f23e13efb5b23ce3703b363f13023",
         strip_prefix = "grpc-java-" + GRPC_JAVA_VERS,
         urls = ["https://github.com/grpc/grpc-java/archive/v%s.zip" % GRPC_JAVA_VERS],
     )
@@ -62,4 +75,22 @@ def dtac_deps():
         name = "com_googlecode_diffutils",
         artifact = "com.googlecode.java-diff-utils:diffutils:jar:1.3.0",
         sha256 = "61ba4dc49adca95243beaa0569adc2a23aedb5292ae78aa01186fa782ebdc5c2",
+    )
+
+    maven_jar(
+        name = "com_google_errorprone_error_prone_annotations",
+        artifact = "com.google.errorprone:error_prone_annotations:2.1.3",
+        sha256 = "03d0329547c13da9e17c634d1049ea2ead093925e290567e1a364fd6b1fc7ff8",
+    )
+
+    maven_jar(
+        name = "com_google_code_findbugs_jsr305",
+        artifact = "com.google.code.findbugs:jsr305:3.0.2",
+        sha256 = "766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7",
+    )
+
+    maven_jar(
+        name = "com_google_truth_truth",
+        artifact = "com.google.truth:truth:1.1.3",
+        sha256 = "fc0b67782289a2aabfddfdf99eff1dcd5edc890d49143fcd489214b107b8f4f3",
     )
