@@ -7,6 +7,6 @@ java_library(
         "//bridge_proto:bridge_java_proto",
         "//cards_proto:cards_java_proto",
         "//java/edu/nyu/bridge/scoring",
-        "@com_google_code_findbugs_jsr305//jar",
+        "@maven//:com_google_code_findbugs_jsr305",
     ],
 )

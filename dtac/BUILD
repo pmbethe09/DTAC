@@ -70,7 +70,7 @@ cc_library(
     hdrs = TEST_LIB_HDRS,
     deps = [
         ":dtac",
-        "@com_github_google_googletest//:gtest",
+        "@googletest//:gtest",
     ],
 )
 
@@ -82,8 +82,8 @@ cc_test(
     deps = [
         ":dtac",
         ":testlib",
-        "@com_github_google_googletest//:gtest",
-        "@com_github_google_googletest//:gtest_main",
+        "@googletest//:gtest",
+        "@googletest//:gtest_main",
     ],
 )
 

@@ -5,7 +5,6 @@ import static java.util.stream.Collectors.toList;
 
 import com.google.common.collect.Lists;
 import edu.nyu.cards.Hand;
-import edu.nyu.cards.Hands;
 import edu.nyu.cards.gen.Cards;
 import java.util.Collections;
 import java.util.List;
@@ -33,7 +32,7 @@ public class RandomDealer implements Dealer {
     List<Cards.Card> result = Lists.newArrayList(deck.toProto().getCardsList());
     Collections.shuffle(result, random);
     return Lists.partition(result, result.size() / hands).stream()
-        .map(Hands.HAND_TO_LIST.reverse())
+        .map(c -> Cards.Hand.newBuilder().addAllCards(c).build())
         .collect(toList());
   }
 

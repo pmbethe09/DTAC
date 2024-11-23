@@ -6,7 +6,7 @@ java_library(
     deps = [
         "//cards_proto:cards_java_proto",
         "//java/edu/nyu/cards",
-        "@com_google_guava_guava//jar",
-        "@jsr330_repo//jar",
+        "@maven//:com_google_guava_guava",
+        "@maven//:javax_inject_jsr330_api",
     ],
 )

@@ -1,7 +1,7 @@
-package(default_visibility = ["//visibility:public"])
+load("@rules_go//proto:def.bzl", "go_proto_library")
+load("@rules_python//python:proto.bzl", "py_proto_library")
 
-load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
-load("@com_google_protobuf//:protobuf.bzl", "py_proto_library")
+package(default_visibility = ["//visibility:public"])
 
 cc_proto_library(
     name = "bridge_cc_proto",
@@ -26,6 +26,5 @@ go_proto_library(
 
 py_proto_library(
     name = "bridge_py_proto",
-    srcs = ["bridge.proto"],
-    deps = ["//cards_proto:cards_py_proto"],
+    deps = [":bridge_proto"],
 )

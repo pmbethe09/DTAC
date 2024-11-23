@@ -63,7 +63,7 @@ public final class Bids {
     BidPair(Bid bid) {
       String name = bid.name();
       int index = name.indexOf('_');
-      level = Preconditions.checkNotNull(Level.valueOf(name.substring(0, index)));
+      level = Level.valueOf(name.substring(0, index));
       String suitName = name.substring(index + 1);
       if (level == Level.ONE) {
         // singular forms
