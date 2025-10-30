@@ -3,7 +3,13 @@ A library to quickly find a "claim" in bridge
 
 Based on my MS research (http://cs.nyu.edu/media/publications/bethe_paul.pdf)
 
-## To build, install Google's bazel from bazel.io
+## If on Mac
+
+* `brew install bazelisk`
+* install xcode from the app store
+* install the latest jdk from oracle or openjdk
+
+## To build
 
 bazel build ...
 
