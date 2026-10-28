@@ -1,0 +1,7 @@
+# Prefer a GitHub-released protoc instead of compiling it from source.
+common --@protobuf//bazel/toolchains:prefer_prebuilt_protoc=true
+
+# Protobuf (and other externals) still emit -Wdeprecated-declarations when their
+# C++ plugin/runtime is built for cc_proto_library; keep that noise out of our builds.
+common --per_file_copt=^external/.*@-Wno-deprecated-declarations
+common --host_per_file_copt=^external/.*@-Wno-deprecated-declarations

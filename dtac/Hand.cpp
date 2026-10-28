@@ -50,10 +50,7 @@ Hand Hand::fromString(const std::string& s) {
 void Hand::removeCard(SUIT s, RANK r) {
   ASSERT_MSG_DBG(hasCard(s, r),
                  "card: " << suit2Char(s) << rank2Char(r) << " not in hand");
-  static int ALL_CARDS = (((int)ACE) << 1) - 1;  // all bits from 2 to A
-  cards[(int)s] ^= (int)r;                       // remove this card
-  // cards[(int)s] &= (((int)r) ^ ALL_CARDS); // safe way, makes no change even
-  // if card missing
+  cards[(int)s] ^= (int)r;  // remove this card
 }
 void Hand::addCard(SUIT s, RANK r) {
   // ASSERT_MSG_DBG(!hasCard(s, r), "card: " << suit2Char(s) << rank2Char(r) <<

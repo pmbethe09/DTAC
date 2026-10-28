@@ -2,6 +2,8 @@
 # Assumes srcs are all.java Test files
 # Assumes junit4 is already added to deps by the user.
 
+load("@rules_java//java:java_test.bzl", "java_test")
+
 _OUTPUT = """import org.junit.runners.Suite;
     import org.junit.runner.RunWith;
 
@@ -68,7 +70,7 @@ def junit_tests(name, srcs, **kwargs):
         srcs = srcs,
         outname = s_name,
     )
-    native.java_test(
+    java_test(
         name = name,
         test_class = s_name,
         srcs = srcs + [":" + s_name],
